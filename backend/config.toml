@@ -1,0 +1,275 @@
+# Code Gym Project Configuration
+
+title = "Code Gym"
+description = "A platform for practicing programming skills through structured exercises"
+version = "1.0.0"
+maintainer = "your-email@example.com"
+
+# Define programming languages
+[[languages]]
+id = "python"
+name = "Python"
+version = "3.12"
+
+[[languages]]
+id = "javascript"
+name = "JavaScript"
+version = "ES2022"
+
+
+# Define courses
+[[courses]]
+id = "python-basics"
+language = "python"
+title = "Python Fundamentals"
+description = "Learn Python programming from scratch"
+difficulty = "beginner"
+estimated_hours = 20
+prerequisites = []
+
+  [[courses.topics]]
+  id = "variables-data-types"
+  title = "Variables and Data Types"
+  description = "Understanding variables, numbers, strings, booleans, and type conversions"
+  order = 1
+
+    [[courses.topics.questions]]
+    id = "hello-world"
+    title = "Hello, World!"
+    description = "Write your first Python program"
+    complexity = "easy"
+    points = 5
+    time_limit_seconds = 10
+    memory_limit_mb = 128
+
+      [courses.topics.questions.starter_code]
+      content = """
+      # Write a program that prints "Hello, World!"
+
+      # Your code here
+      """
+
+      [courses.topics.questions.test_cases]
+      hidden = false
+
+        [[courses.topics.questions.test_cases.cases]]
+        input = ""
+        expected_output = "Hello, World!"
+        explanation = "The program should print exactly 'Hello, World!'"
+
+      [courses.topics.questions.solution]
+      content = """
+      print("Hello, World!")
+      """
+
+    [[courses.topics.questions]]
+    id = "variable-swap"
+    title = "Variable Swap"
+    description = "Swap the values of two variables without using a temporary variable"
+    complexity = "medium"
+    points = 10
+    time_limit_seconds = 10
+    memory_limit_mb = 128
+
+      [courses.topics.questions.starter_code]
+      content = """
+      # Swap the values of variables a and b without using a temporary variable
+
+      a = int(input())
+      b = int(input())
+
+      # Your code here
+
+      print(f"a = {a}")
+      print(f"b = {b}")
+      """
+
+      [courses.topics.questions.test_cases]
+      hidden = false
+
+        [[courses.topics.questions.test_cases.cases]]
+        input = """5
+        10"""
+        expected_output = """a = 10
+        b = 5"""
+        explanation = "The values of a and b should be swapped"
+
+        [[courses.topics.questions.test_cases.cases]]
+        input = """42
+        0"""
+        expected_output = """a = 0
+        b = 42"""
+        explanation = "The values of a and b should be swapped"
+
+      [courses.topics.questions.solution]
+      content = """
+      a = int(input())
+      b = int(input())
+
+      a, b = b, a
+
+      print(f"a = {a}")
+      print(f"b = {b}")
+      """
+
+  [[courses.topics]]
+  id = "control-structures"
+  title = "Control Structures"
+  description = "Learn about conditional statements and loops"
+  order = 2
+
+    [[courses.topics.questions]]
+    id = "fizzbuzz"
+    title = "FizzBuzz"
+    description = "Classic FizzBuzz problem"
+    complexity = "easy"
+    points = 8
+    time_limit_seconds = 10
+    memory_limit_mb = 128
+
+      [courses.topics.questions.starter_code]
+      content = """
+      # Write a program that prints numbers from 1 to n
+      # For multiples of 3, print "Fizz" instead of the number
+      # For multiples of 5, print "Buzz" instead of the number
+      # For multiples of both 3 and 5, print "FizzBuzz"
+
+      n = int(input())
+
+      # Your code here
+      """
+
+      [courses.topics.questions.test_cases]
+      hidden = false
+
+        [[courses.topics.questions.test_cases.cases]]
+        input = "15"
+        expected_output = """1
+        2
+        Fizz
+        4
+        Buzz
+        Fizz
+        7
+        8
+        Fizz
+        Buzz
+        11
+        Fizz
+        13
+        14
+        FizzBuzz"""
+        explanation = "Output should follow FizzBuzz rules for numbers 1 to 15"
+
+      [courses.topics.questions.solution]
+      content = """
+      n = int(input())
+
+      for i in range(1, n+1):
+          if i % 3 == 0 and i % 5 == 0:
+              print("FizzBuzz")
+          elif i % 3 == 0:
+              print("Fizz")
+          elif i % 5 == 0:
+              print("Buzz")
+          else:
+              print(i)
+      """
+
+[[courses]]
+id = "javascript-basics"
+language = "javascript"
+title = "JavaScript Essentials"
+description = "Learn JavaScript fundamentals for web development"
+difficulty = "beginner"
+estimated_hours = 25
+prerequisites = []
+
+  [[courses.topics]]
+  id = "js-basics"
+  title = "JavaScript Basics"
+  description = "Variables, data types, and operators in JavaScript"
+  order = 1
+
+    [[courses.topics.questions]]
+    id = "js-hello-world"
+    title = "Hello, World in JavaScript"
+    description = "Write your first JavaScript program"
+    complexity = "easy"
+    points = 5
+    time_limit_seconds = 10
+    memory_limit_mb = 128
+
+      [courses.topics.questions.starter_code]
+      content = """
+      // Write a function that returns "Hello, World!"
+
+      function helloWorld() {
+        // Your code here
+      }
+
+      console.log(helloWorld());
+      """
+
+      [courses.topics.questions.test_cases]
+      hidden = false
+
+        [[courses.topics.questions.test_cases.cases]]
+        input = ""
+        expected_output = "Hello, World!"
+        explanation = "The function should return exactly 'Hello, World!'"
+
+      [courses.topics.questions.solution]
+      content = """
+      function helloWorld() {
+        return "Hello, World!";
+      }
+
+      console.log(helloWorld());
+      """
+
+    [[courses.topics.questions]]
+    id = "js-array-sum"
+    title = "Array Sum"
+    description = "Calculate the sum of all elements in an array"
+    complexity = "medium"
+    points = 10
+    time_limit_seconds = 10
+    memory_limit_mb = 128
+
+      [courses.topics.questions.starter_code]
+      content = """
+      // Write a function that calculates the sum of all elements in an array
+
+      function arraySum(arr) {
+        // Your code here
+      }
+
+      // Test cases
+      const input = JSON.parse(readline());
+      console.log(arraySum(input));
+      """
+
+      [courses.topics.questions.test_cases]
+      hidden = false
+
+        [[courses.topics.questions.test_cases.cases]]
+        input = "[1, 2, 3, 4, 5]"
+        expected_output = "15"
+        explanation = "Sum of array [1, 2, 3, 4, 5] is 15"
+
+        [[courses.topics.questions.test_cases.cases]]
+        input = "[-1, 0, 1]"
+        expected_output = "0"
+        explanation = "Sum of array [-1, 0, 1] is 0"
+
+      [courses.topics.questions.solution]
+      content = """
+      function arraySum(arr) {
+        return arr.reduce((sum, current) => sum + current, 0);
+      }
+
+      // Test cases
+      const input = JSON.parse(readline());
+      console.log(arraySum(input));
+      """
