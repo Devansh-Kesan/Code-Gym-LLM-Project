@@ -1,0 +1,1356 @@
+title: Code Gym
+description: A platform for practicing programming skills through structured exercises
+version: 1.0.0
+maintainer: your-email@example.com
+languages:
+  - id: python
+    name: Python
+    version: '3.12'
+  - id: javascript
+    name: JavaScript
+    version: ES2022
+courses:
+  - id: python-course
+    language: python
+    title: Python Fundamentals
+    description: Learn Python programming from scratch
+    difficulty: beginner
+    estimated_hours: 20
+    prerequisites: []
+    topics:
+      - topic_id: python_basics
+        topic_title: Python Basics & Control Flow
+        short_description: >-
+          Learn the foundation of Python including variables, loops,
+          conditionals, and basic logic building.
+        order: 1
+        questions:
+          - id: even-or-odd
+            title: 'Even or Odd'
+            description: Determine if the input number is even or odd.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def is_even_or_odd(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    num = int(input())
+                    print(is_even_or_odd(num))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '4'
+                  expected_output: 'Even'
+                  explanation: '4 is divisible by 2'
+                - input: '7'
+                  expected_output: 'Odd'
+                  explanation: '7 is not divisible by 2'
+              hidden: true
+              hidden_cases:
+                - input: '0'
+                  expected_output: 'Even'
+                - input: '101'
+                  expected_output: 'Odd'
+            solution:
+              content: |2-
+                def is_even_or_odd(n):
+                    return "Even" if n % 2 == 0 else "Odd"
+
+                if __name__ == "__main__":
+                    num = int(input())
+                    print(is_even_or_odd(num))
+
+          - id: sum-upto-n
+            title: 'Sum up to N'
+            description: Calculate the sum of numbers from 1 to N.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def sum_upto_n(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(sum_upto_n(n))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: '15'
+                  explanation: '1 + 2 + 3 + 4 + 5 = 15'
+                - input: '1'
+                  expected_output: '1'
+                  explanation: 'Sum of first 1 number is 1'
+              hidden: true
+              hidden_cases:
+                - input: '100'
+                  expected_output: '5050'
+            solution:
+              content: |2-
+                def sum_upto_n(n):
+                    return n * (n + 1) // 2
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(sum_upto_n(n))
+
+          - id: fizz-buzz
+            title: 'FizzBuzz'
+            description: Print Fizz if divisible by 3, Buzz if divisible by 5, FizzBuzz if both.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def fizz_buzz(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(fizz_buzz(n))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3'
+                  expected_output: 'Fizz'
+                  explanation: 'Divisible by 3'
+                - input: '5'
+                  expected_output: 'Buzz'
+                  explanation: 'Divisible by 5'
+              hidden: true
+              hidden_cases:
+                - input: '15'
+                  expected_output: 'FizzBuzz'
+                - input: '2'
+                  expected_output: '2'
+            solution:
+              content: |2-
+                def fizz_buzz(n):
+                    if n % 3 == 0 and n % 5 == 0:
+                        return "FizzBuzz"
+                    elif n % 3 == 0:
+                        return "Fizz"
+                    elif n % 5 == 0:
+                        return "Buzz"
+                    else:
+                        return str(n)
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(fizz_buzz(n))
+
+          - id: multiplication-table
+            title: 'Multiplication Table'
+            description: Print the multiplication table for a number up to 10.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def print_table(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_table(n)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '2'
+                  expected_output: "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20"
+                  explanation: 'Multiplication table from 1 to 10'
+              hidden: true
+              hidden_cases:
+                - input: '10'
+                  expected_output: "10 x 1 = 10\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100"
+            solution:
+              content: |2-
+                def print_table(n):
+                    for i in range(1, 11):
+                        print(f"{n} x {i} = {n * i}")
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_table(n)
+
+          - id: palindrome-check
+            title: 'Palindrome Check'
+            description: Check whether the given string is a palindrome (reads the same backward and forward).
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def is_palindrome(s):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    s = input()
+                    print(is_palindrome(s))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'racecar'
+                  expected_output: 'True'
+                  explanation: 'racecar is the same forwards and backwards'
+                - input: 'hello'
+                  expected_output: 'False'
+                  explanation: 'hello reversed is olleh'
+              hidden: true
+              hidden_cases:
+                - input: 'madam'
+                  expected_output: 'True'
+                - input: 'python'
+                  expected_output: 'False'
+            solution:
+              content: |2-
+                def is_palindrome(s):
+                    return str(s) == str(s)[::-1]
+
+                if __name__ == "__main__":
+                    s = input()
+                    print(is_palindrome(s))
+
+          - id: pattern-printer
+            title: 'Pattern Printer'
+            description: Print a right-angled triangle of stars of height N.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def print_pattern(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_pattern(n)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3'
+                  expected_output: "*\n**\n***"
+                  explanation: 'Each line has increasing stars'
+              hidden: true
+              hidden_cases:
+                - input: '5'
+                  expected_output: "*\n**\n***\n****\n*****"
+            solution:
+              content: |2-
+                def print_pattern(n):
+                    for i in range(1, n + 1):
+                        print('*' * i)
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_pattern(n)
+                              
+      - topic_id: data_structures
+        topic_title: Data Structures
+        short_description: Work with lists, dictionaries, sets, and tuples to manipulate and organize data efficiently.
+        order: 2
+        questions:
+          - id: reverse-list
+            title: 'Reverse List'
+            description: Reverse a list of integers without using built-in reverse methods.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def reverse_list(lst):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    lst = list(map(int, input().split()))
+                    print(reverse_list(lst))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4 5'
+                  expected_output: '[5, 4, 3, 2, 1]'
+                - input: '10'
+                  expected_output: '[10]'
+              hidden: true
+              hidden_cases:
+                - input: '7 8 9'
+                  expected_output: '[9, 8, 7]'
+            solution:
+              content: |2-
+                def reverse_list(lst):
+                    return lst[::-1]
+
+                if __name__ == "__main__":
+                    lst = list(map(int, input().split()))
+                    print(reverse_list(lst))
+
+          - id: unique-elements
+            title: 'Unique Elements'
+            description: Return a list of only the unique elements from the input list.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def unique_elements(lst):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    lst = input().split()
+                    print(unique_elements(lst))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'a b c a b'
+                  expected_output: "['a', 'b', 'c']"
+                - input: '1 2 2 3 4'
+                  expected_output: "['1', '2', '3', '4']"
+              hidden: true
+              hidden_cases:
+                - input: 'x y x z'
+                  expected_output: "['x', 'y', 'z']"
+            solution:
+              content: |2-
+                def unique_elements(lst):
+                    return list(dict.fromkeys(lst))
+
+                if __name__ == "__main__":
+                    lst = input().split()
+                    print(unique_elements(lst))
+
+          - id: dict-counter
+            title: 'Dictionary Word Counter'
+            description: Count occurrences of each word in a sentence and return a dictionary.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def count_words(sentence):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    sentence = input()
+                    print(count_words(sentence))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'apple banana apple'
+                  expected_output: "{'apple': 2, 'banana': 1}"
+                - input: 'one one two'
+                  expected_output: "{'one': 2, 'two': 1}"
+              hidden: true
+              hidden_cases:
+                - input: 'cat dog cat dog dog'
+                  expected_output: "{'cat': 2, 'dog': 3}"
+            solution:
+              content: |2-
+                def count_words(sentence):
+                    words = sentence.split()
+                    result = {}
+                    for word in words:
+                        result[word] = result.get(word, 0) + 1
+                    return result
+
+                if __name__ == "__main__":
+                    sentence = input()
+                    print(count_words(sentence))
+
+          - id: merge-dictionaries
+            title: 'Merge Dictionaries'
+            description: Merge two dictionaries, summing values for matching keys.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def merge_dicts(d1, d2):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    d1 = eval(input())
+                    d2 = eval(input())
+                    print(merge_dicts(d1, d2))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "{'a': 1, 'b': 2}\n{'b': 3, 'c': 4}"
+                  expected_output: "{'a': 1, 'b': 5, 'c': 4}"
+                - input: "{}\n{'x': 10}"
+                  expected_output: "{'x': 10}"
+              hidden: true
+              hidden_cases:
+                - input: "{'x': 1, 'y': 2}\n{'x': 4, 'z': 5}"
+                  expected_output: "{'x': 5, 'y': 2, 'z': 5}"
+            solution:
+              content: |2-
+                def merge_dicts(d1, d2):
+                    result = d1.copy()
+                    for k, v in d2.items():
+                        result[k] = result.get(k, 0) + v
+                    return result
+
+                if __name__ == "__main__":
+                    d1 = eval(input())
+                    d2 = eval(input())
+                    print(merge_dicts(d1, d2))
+
+          - id: stack-simulation
+            title: 'Stack Simulation'
+            description: Implement basic stack operations (push, pop) using a list.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Stack:
+                    def __init__(self):
+                        self.items = []
+
+                    def push(self, value):
+                        # Your code here
+                        pass
+
+                    def pop(self):
+                        # Your code here
+                        pass
+
+                    def display(self):
+                        return self.items
+
+                if __name__ == "__main__":
+                    s = Stack()
+                    s.push(1)
+                    s.push(2)
+                    s.pop()
+                    print(s.display())
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: '[1]'
+                - input: ''
+                  expected_output: '[1]'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: '[1, 2]'
+            solution:
+              content: |2-
+                class Stack:
+                    def __init__(self):
+                        self.items = []
+
+                    def push(self, value):
+                        self.items.append(value)
+
+                    def pop(self):
+                        if self.items:
+                            self.items.pop()
+
+                    def display(self):
+                        return self.items
+
+                if __name__ == "__main__":
+                    s = Stack()
+                    s.push(1)
+                    s.push(2)
+                    s.pop()
+                    print(s.display())
+
+          - id: most-common-element
+            title: 'Most Common Element'
+            description: Return the most frequent element in a list. If tie, return any one.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def most_common(lst):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    lst = input().split()
+                    print(most_common(lst))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'a b a c a'
+                  expected_output: 'a'
+                - input: 'x y x z x y'
+                  expected_output: 'x'
+              hidden: true
+              hidden_cases:
+                - input: '1 2 3 3 2 2'
+                  expected_output: '2'
+            solution:
+              content: |2-
+                def most_common(lst):
+                    freq = {}
+                    for item in lst:
+                        freq[item] = freq.get(item, 0) + 1
+                    return max(freq, key=freq.get)
+
+                if __name__ == "__main__":
+                    lst = input().split()
+                    print(most_common(lst))
+      
+      - topic_id: functions_recursion
+        topic_title: Functions and Recursion
+        short_description: Understand how to build reusable code with functions and tackle problems using recursion.
+        order: 3
+        questions:
+        - id: square-number
+          title: 'Square a Number'
+          description: Write a function that returns the square of a number.
+          complexity: easy
+          points: 5
+          time_limit_seconds: 5
+          memory_limit_mb: 64
+          starter_code:
+            content: |2-
+              def square(n):
+                  # Your code here
+                  pass
+
+              if __name__ == "__main__":
+                  num = int(input())
+                  print(square(num))
+          test_cases:
+            hidden: false
+            visible_cases:
+              - input: '4'
+                expected_output: '16'
+              - input: '-3'
+                expected_output: '9'
+            hidden: true
+            hidden_cases:
+              - input: '0'
+                expected_output: '0'
+          solution:
+            content: |2-
+              def square(n):
+                  return n * n
+
+              if __name__ == "__main__":
+                  num = int(input())
+                  print(square(num))
+
+        - id: greet-name
+          title: 'Greet by Name'
+          description: Write a function that takes a name and returns a greeting message.
+          complexity: easy
+          points: 5
+          time_limit_seconds: 5
+          memory_limit_mb: 64
+          starter_code:
+            content: |2-
+              def greet(name):
+                  # Your code here
+                  pass
+
+              if __name__ == "__main__":
+                  name = input()
+                  print(greet(name))
+          test_cases:
+            hidden: false
+            visible_cases:
+              - input: 'Alice'
+                expected_output: 'Hello, Alice!'
+              - input: 'Bob'
+                expected_output: 'Hello, Bob!'
+            hidden: true
+            hidden_cases:
+              - input: 'Zoe'
+                expected_output: 'Hello, Zoe!'
+          solution:
+            content: |2-
+              def greet(name):
+                  return f"Hello, {name}!"
+
+              if __name__ == "__main__":
+                  name = input()
+                  print(greet(name))
+
+        - id: factorial-recursion
+          title: 'Factorial (Recursion)'
+          description: Use recursion to calculate the factorial of a number.
+          complexity: medium
+          points: 10
+          time_limit_seconds: 5
+          memory_limit_mb: 64
+          starter_code:
+            content: |2-
+              def factorial(n):
+                  # Your code here
+                  pass
+
+              if __name__ == "__main__":
+                  num = int(input())
+                  print(factorial(num))
+          test_cases:
+            hidden: false
+            visible_cases:
+              - input: '5'
+                expected_output: '120'
+              - input: '0'
+                expected_output: '1'
+            hidden: true
+            hidden_cases:
+              - input: '6'
+                expected_output: '720'
+          solution:
+            content: |2-
+              def factorial(n):
+                  if n == 0 or n == 1:
+                      return 1
+                  return n * factorial(n - 1)
+
+              if __name__ == "__main__":
+                  num = int(input())
+                  print(factorial(num))
+
+        - id: fibonacci-recursion
+          title: 'Fibonacci (Recursion)'
+          description: Return the nth Fibonacci number using recursion.
+          complexity: medium
+          points: 10
+          time_limit_seconds: 5
+          memory_limit_mb: 64
+          starter_code:
+            content: |2-
+              def fibonacci(n):
+                  # Your code here
+                  pass
+
+              if __name__ == "__main__":
+                  num = int(input())
+                  print(fibonacci(num))
+          test_cases:
+            hidden: false
+            visible_cases:
+              - input: '0'
+                expected_output: '0'
+              - input: '1'
+                expected_output: '1'
+            hidden: true
+            hidden_cases:
+              - input: '5'
+                expected_output: '5'
+          solution:
+            content: |2-
+              def fibonacci(n):
+                  if n <= 1:
+                      return n
+                  return fibonacci(n - 1) + fibonacci(n - 2)
+
+              if __name__ == "__main__":
+                  num = int(input())
+                  print(fibonacci(num))
+
+        - id: power-function
+          title: 'Power Function (Recursion)'
+          description: Calculate a raised to the power of b using recursion.
+          complexity: hard
+          points: 15
+          time_limit_seconds: 10
+          memory_limit_mb: 64
+          starter_code:
+            content: |2-
+              def power(a, b):
+                  # Your code here
+                  pass
+
+              if __name__ == "__main__":
+                  base, exponent = map(int, input().split())
+                  print(power(base, exponent))
+          test_cases:
+            hidden: false
+            visible_cases:
+              - input: '2 3'
+                expected_output: '8'
+              - input: '5 0'
+                expected_output: '1'
+            hidden: true
+            hidden_cases:
+              - input: '3 4'
+                expected_output: '81'
+          solution:
+            content: |2-
+              def power(a, b):
+                  if b == 0:
+                      return 1
+                  return a * power(a, b - 1)
+
+              if __name__ == "__main__":
+                  base, exponent = map(int, input().split())
+                  print(power(base, exponent))
+
+        - id: sum-of-digits
+          title: 'Sum of Digits (Recursion)'
+          description: Write a recursive function to return the sum of digits of an integer.
+          complexity: hard
+          points: 15
+          time_limit_seconds: 10
+          memory_limit_mb: 64
+          starter_code:
+            content: |2-
+              def sum_of_digits(n):
+                  # Your code here
+                  pass
+
+              if __name__ == "__main__":
+                  number = int(input())
+                  print(sum_of_digits(number))
+          test_cases:
+            hidden: false
+            visible_cases:
+              - input: '123'
+                expected_output: '6'
+              - input: '0'
+                expected_output: '0'
+            hidden: true
+            hidden_cases:
+              - input: '999'
+                expected_output: '27'
+          solution:
+            content: |2-
+              def sum_of_digits(n):
+                  if n == 0:
+                      return 0
+                  return n % 10 + sum_of_digits(n // 10)
+
+              if __name__ == "__main__":
+                  number = int(input())
+                  print(sum_of_digits(number))
+  
+      - topic_id: oop
+        topic_title: Object-Oriented Programming (OOP)
+        short_description: Learn to structure Python code with classes, objects, and inheritance to build modular programs.
+        order: 4
+        questions:
+          - id: basic-class
+            title: 'Basic Class Creation'
+            description: Create a class `Person` with attributes `name` and `age`, and a method to print them.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Person:
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    p = Person("Alice", 30)
+                    p.display()
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: 'Name: Alice, Age: 30'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: 'Name: Bob, Age: 25'
+            solution:
+              content: |2-
+                class Person:
+                    def __init__(self, name, age):
+                        self.name = name
+                        self.age = age
+
+                    def display(self):
+                        print(f"Name: {self.name}, Age: {self.age}")
+
+                if __name__ == "__main__":
+                    p = Person("Alice", 30)
+                    p.display()
+
+          - id: class-methods
+            title: 'Class with Methods'
+            description: Create a class `Rectangle` with methods to calculate area and perimeter.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Rectangle:
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    r = Rectangle(5, 10)
+                    print(r.area())
+                    print(r.perimeter())
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: "50\n30"
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: "6\n10"
+            solution:
+              content: |2-
+                class Rectangle:
+                    def __init__(self, width, height):
+                        self.width = width
+                        self.height = height
+
+                    def area(self):
+                        return self.width * self.height
+
+                    def perimeter(self):
+                        return 2 * (self.width + self.height)
+
+                if __name__ == "__main__":
+                    r = Rectangle(5, 10)
+                    print(r.area())
+                    print(r.perimeter())
+
+          - id: inheritance-example
+            title: 'Inheritance Example'
+            description: Use inheritance to create a class `Student` that inherits from `Person`.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Person:
+                    def __init__(self, name):
+                        self.name = name
+
+                class Student(Person):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    s = Student("John", "Math")
+                    s.display()
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: 'John studies Math'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: 'Alice studies History'
+            solution:
+              content: |2-
+                class Person:
+                    def __init__(self, name):
+                        self.name = name
+
+                class Student(Person):
+                    def __init__(self, name, subject):
+                        super().__init__(name)
+                        self.subject = subject
+
+                    def display(self):
+                        print(f"{self.name} studies {self.subject}")
+
+                if __name__ == "__main__":
+                    s = Student("John", "Math")
+                    s.display()
+
+          - id: class-attributes
+            title: 'Class Attributes and Instances'
+            description: Count how many instances of a class have been created using a class attribute.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Counter:
+                    count = 0
+
+                    def __init__(self):
+                        # Your code here
+                        pass
+
+                if __name__ == "__main__":
+                    a = Counter()
+                    b = Counter()
+                    print(Counter.count)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: '2'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: '5'
+            solution:
+              content: |2-
+                class Counter:
+                    count = 0
+
+                    def __init__(self):
+                        Counter.count += 1
+
+                if __name__ == "__main__":
+                    a = Counter()
+                    b = Counter()
+                    print(Counter.count)
+
+          - id: private-attributes
+            title: 'Private Attributes and Encapsulation'
+            description: Use private variables and a getter method to access data safely.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class BankAccount:
+                    def __init__(self, balance):
+                        # Your code here
+                        pass
+
+                if __name__ == "__main__":
+                    acc = BankAccount(1000)
+                    print(acc.get_balance())
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: '1000'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: '2500'
+            solution:
+              content: |2-
+                class BankAccount:
+                    def __init__(self, balance):
+                        self.__balance = balance
+
+                    def get_balance(self):
+                        return self.__balance
+
+                if __name__ == "__main__":
+                    acc = BankAccount(1000)
+                    print(acc.get_balance())
+
+          - id: polymorphism-example
+            title: 'Polymorphism Example'
+            description: Demonstrate polymorphism using a common method in multiple classes.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Dog:
+                    def speak(self):
+                        return "Woof!"
+
+                class Cat:
+                    # Your code here
+                    pass
+
+                def animal_sound(animal):
+                    return animal.speak()
+
+                if __name__ == "__main__":
+                    c = Cat()
+                    print(animal_sound(c))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: 'Meow!'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: 'Meow!'
+            solution:
+              content: |2-
+                class Dog:
+                    def speak(self):
+                        return "Woof!"
+
+                class Cat:
+                    def speak(self):
+                        return "Meow!"
+
+                def animal_sound(animal):
+                    return animal.speak()
+
+                if __name__ == "__main__":
+                    c = Cat()
+                    print(animal_sound(c))
+
+      - topic_id: algorithms
+        topic_title: Algorithms & Problem Solving
+        short_description: Solve classic algorithmic challenges to boost logical thinking and coding fluency.
+        order: 5
+        questions:
+          - id: power-of-two
+            title: 'Is Power of Two?'
+            description: Check whether a given number is a power of two.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def is_power_of_two(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(is_power_of_two(n))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '8'
+                  expected_output: 'True'
+                - input: '10'
+                  expected_output: 'False'
+              hidden: true
+              hidden_cases:
+                - input: '1'
+                  expected_output: 'True'
+            solution:
+              content: |2-
+                def is_power_of_two(n):
+                    return n > 0 and (n & (n - 1)) == 0
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(is_power_of_two(n))
+
+          - id: count-words
+            title: 'Count Words in a Sentence'
+            description: Count the number of words in a given sentence. Words are separated by spaces.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def count_words(sentence):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    sentence = input()
+                    print(count_words(sentence))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "This is a test"
+                  expected_output: '4'
+                - input: "Python is fun"
+                  expected_output: '3'
+              hidden: true
+              hidden_cases:
+                - input: "  Hello world   "
+                  expected_output: '2'
+            solution:
+              content: |2-
+                def count_words(sentence):
+                    return len(sentence.strip().split())
+
+                if __name__ == "__main__":
+                    sentence = input()
+                    print(count_words(sentence))
+
+          - id: group-by-frequency
+            title: 'Group Elements by Frequency'
+            description: Given a list of numbers, group and return elements by their frequency in descending order.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def group_by_frequency(arr):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    arr = list(map(int, input().split()))
+                    print(group_by_frequency(arr))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '4 5 6 5 4 3'
+                  expected_output: '[4, 4, 5, 5, 6, 3]'
+                - input: '9 9 9 8 8 7'
+                  expected_output: '[9, 9, 9, 8, 8, 7]'
+              hidden: true
+              hidden_cases:
+                - input: '1 2 2 3 3 3'
+                  expected_output: '[3, 3, 3, 2, 2, 1]'
+            solution:
+              content: |2-
+                from collections import Counter
+
+                def group_by_frequency(arr):
+                    freq = Counter(arr)
+                    arr.sort(key=lambda x: (-freq[x], arr.index(x)))
+                    return arr
+
+                if __name__ == "__main__":
+                    arr = list(map(int, input().split()))
+                    print(group_by_frequency(arr))
+
+          - id: two-sum
+            title: 'Two Sum Problem'
+            description: >-
+              Given a list of integers and a target value, return the indices (0-based) of the two numbers that add up to the target.
+              If no such pair exists, return -1.
+            complexity: medium
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def two_sum(nums, target):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    nums = list(map(int, input().split()))
+                    target = int(input())
+                    print(two_sum(nums, target))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: |-
+                    2 7 11 15
+                    9
+                  expected_output: '[0, 1]'
+                - input: |-
+                    3 2 4
+                    6
+                  expected_output: '[1, 2]'
+              hidden: true
+              hidden_cases:
+                - input: |-
+                    1 2 3
+                    7
+                  expected_output: '-1'
+            solution:
+              content: |2-
+                def two_sum(nums, target):
+                    seen = {}
+                    for i, num in enumerate(nums):
+                        diff = target - num
+                        if diff in seen:
+                            return [seen[diff], i]
+                        seen[num] = i
+                    return -1
+
+                if __name__ == "__main__":
+                    nums = list(map(int, input().split()))
+                    target = int(input())
+                    print(two_sum(nums, target))
+
+          - id: longest-increasing-subsequence
+            title: 'Longest Increasing Subsequence Length'
+            description: Given a list of numbers, return the length of the longest increasing subsequence.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                def lis_length(arr):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    arr = list(map(int, input().split()))
+                    print(lis_length(arr))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '10 9 2 5 3 7 101 18'
+                  expected_output: '4'
+                - input: '1 3 5 4 7'
+                  expected_output: '4'
+              hidden: true
+              hidden_cases:
+                - input: '5 6 7 1 2 3'
+                  expected_output: '3'
+            solution:
+              content: |2-
+                def lis_length(arr):
+                    if not arr:
+                        return 0
+                    dp = [1] * len(arr)
+                    for i in range(len(arr)):
+                        for j in range(i):
+                            if arr[i] > arr[j]:
+                                dp[i] = max(dp[i], dp[j] + 1)
+                    return max(dp)
+
+                if __name__ == "__main__":
+                    arr = list(map(int, input().split()))
+                    print(lis_length(arr))
+
+          - id: valid-parentheses
+            title: 'Valid Parentheses'
+            description: Check if the input string of parentheses is valid (every open has a close in order).
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def is_valid_parentheses(s):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    s = input()
+                    print(is_valid_parentheses(s))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '()[]{}'
+                  expected_output: 'True'
+                - input: '(]'
+                  expected_output: 'False'
+              hidden: true
+              hidden_cases:
+                - input: '([{}])'
+                  expected_output: 'True'
+            solution:
+              content: |2-
+                def is_valid_parentheses(s):
+                    stack = []
+                    mapping = {')': '(', ']': '[', '}': '{'}
+                    for char in s:
+                        if char in mapping.values():
+                            stack.append(char)
+                        elif char in mapping:
+                            if not stack or stack.pop() != mapping[char]:
+                                return False
+                    return not stack
+
+                if __name__ == "__main__":
+                    s = input()
+                    print(is_valid_parentheses(s))
+
+  - id: javascript-basics
+    language: javascript
+    title: JavaScript Essentials
+    description: Learn JavaScript fundamentals for web development
+    difficulty: beginner
+    estimated_hours: 25
+    prerequisites: []
+    topics:
+      - id: js-basics
+        title: JavaScript Basics
+        description: 'Variables, data types, and operators in JavaScript'
+        order: 1
+        questions:
+          - id: js-hello-world
+            title: 'Hello, World in JavaScript'
+            description: Write your first JavaScript program
+            complexity: easy
+            points: 5
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                      // Write a function that returns "Hello, World!"
+
+                      function helloWorld() {
+                        // Your code here
+                      }
+
+                      console.log(helloWorld());
+                      
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: 'Hello, World!'
+                  explanation: 'The function should return exactly ''Hello, World!'''
+            solution:
+              content: |2-
+                      function helloWorld() {
+                        return "Hello, World!";
+                      }
+
+                      console.log(helloWorld());
+                      
+          - id: js-array-sum
+            title: Array Sum
+            description: Calculate the sum of all elements in an array
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                      // Write a function that calculates the sum of all elements in an array
+
+                      function arraySum(arr) {
+                        // Your code here
+                      }
+
+                      // Test cases
+                      const input = JSON.parse(readline());
+                      console.log(arraySum(input));
+                      
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '[1, 2, 3, 4, 5]'
+                  expected_output: '15'
+                  explanation: 'Sum of array [1, 2, 3, 4, 5] is 15'
+                - input: '[-1, 0, 1]'
+                  expected_output: '0'
+                  explanation: 'Sum of array [-1, 0, 1] is 0'
+            solution:
+              content: |2-
+                      function arraySum(arr) {
+                        return arr.reduce((sum, current) => sum + current, 0);
+                      }
+
+                      // Test cases
+                      const input = JSON.parse(readline());
+                      console.log(arraySum(input));                      

@@ -3,6 +3,9 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+import yaml
+import os
+
 app = FastAPI()
 
 # Enable CORS so frontend can call API
@@ -14,51 +17,35 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Sample Data
-courses_data = {
-    "python-basics": {
-        "title": "Python Basics",
-        "description": "Learn the fundamentals of Python.",
-        "language": "Python",
-        "topics": {
-            "variables-data-types": {
-                "title": "Variables and Data Types",
-                "levels": {
-                    "beginner": {
-                        "questions": ["hello-world"]
-                    }
-                }
-            }
-        }
-    },
-    "cpp-basics": {
-        "title": "C++ Basics",
-        "description": "Learn C++ from scratch.",
-        "language": "C++",
-        "topics": {}
-    }
-}
+courses_data = {}
+questions_data = {}
 
-questions_data = {
-    "hello-world": {
-        "title": "Hello World!",
-        "description": "Write a program that prints Hello, World!",
-        "starter_code": "print(\"Hello, World!\")"
-    }
-}
+def load_config(path="config.yaml"):
+    global courses_data, questions_data
 
-# API Routes
-@app.get("/info")
-def get_info():
-    return {"app": "LearnCode API", "version": "1.0"}
+    with open(path, "r") as file:
+        config = yaml.safe_load(file)
 
-@app.get("/languages")
-def get_languages():
-    return list({c['language'] for c in courses_data.values()})
+    for course in config.get("courses", []):
+        course_id = course["id"]
+        courses_data[course_id] = course
+
+        # Flatten and collect question data
+        for topic in course.get("topics", []):
+            for question in topic.get("questions", []):
+                qid = question["id"]
+                questions_data[qid] = question
+
+# Load everything from config.yaml
+load_config()
+
+@app.get("/debug")
+def debug():
+    return questions_data
 
 @app.get("/courses")
 def get_courses():
-    return [{"id": cid, **data} for cid, data in courses_data.items()]
+    return [j for j in courses_data.values()]
 
 @app.get("/courses/{course_id}")
 def get_course(course_id: str):
@@ -77,19 +64,12 @@ def get_topics(course_id: str):
 @app.get("/courses/{course_id}/topics/{topic_id}")
 def get_topic(course_id: str, topic_id: str):
     course = courses_data.get(course_id)
-    topic = course.get("topics", {}).get(topic_id)
+    topic = next((t for t in course.get("topics", []) if t["topic_id"] == topic_id), None)
     if not topic:
         raise HTTPException(status_code=404, detail="Topic not found")
     return topic
 
-@app.get("/courses/{course_id}/topics/{topic_id}/levels/{level}")
-def get_questions(course_id: str, topic_id: str, level: str):
-    topic = courses_data.get(course_id, {}).get("topics", {}).get(topic_id)
-    if not topic:
-        raise HTTPException(status_code=404, detail="Topic not found")
-    return topic.get("levels", {}).get(level, {}).get("questions", [])
-
-@app.get("/questions/{question_id}")
+@app.get("/courses/{course_id}/topics/{topic_id}/questions/{question_id}")
 def get_question(question_id: str):
     question = questions_data.get(question_id)
     if not question:

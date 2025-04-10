@@ -11,16 +11,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(`http://localhost:8000/courses/${courseId}/topics`);
       const topics = await res.json();
-  
+      console.log(topics)
       topics.forEach(topic => {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <h3>${topic.title}</h3>
-          <p>${topic.description}</p>
+          <h3>${topic.topic_title}</h3>
+          <p>${topic.short_description}</p>
         `;
         card.onclick = () => {
-          window.location.href = `levels.html?course_id=${courseId}&topic_id=${topic.id}`;
+          window.location.href = `questions.html?course_id=${courseId}&topic_id=${topic.topic_id}`;
         };
         container.appendChild(card);
       });

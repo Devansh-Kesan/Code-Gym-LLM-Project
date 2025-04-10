@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Gym</title>
+    <!-- Include CodeMirror CSS and JavaScript -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/comment/comment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/selection/active-line.min.js"></script>
+    <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Code Gym</h1>
+    </div>
+
+    <div class="problem-container" id="problem-section">
+        <h2 class="problem-title">Loading problem...</h2>
+        <div class="problem-description">
+            Problem description will appear here...
+        </div>
+        
+        <div class="test-cases">
+            <h3>Visible Test Cases</h3>
+            <div id="test-cases-content">
+                <div class="test-case">
+                    <div><strong>Input:</strong></div>
+                    <pre>Test input will appear here...</pre>
+                    <div><strong>Expected Output:</strong></div>
+                    <pre>Expected output will appear here...</pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-editor-container">
+            <h3>Your Code</h3>
+            <div class="shortcut-guide">
+                <strong>Editor Shortcuts:</strong> 
+                <kbd>Tab</kbd> for indentation, 
+                <kbd>Shift+Tab</kbd> to unindent, 
+                <kbd>Ctrl+/</kbd> or <kbd>Cmd+/</kbd> to comment/uncomment.
+            </div>
+            <div id="editor-wrapper">
+                <textarea id="code-editor" placeholder="Write your code here..."></textarea>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="submit-btn" id="submit-btn">Submit Solution</button>
+            <button class="reset-btn" id="reset-btn">Reset Code</button>
+        </div>
+        
+        <div class="results-container" id="results-container">
+            <h3 class="results-title">Results</h3>
+            <div id="results-content">
+                <!-- Test results will be populated here -->
+            </div>
+        </div>
+        
+        <div class="llm-tools">
+            <button class="llm-btn" id="hint-btn">Get Hint</button>
+            <button class="llm-btn" id="error-btn">Explain Errors</button>
+            <button class="llm-btn" id="review-btn">Code Review</button>
+            <button class="llm-btn" id="debug-btn">Debug Help</button>
+            <button class="llm-btn" id="test-btn">Generate Test Cases</button>
+        </div>
+        
+        <div class="llm-response" id="llm-response">
+            <h3>Helper Response</h3>
+            <div id="llm-content">
+                LLM response will appear here...
+            </div>
+        </div>
+    </div>
+
+    <script src="js/editor.js"></script>
+</body>
+</html>
