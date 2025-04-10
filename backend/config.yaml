@@ -1275,82 +1275,1215 @@ courses:
 
   - id: javascript-basics
     language: javascript
-    title: JavaScript Essentials
-    description: Learn JavaScript fundamentals for web development
+    title: JavaScript Fundamentals
+    description: Learn JavaScript programming from scratch
     difficulty: beginner
-    estimated_hours: 25
+    estimated_hours: 20
     prerequisites: []
     topics:
-      - id: js-basics
-        title: JavaScript Basics
-        description: 'Variables, data types, and operators in JavaScript'
+      - topic_id: js_basics
+        topic_title: JavaScript Basics & Control Flow
+        short_description: >-
+          Learn the foundation of JavaScript including variables, loops,
+          conditionals, and basic logic building.
         order: 1
         questions:
-          - id: js-hello-world
-            title: 'Hello, World in JavaScript'
-            description: Write your first JavaScript program
+          - id: even-or-odd-js
+            title: 'Even or Odd'
+            description: Determine if the input number is even or odd.
             complexity: easy
             points: 5
-            time_limit_seconds: 10
-            memory_limit_mb: 128
+            time_limit_seconds: 5
+            memory_limit_mb: 64
             starter_code:
               content: |2-
-                      // Write a function that returns "Hello, World!"
+                function isEvenOrOdd(n) {
+                    // Your code here
+                }
 
-                      function helloWorld() {
+                const num = Number(prompt());
+                console.log(isEvenOrOdd(num));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '4'
+                  expected_output: 'Even'
+                  explanation: '4 is divisible by 2'
+                - input: '7'
+                  expected_output: 'Odd'
+                  explanation: '7 is not divisible by 2'
+              hidden: true
+              hidden_cases:
+                - input: '0'
+                  expected_output: 'Even'
+                - input: '101'
+                  expected_output: 'Odd'
+            solution:
+              content: |2-
+                function isEvenOrOdd(n) {
+                    return n % 2 === 0 ? "Even" : "Odd";
+                }
+
+                const num = Number(prompt());
+                console.log(isEvenOrOdd(num));
+
+          - id: sum-upto-n-js
+            title: 'Sum up to N'
+            description: Calculate the sum of numbers from 1 to N.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function sumUptoN(n) {
+                    // Your code here
+                }
+
+                const n = Number(prompt());
+                console.log(sumUptoN(n));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: '15'
+                  explanation: '1 + 2 + 3 + 4 + 5 = 15'
+                - input: '1'
+                  expected_output: '1'
+                  explanation: 'Sum of first 1 number is 1'
+              hidden: true
+              hidden_cases:
+                - input: '100'
+                  expected_output: '5050'
+            solution:
+              content: |2-
+                function sumUptoN(n) {
+                    return (n * (n + 1)) / 2;
+                }
+
+                const n = Number(prompt());
+                console.log(sumUptoN(n));
+
+          - id: fizz-buzz-js
+            title: 'FizzBuzz'
+            description: Print Fizz if divisible by 3, Buzz if divisible by 5, FizzBuzz if both.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function fizzBuzz(n) {
+                    // Your code here
+                }
+
+                const n = Number(prompt());
+                console.log(fizzBuzz(n));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3'
+                  expected_output: 'Fizz'
+                  explanation: 'Divisible by 3'
+                - input: '5'
+                  expected_output: 'Buzz'
+                  explanation: 'Divisible by 5'
+              hidden: true
+              hidden_cases:
+                - input: '15'
+                  expected_output: 'FizzBuzz'
+                - input: '2'
+                  expected_output: '2'
+            solution:
+              content: |2-
+                function fizzBuzz(n) {
+                    if (n % 3 === 0 && n % 5 === 0) return "FizzBuzz";
+                    if (n % 3 === 0) return "Fizz";
+                    if (n % 5 === 0) return "Buzz";
+                    return String(n);
+                }
+
+                const n = Number(prompt());
+                console.log(fizzBuzz(n));
+
+          - id: multiplication-table-js
+            title: 'Multiplication Table'
+            description: Print the multiplication table for a number up to 10.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function printTable(n) {
+                    // Your code here
+                }
+
+                const n = Number(prompt());
+                printTable(n);
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '2'
+                  expected_output: "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20"
+                  explanation: 'Multiplication table from 1 to 10'
+              hidden: true
+              hidden_cases:
+                - input: '10'
+                  expected_output: "10 x 1 = 0\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100"
+            solution:
+              content: |2-
+                function printTable(n) {
+                    for (let i = 1; i <= 10; i++) {
+                        console.log(`${n} x ${i} = ${n * i}`);
+                    }
+                }
+
+                const n = Number(prompt());
+                printTable(n);
+
+          - id: palindrome-check-js
+            title: 'Palindrome Check'
+            description: Check whether the given string is a palindrome (reads the same backward and forward).
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function isPalindrome(s) {
+                    // Your code here
+                }
+
+                const s = prompt();
+                console.log(isPalindrome(s));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'racecar'
+                  expected_output: 'true'
+                  explanation: 'racecar is the same forwards and backwards'
+                - input: 'hello'
+                  expected_output: 'false'
+                  explanation: 'hello reversed is olleh'
+              hidden: true
+              hidden_cases:
+                - input: 'madam'
+                  expected_output: 'true'
+                - input: 'javascript'
+                  expected_output: 'false'
+            solution:
+              content: |2-
+                function isPalindrome(s) {
+                    const cleaned = s.toLowerCase();
+                    return cleaned === cleaned.split('').reverse().join('');
+                }
+
+                const s = prompt();
+                console.log(isPalindrome(s));
+
+          - id: pattern-printer-js
+            title: 'Pattern Printer'
+            description: Print a right-angled triangle of stars of height N.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function printPattern(n) {
+                    // Your code here
+                }
+
+                const n = Number(prompt());
+                printPattern(n);
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3'
+                  expected_output: "*\n**\n***"
+                  explanation: 'Each line has increasing stars'
+              hidden: true
+              hidden_cases:
+                - input: '5'
+                  expected_output: "*\n**\n***\n****\n*****"
+            solution:
+              content: |2-
+                function printPattern(n) {
+                    for (let i = 1; i <= n; i++) {
+                        console.log('*'.repeat(i));
+                    }
+                }
+
+                const n = Number(prompt());
+                printPattern(n);
+
+      - topic_id: js_data_structures
+        topic_title: Data Structures
+        short_description: Work with arrays, objects, sets, and maps to manipulate and organize data efficiently.
+        order: 2
+        questions:
+          - id: reverse-array-js
+            title: 'Reverse Array'
+            description: Reverse an array of integers without using built-in reverse methods.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function reverseArray(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(reverseArray(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4 5'
+                  expected_output: '[5,4,3,2,1]'
+                - input: '10'
+                  expected_output: '[10]'
+              hidden: true
+              hidden_cases:
+                - input: '7 8 9'
+                  expected_output: '[9,8,7]'
+            solution:
+              content: |2-
+                function reverseArray(arr) {
+                    let left = 0, right = arr.length - 1;
+                    while (left < right) {
+                        [arr[left], arr[right]] = [arr[right], arr[left]];
+                        left++;
+                        right--;
+                    }
+                    return arr;
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(reverseArray(input));
+
+          - id: unique-elements-js
+            title: 'Unique Elements'
+            description: Return an array of only the unique elements from the input array.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function uniqueElements(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ');
+                console.log(uniqueElements(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'a b c a b'
+                  expected_output: '["a","b","c"]'
+                - input: '1 2 2 3 4'
+                  expected_output: '["1","2","3","4"]'
+              hidden: true
+              hidden_cases:
+                - input: 'x y x z'
+                  expected_output: '["x","y","z"]'
+            solution:
+              content: |2-
+                function uniqueElements(arr) {
+                    return [...new Set(arr)];
+                }
+
+                const input = prompt().split(' ');
+                console.log(uniqueElements(input));
+
+          - id: object-counter-js
+            title: 'Object Word Counter'
+            description: Count occurrences of each word in a sentence and return an object.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function countWords(sentence) {
+                    // Your code here
+                }
+
+                const sentence = prompt();
+                console.log(countWords(sentence));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'apple banana apple'
+                  expected_output: '{"apple":2,"banana":1}'
+                - input: 'one one two'
+                  expected_output: '{"one":2,"two":1}'
+              hidden: true
+              hidden_cases:
+                - input: 'cat dog cat dog dog'
+                  expected_output: '{"cat":2,"dog":3}'
+            solution:
+              content: |2-
+                function countWords(sentence) {
+                    const words = sentence.split(' ');
+                    return words.reduce((acc, word) => {
+                        acc[word] = (acc[word] || 0) + 1;
+                        return acc;
+                    }, {});
+                }
+
+                const sentence = prompt();
+                console.log(countWords(sentence));
+
+          - id: merge-objects-js
+            title: 'Merge Objects'
+            description: Merge two objects, summing values for matching keys.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function mergeObjects(obj1, obj2) {
+                    // Your code here
+                }
+
+                const obj1 = JSON.parse(prompt());
+                const obj2 = JSON.parse(prompt());
+                console.log(mergeObjects(obj1, obj2));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '{"a": 1, "b": 2}\n{"b": 3, "c": 4}'
+                  expected_output: '{"a":1,"b":5,"c":4}'
+                - input: '{}\n{"x": 10}'
+                  expected_output: '{"x":10}'
+              hidden: true
+              hidden_cases:
+                - input: '{"x": 1, "y": 2}\n{"x": 4, "z": 5}'
+                  expected_output: '{"x":5,"y":2,"z":5}'
+            solution:
+              content: |2-
+                function mergeObjects(obj1, obj2) {
+                    const result = { ...obj1 };
+                    for (const [key, value] of Object.entries(obj2)) {
+                        result[key] = (result[key] || 0) + value;
+                    }
+                    return result;
+                }
+
+                const obj1 = JSON.parse(prompt());
+                const obj2 = JSON.parse(prompt());
+                console.log(mergeObjects(obj1, obj2));
+
+          - id: stack-simulation-js
+            title: 'Stack Simulation'
+            description: Implement basic stack operations (push, pop) using an array.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Stack {
+                    constructor() {
+                        this.items = [];
+                    }
+
+                    push(value) {
                         // Your code here
-                      }
+                    }
 
-                      console.log(helloWorld());
-                      
+                    pop() {
+                        // Your code here
+                    }
+
+                    display() {
+                        return this.items;
+                    }
+                }
+
+                const s = new Stack();
+                s.push(1);
+                s.push(2);
+                s.pop();
+                console.log(s.display());
             test_cases:
               hidden: false
               visible_cases:
                 - input: ''
-                  expected_output: 'Hello, World!'
-                  explanation: 'The function should return exactly ''Hello, World!'''
+                  expected_output: '[1]'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: '[1,2]'
             solution:
               content: |2-
-                      function helloWorld() {
-                        return "Hello, World!";
-                      }
+                class Stack {
+                    constructor() {
+                        this.items = [];
+                    }
 
-                      console.log(helloWorld());
-                      
-          - id: js-array-sum
-            title: Array Sum
-            description: Calculate the sum of all elements in an array
-            complexity: medium
-            points: 10
+                    push(value) {
+                        this.items.push(value);
+                    }
+
+                    pop() {
+                        if (this.items.length > 0) {
+                            this.items.pop();
+                        }
+                    }
+
+                    display() {
+                        return this.items;
+                    }
+                }
+
+                const s = new Stack();
+                s.push(1);
+                s.push(2);
+                s.pop();
+                console.log(s.display());
+
+          - id: most-common-element-js
+            title: 'Most Common Element'
+            description: Return the most frequent element in an array. If tie, return any one.
+            complexity: hard
+            points: 15
             time_limit_seconds: 10
-            memory_limit_mb: 128
+            memory_limit_mb: 64
             starter_code:
               content: |2-
-                      // Write a function that calculates the sum of all elements in an array
+                function mostCommon(arr) {
+                    // Your code here
+                }
 
-                      function arraySum(arr) {
-                        // Your code here
-                      }
-
-                      // Test cases
-                      const input = JSON.parse(readline());
-                      console.log(arraySum(input));
-                      
+                const input = prompt().split(' ');
+                console.log(mostCommon(input));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '[1, 2, 3, 4, 5]'
-                  expected_output: '15'
-                  explanation: 'Sum of array [1, 2, 3, 4, 5] is 15'
-                - input: '[-1, 0, 1]'
-                  expected_output: '0'
-                  explanation: 'Sum of array [-1, 0, 1] is 0'
+                - input: 'a b a c a'
+                  expected_output: 'a'
+                - input: 'x y x z x y'
+                  expected_output: 'x'
+              hidden: true
+              hidden_cases:
+                - input: '1 2 3 3 2 2'
+                  expected_output: '2'
             solution:
               content: |2-
-                      function arraySum(arr) {
-                        return arr.reduce((sum, current) => sum + current, 0);
-                      }
+                function mostCommon(arr) {
+                    const freq = arr.reduce((acc, item) => {
+                        acc[item] = (acc[item] || 0) + 1;
+                        return acc;
+                    }, {});
+                    return Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
+                }
 
-                      // Test cases
-                      const input = JSON.parse(readline());
-                      console.log(arraySum(input));                      
+                const input = prompt().split(' ');
+                console.log(mostCommon(input));
+
+      - topic_id: js_functions_scope
+        topic_title: Functions and Scope
+        short_description: Master functions, scope, and closures to create reusable and encapsulated code in JavaScript.
+        order: 3
+        questions:
+          - id: square-number-js
+            title: 'Square a Number'
+            description: Write a function that returns the square of a number.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function square(n) {
+                    // Your code here
+                }
+
+                const num = Number(prompt());
+                console.log(square(num));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '4'
+                  expected_output: '16'
+                  explanation: '4 * 4 = 16'
+                - input: '-3'
+                  expected_output: '9'
+                  explanation: '-3 * -3 = 9'
+              hidden: true
+              hidden_cases:
+                - input: '0'
+                  expected_output: '0'
+            solution:
+              content: |2-
+                function square(n) {
+                    return n * n;
+                }
+
+                const num = Number(prompt());
+                console.log(square(num));
+
+          - id: greet-name-js
+            title: 'Greet by Name'
+            description: Write a function that takes a name and returns a greeting message.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function greet(name) {
+                    // Your code here
+                }
+
+                const name = prompt();
+                console.log(greet(name));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'Alice'
+                  expected_output: 'Hello, Alice!'
+                  explanation: 'Greets the provided name'
+                - input: 'Bob'
+                  expected_output: 'Hello, Bob!'
+              hidden: true
+              hidden_cases:
+                - input: 'Zoe'
+                  expected_output: 'Hello, Zoe!'
+            solution:
+              content: |2-
+                function greet(name) {
+                    return `Hello, ${name}!`;
+                }
+
+                const name = prompt();
+                console.log(greet(name));
+
+          - id: scope-check-js
+            title: 'Scope Check'
+            description: Predict the output based on variable scope in a function.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function scopeTest() {
+                    let x = 10;
+                    if (true) {
+                        let x = 20;
+                    }
+                    return x;
+                }
+
+                console.log(scopeTest());
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: '10'
+                  explanation: 'Block-scoped let does not affect outer x'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: '10'
+            solution:
+              content: |2-
+                function scopeTest() {
+                    let x = 10;
+                    if (true) {
+                        let x = 20; // Different scope, does not overwrite outer x
+                    }
+                    return x;
+                }
+
+                console.log(scopeTest());
+
+          - id: counter-function-js
+            title: 'Counter Function'
+            description: Create a function that returns a counter that increments each time it’s called.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function createCounter() {
+                    // Your code here
+                }
+
+                const counter = createCounter();
+                console.log(counter());
+                console.log(counter());
+                console.log(counter());
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: "0\n1\n2"
+                  explanation: 'Counter increments with each call'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: "0\n1\n2"
+            solution:
+              content: |2-
+                function createCounter() {
+                    let count = 0;
+                    return function() {
+                        return count++;
+                    };
+                }
+
+                const counter = createCounter();
+                console.log(counter());
+                console.log(counter());
+                console.log(counter());
+
+          - id: closure-multiplier-js
+            title: 'Closure Multiplier'
+            description: Create a function that returns a multiplier function based on a given factor.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function createMultiplier(factor) {
+                    // Your code here
+                }
+
+                const double = createMultiplier(2);
+                const triple = createMultiplier(3);
+                console.log(double(5));
+                console.log(triple(5));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: "10\n15"
+                  explanation: 'Double multiplies by 2, triple by 3'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: "10\n15"
+            solution:
+              content: |2-
+                function createMultiplier(factor) {
+                    return function(num) {
+                        return num * factor;
+                    };
+                }
+
+                const double = createMultiplier(2);
+                const triple = createMultiplier(3);
+                console.log(double(5));
+                console.log(triple(5));
+
+          - id: recursive-factorial-js
+            title: 'Factorial (Recursion)'
+            description: Use recursion to calculate the factorial of a number.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function factorial(n) {
+                    // Your code here
+                }
+
+                const num = Number(prompt());
+                console.log(factorial(num));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: '120'
+                  explanation: '5! = 5 * 4 * 3 * 2 * 1 = 120'
+                - input: '0'
+                  expected_output: '1'
+                  explanation: '0! is defined as 1'
+              hidden: true
+              hidden_cases:
+                - input: '6'
+                  expected_output: '720'
+            solution:
+              content: |2-
+                function factorial(n) {
+                    if (n === 0 || n === 1) return 1;
+                    return n * factorial(n - 1);
+                }
+
+                const num = Number(prompt());
+                console.log(factorial(num));
+
+      - topic_id: js_arrays_methods
+        topic_title: Arrays and Methods
+        short_description: Explore JavaScript arrays and their powerful built-in methods to manipulate and process data effectively.
+        order: 4
+        questions:
+          - id: array-sum-js
+            title: 'Array Sum'
+            description: Calculate the sum of all numbers in an array.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function arraySum(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(arraySum(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4 5'
+                  expected_output: '15'
+                  explanation: '1 + 2 + 3 + 4 + 5 = 15'
+                - input: '10'
+                  expected_output: '10'
+                  explanation: 'Single element sum is itself'
+              hidden: true
+              hidden_cases:
+                - input: '0 0 0'
+                  expected_output: '0'
+            solution:
+              content: |2-
+                function arraySum(arr) {
+                    return arr.reduce((sum, num) => sum + num, 0);
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(arraySum(input));
+
+          - id: filter-even-js
+            title: 'Filter Even Numbers'
+            description: Return an array containing only the even numbers from the input array.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function filterEven(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(filterEven(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4 5 6'
+                  expected_output: '[2,4,6]'
+                  explanation: 'Only even numbers are kept'
+                - input: '1 3 5'
+                  expected_output: '[]'
+                  explanation: 'No even numbers in the array'
+              hidden: true
+              hidden_cases:
+                - input: '2 4 6 8'
+                  expected_output: '[2,4,6,8]'
+            solution:
+              content: |2-
+                function filterEven(arr) {
+                    return arr.filter(num => num % 2 === 0);
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(filterEven(input));
+
+          - id: double-numbers-js
+            title: 'Double Numbers'
+            description: Return a new array with each number from the input array doubled.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function doubleNumbers(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(doubleNumbers(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3'
+                  expected_output: '[2,4,6]'
+                  explanation: 'Each number is multiplied by 2'
+                - input: '0 5'
+                  expected_output: '[0,10]'
+              hidden: true
+              hidden_cases:
+                - input: '-1 2 3'
+                  expected_output: '[-2,4,6]'
+            solution:
+              content: |2-
+                function doubleNumbers(arr) {
+                    return arr.map(num => num * 2);
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(doubleNumbers(input));
+
+          - id: find-max-js
+            title: 'Find Maximum'
+            description: Find and return the maximum value in an array of numbers.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function findMax(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(findMax(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3 1 4 1 5'
+                  expected_output: '5'
+                  explanation: '5 is the largest number'
+                - input: '-1 -5 -2'
+                  expected_output: '-1'
+                  explanation: '-1 is the largest among negatives'
+              hidden: true
+              hidden_cases:
+                - input: '10 2 8 10'
+                  expected_output: '10'
+            solution:
+              content: |2-
+                function findMax(arr) {
+                    return Math.max(...arr);
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(findMax(input));
+
+          - id: array-chunk-js
+            title: 'Array Chunking'
+            description: Split an array into chunks of a given size and return an array of these chunks.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function chunkArray(arr, size) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ');
+                const size = Number(prompt());
+                console.log(chunkArray(input, size));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'a b c d e\n2'
+                  expected_output: '[["a","b"],["c","d"],["e"]]'
+                  explanation: 'Array split into chunks of size 2'
+                - input: '1 2 3\n1'
+                  expected_output: '[["1"],["2"],["3"]]'
+              hidden: true
+              hidden_cases:
+                - input: 'x y z w\n3'
+                  expected_output: '[["x","y","z"],["w"]]'
+            solution:
+              content: |2-
+                function chunkArray(arr, size) {
+                    if (size <= 0) return [];
+                    const result = [];
+                    for (let i = 0; i < arr.length; i += size) {
+                        result.push(arr.slice(i, i + size));
+                    }
+                    return result;
+                }
+
+                const input = prompt().split(' ');
+                const size = Number(prompt());
+                console.log(chunkArray(input, size));
+
+          - id: flatten-array-js
+            title: 'Flatten Array'
+            description: Flatten a nested array (one level deep) into a single-level array.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function flattenArray(arr) {
+                    // Your code here
+                }
+
+                const input = JSON.parse(prompt());
+                console.log(flattenArray(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '[1, [2, 3], 4]'
+                  expected_output: '[1,2,3,4]'
+                  explanation: 'Nested arrays are flattened one level'
+                - input: '["a", ["b"], ["c", "d"]]'
+                  expected_output: '["a","b","c","d"]'
+              hidden: true
+              hidden_cases:
+                - input: '[5, [], [6, 7]]'
+                  expected_output: '[5,6,7]'
+            solution:
+              content: |2-
+                function flattenArray(arr) {
+                    return arr.reduce((flat, item) => flat.concat(Array.isArray(item) ? item : [item]), []);
+                }
+
+                const input = JSON.parse(prompt());
+                console.log(flattenArray(input));
+
+      - topic_id: js_arrays_advanced
+        topic_title: Advanced Array Operations
+        short_description: Dive deeper into JavaScript array manipulation with advanced methods and techniques.
+        order: 6
+        questions:
+          - id: unique-elements-js
+            title: 'Unique Elements'
+            description: Return an array containing only unique elements from the input array.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function getUnique(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(String);
+                console.log(getUnique(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 2 3 3 4'
+                  expected_output: '[1,2,3,4]'
+                  explanation: 'Duplicates are removed'
+                - input: 'a a b c'
+                  expected_output: '[a,b,c]'
+                  explanation: 'Only unique strings remain'
+              hidden: true
+              hidden_cases:
+                - input: '5 5 5'
+                  expected_output: '[5]'
+            solution:
+              content: |2-
+                function getUnique(arr) {
+                    return [...new Set(arr)];
+                }
+
+                const input = prompt().split(' ').map(String);
+                console.log(getUnique(input));
+
+          - id: array-intersection-js
+            title: 'Array Intersection'
+            description: Find and return common elements between two arrays.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function arrayIntersection(arr1, arr2) {
+                    // Your code here
+                }
+
+                const input1 = prompt().split(' ').map(Number);
+                const input2 = prompt().split(' ').map(Number);
+                console.log(arrayIntersection(input1, input2));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4\n2 4 6'
+                  expected_output: '[2,4]'
+                  explanation: '2 and 4 are common in both arrays'
+                - input: '5 6 7\n8 9'
+                  expected_output: '[]'
+                  explanation: 'No common elements'
+              hidden: true
+              hidden_cases:
+                - input: '1 1 2\n1 2 2'
+                  expected_output: '[1,2]'
+            solution:
+              content: |2-
+                function arrayIntersection(arr1, arr2) {
+                    return arr1.filter(item => arr2.includes(item));
+                }
+
+                const input1 = prompt().split(' ').map(Number);
+                const input2 = prompt().split(' ').map(Number);
+                console.log(arrayIntersection(input1, input2));
+
+          - id: rotate-array-js
+            title: 'Rotate Array'
+            description: Rotate an array to the right by k steps.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function rotateArray(arr, k) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(Number);
+                const k = Number(prompt());
+                console.log(rotateArray(input, k));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4 5\n2'
+                  expected_output: '[4,5,1,2,3]'
+                  explanation: 'Array rotated right by 2 steps'
+                - input: '1 2 3\n1'
+                  expected_output: '[3,1,2]'
+              hidden: true
+              hidden_cases:
+                - input: '1 2\n0'
+                  expected_output: '[1,2]'
+            solution:
+              content: |2-
+                function rotateArray(arr, k) {
+                    k = k % arr.length;
+                    return [...arr.slice(-k), ...arr.slice(0, -k)];
+                }
+
+                const input = prompt().split(' ').map(Number);
+                const k = Number(prompt());
+                console.log(rotateArray(input, k));
+
+          - id: array-difference-js
+            title: 'Array Difference'
+            description: Return elements in the first array that are not in the second array.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function arrayDifference(arr1, arr2) {
+                    // Your code here
+                }
+
+                const input1 = prompt().split(' ').map(Number);
+                const input2 = prompt().split(' ').map(Number);
+                console.log(arrayDifference(input1, input2));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4\n2 4'
+                  expected_output: '[1,3]'
+                  explanation: '1 and 3 are not in the second array'
+                - input: '5 6\n5 6 7'
+                  expected_output: '[]'
+              hidden: true
+              hidden_cases:
+                - input: '1 2 3\n3 4 5'
+                  expected_output: '[1,2]'
+            solution:
+              content: |2-
+                function arrayDifference(arr1, arr2) {
+                    return arr1.filter(item => !arr2.includes(item));
+                }
+
+                const input1 = prompt().split(' ').map(Number);
+                const input2 = prompt().split(' ').map(Number);
+                console.log(arrayDifference(input1, input2));
+
+          - id: merge-sorted-js
+            title: 'Merge Sorted Arrays'
+            description: Merge two sorted arrays into a single sorted array.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function mergeSortedArrays(arr1, arr2) {
+                    // Your code here
+                }
+
+                const input1 = prompt().split(' ').map(Number);
+                const input2 = prompt().split(' ').map(Number);
+                console.log(mergeSortedArrays(input1, input2));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 3 5\n2 4 6'
+                  expected_output: '[1,2,3,4,5,6]'
+                  explanation: 'Merged and sorted'
+                - input: '1 2\n3'
+                  expected_output: '[1,2,3]'
+              hidden: true
+              hidden_cases:
+                - input: '2 4 6\n1 3 5'
+                  expected_output: '[1,2,3,4,5,6]'
+            solution:
+              content: |2-
+                function mergeSortedArrays(arr1, arr2) {
+                    return [...arr1, ...arr2].sort((a, b) => a - b);
+                }
+
+                const input1 = prompt().split(' ').map(Number);
+                const input2 = prompt().split(' ').map(Number);
+                console.log(mergeSortedArrays(input1, input2));
+
+          - id: array-partition-js
+            title: 'Partition Array'
+            description: Partition an array into two groups based on a condition (e.g., even vs. odd).
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function partitionArray(arr) {
+                    // Your code here
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(partitionArray(input));
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 4 5'
+                  expected_output: '[[2,4],[1,3,5]]'
+                  explanation: 'Even numbers in first group, odd in second'
+                - input: '1 3 5'
+                  expected_output: '[[],[1,3,5]]'
+                  explanation: 'No even numbers'
+              hidden: true
+              hidden_cases:
+                - input: '2 4 6'
+                  expected_output: '[[2,4,6],[]]'
+            solution:
+              content: |2-
+                function partitionArray(arr) {
+                    return [arr.filter(num => num % 2 === 0), arr.filter(num => num % 2 !== 0)];
+                }
+
+                const input = prompt().split(' ').map(Number);
+                console.log(partitionArray(input));

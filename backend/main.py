@@ -27,17 +27,22 @@ def load_config(path="config.yaml"):
         config = yaml.safe_load(file)
 
     for course in config.get("courses", []):
+        # print("CC",course)
         course_id = course["id"]
         courses_data[course_id] = course
 
         # Flatten and collect question data
         for topic in course.get("topics", []):
             for question in topic.get("questions", []):
+                # print("QQ",question)
                 qid = question["id"]
                 questions_data[qid] = question
 
 # Load everything from config.yaml
 load_config()
+# print("CCD",courses_data)
+print("QQD",questions_data)
+
 
 @app.get("/debug")
 def debug():
