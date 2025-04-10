@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(`http://localhost:8000/courses/${courseId}/topics`);
       const topics = await res.json();
-      console.log(topics)
+      console.log("topics",topics)
       topics.forEach(topic => {
         const card = document.createElement("div");
         card.className = "card";

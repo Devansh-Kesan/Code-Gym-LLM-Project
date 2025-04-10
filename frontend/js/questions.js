@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(`http://localhost:8000/courses/${courseId}/topics/${topicId}`);
       const topic = await res.json();
-    //   console.log(topic)
+      console.log(topic)
       titleEl.textContent = topic.topic_title;
   
       topic.questions.forEach((q, index) => {
