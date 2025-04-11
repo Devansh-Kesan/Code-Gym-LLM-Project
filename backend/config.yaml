@@ -18,519 +18,625 @@ courses:
     estimated_hours: 20
     prerequisites: []
     topics:
-      - topic_id: python_basics
-        topic_title: Python Basics & Control Flow
+      - topic_id: Understanding Built-in Collections
+        topic_title: Mastering Python Data Structures
         short_description: >-
-          Learn the foundation of Python including variables, loops,
-          conditionals, and basic logic building.
+          Learn how to store, retrieve, and manipulate data using Python's built-in structures like lists, tuples, sets, and dictionaries. These are essential tools for organizing and managing data effectively in any Python program.
         order: 1
         questions:
-          - id: even-or-odd
-            title: 'Even or Odd'
-            description: Determine if the input number is even or odd.
+          - id: sum-of-list
+            title: 'Sum of List Elements'
+            description: Calculate and return the sum of all elements in a given list.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def is_even_or_odd(n):
+                def sum_of_list(lst):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    num = int(input())
-                    print(is_even_or_odd(num))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '4'
-                  expected_output: 'Even'
-                  explanation: '4 is divisible by 2'
-                - input: '7'
-                  expected_output: 'Odd'
-                  explanation: '7 is not divisible by 2'
-              hidden: true
-              hidden_cases:
-                - input: '0'
-                  expected_output: 'Even'
-                - input: '101'
-                  expected_output: 'Odd'
-            solution:
-              content: |2-
-                def is_even_or_odd(n):
-                    return "Even" if n % 2 == 0 else "Odd"
-
-                if __name__ == "__main__":
-                    num = int(input())
-                    print(is_even_or_odd(num))
-
-          - id: sum-upto-n
-            title: 'Sum up to N'
-            description: Calculate the sum of numbers from 1 to N.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def sum_upto_n(n):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print(sum_upto_n(n))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '5'
-                  expected_output: '15'
-                  explanation: '1 + 2 + 3 + 4 + 5 = 15'
-                - input: '1'
-                  expected_output: '1'
-                  explanation: 'Sum of first 1 number is 1'
-              hidden: true
-              hidden_cases:
-                - input: '100'
-                  expected_output: '5050'
-            solution:
-              content: |2-
-                def sum_upto_n(n):
-                    return n * (n + 1) // 2
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print(sum_upto_n(n))
-
-          - id: fizz-buzz
-            title: 'FizzBuzz'
-            description: Print Fizz if divisible by 3, Buzz if divisible by 5, FizzBuzz if both.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def fizz_buzz(n):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print(fizz_buzz(n))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '3'
-                  expected_output: 'Fizz'
-                  explanation: 'Divisible by 3'
-                - input: '5'
-                  expected_output: 'Buzz'
-                  explanation: 'Divisible by 5'
-              hidden: true
-              hidden_cases:
-                - input: '15'
-                  expected_output: 'FizzBuzz'
-                - input: '2'
-                  expected_output: '2'
-            solution:
-              content: |2-
-                def fizz_buzz(n):
-                    if n % 3 == 0 and n % 5 == 0:
-                        return "FizzBuzz"
-                    elif n % 3 == 0:
-                        return "Fizz"
-                    elif n % 5 == 0:
-                        return "Buzz"
-                    else:
-                        return str(n)
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print(fizz_buzz(n))
-
-          - id: multiplication-table
-            title: 'Multiplication Table'
-            description: Print the multiplication table for a number up to 10.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def print_table(n):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print_table(n)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '2'
-                  expected_output: "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20"
-                  explanation: 'Multiplication table from 1 to 10'
-              hidden: true
-              hidden_cases:
-                - input: '10'
-                  expected_output: "10 x 1 = 10\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100"
-            solution:
-              content: |2-
-                def print_table(n):
-                    for i in range(1, 11):
-                        print(f"{n} x {i} = {n * i}")
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print_table(n)
-
-          - id: palindrome-check
-            title: 'Palindrome Check'
-            description: Check whether the given string is a palindrome (reads the same backward and forward).
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def is_palindrome(s):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    s = input()
-                    print(is_palindrome(s))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: 'racecar'
-                  expected_output: 'True'
-                  explanation: 'racecar is the same forwards and backwards'
-                - input: 'hello'
-                  expected_output: 'False'
-                  explanation: 'hello reversed is olleh'
-              hidden: true
-              hidden_cases:
-                - input: 'madam'
-                  expected_output: 'True'
-                - input: 'python'
-                  expected_output: 'False'
-            solution:
-              content: |2-
-                def is_palindrome(s):
-                    return str(s) == str(s)[::-1]
-
-                if __name__ == "__main__":
-                    s = input()
-                    print(is_palindrome(s))
-
-          - id: pattern-printer
-            title: 'Pattern Printer'
-            description: Print a right-angled triangle of stars of height N.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def print_pattern(n):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print_pattern(n)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '3'
-                  expected_output: "*\n**\n***"
-                  explanation: 'Each line has increasing stars'
-              hidden: true
-              hidden_cases:
-                - input: '5'
-                  expected_output: "*\n**\n***\n****\n*****"
-            solution:
-              content: |2-
-                def print_pattern(n):
-                    for i in range(1, n + 1):
-                        print('*' * i)
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print_pattern(n)
-                              
-      - topic_id: data_structures
-        topic_title: Data Structures
-        short_description: Work with lists, dictionaries, sets, and tuples to manipulate and organize data efficiently.
-        order: 2
-        questions:
-          - id: reverse-list
-            title: 'Reverse List'
-            description: Reverse a list of integers without using built-in reverse methods.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def reverse_list(lst):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    lst = list(map(int, input().split()))
-                    print(reverse_list(lst))
+                    nums = list(map(int, input().split()))
+                    print(sum_of_list(nums))
             test_cases:
               hidden: false
               visible_cases:
                 - input: '1 2 3 4 5'
-                  expected_output: '[5, 4, 3, 2, 1]'
-                - input: '10'
-                  expected_output: '[10]'
+                  expected_output: '15'
+                  explanation: 'Sum = 1+2+3+4+5 = 15'
+                - input: '10 20 30'
+                  expected_output: '60'
+                  explanation: 'Sum = 10+20+30 = 60'
               hidden: true
               hidden_cases:
-                - input: '7 8 9'
-                  expected_output: '[9, 8, 7]'
+                - input: '0 0 0'
+                  expected_output: '0'
+                - input: '100 -50 25'
+                  expected_output: '75'
             solution:
               content: |2-
-                def reverse_list(lst):
-                    return lst[::-1]
+                def sum_of_list(lst):
+                    return sum(lst)
 
                 if __name__ == "__main__":
-                    lst = list(map(int, input().split()))
-                    print(reverse_list(lst))
+                    nums = list(map(int, input().split()))
+                    print(sum_of_list(nums))
 
-          - id: unique-elements
-            title: 'Unique Elements'
-            description: Return a list of only the unique elements from the input list.
+
+          - id: count-unique-elements
+            title: 'Count Unique Elements'
+            description: Return the number of unique elements in a given list.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def unique_elements(lst):
+                def count_unique(lst):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    lst = input().split()
-                    print(unique_elements(lst))
+                    nums = list(map(int, input().split()))
+                    print(count_unique(nums))
             test_cases:
               hidden: false
               visible_cases:
-                - input: 'a b c a b'
-                  expected_output: "['a', 'b', 'c']"
                 - input: '1 2 2 3 4'
-                  expected_output: "['1', '2', '3', '4']"
+                  expected_output: '4'
+                  explanation: 'Unique elements are 1, 2, 3, 4'
+                - input: '5 5 5 5 5'
+                  expected_output: '1'
+                  explanation: 'Only one unique element: 5'
               hidden: true
               hidden_cases:
-                - input: 'x y x z'
-                  expected_output: "['x', 'y', 'z']"
+                - input: '1 1 2 2 3 3 4'
+                  expected_output: '4'
+                - input: '10 20 30 10 20'
+                  expected_output: '3'
             solution:
               content: |2-
-                def unique_elements(lst):
-                    return list(dict.fromkeys(lst))
-
+                def count_unique(lst):
+                    return len(set(lst))
                 if __name__ == "__main__":
-                    lst = input().split()
-                    print(unique_elements(lst))
+                    nums = list(map(int, input().split()))
+                    print(count_unique(nums))
 
-          - id: dict-counter
-            title: 'Dictionary Word Counter'
-            description: Count occurrences of each word in a sentence and return a dictionary.
+
+          - id: frequency-counter
+            title: 'Frequency Counter'
+            description: Return a dictionary with the frequency of each element in the list.
             complexity: medium
             points: 10
-            time_limit_seconds: 10
-            memory_limit_mb: 64
+            time_limit_seconds: 5
+            memory_limit_mb: 128
             starter_code:
               content: |2-
-                def count_words(sentence):
+                def get_frequency(lst):
                     # Your code here
                     pass
-
                 if __name__ == "__main__":
-                    sentence = input()
-                    print(count_words(sentence))
+                    nums = list(map(int, input().split()))
+                    freq_dict = get_frequency(nums)
+                    for key in sorted(freq_dict.keys()):
+                        print(f"{key}:{freq_dict[key]}")
             test_cases:
               hidden: false
               visible_cases:
-                - input: 'apple banana apple'
-                  expected_output: "{'apple': 2, 'banana': 1}"
-                - input: 'one one two'
-                  expected_output: "{'one': 2, 'two': 1}"
+                - input: '1 2 2 3 3 3'
+                  expected_output: |
+                    1:1
+                    2:2
+                    3:3
+                  explanation: 'Frequencies are 1:1, 2:2, 3:3'
+                - input: '4 4 4 4'
+                  expected_output: |
+                    4:4
+                  explanation: 'Only one unique element with frequency 4'
               hidden: true
               hidden_cases:
-                - input: 'cat dog cat dog dog'
-                  expected_output: "{'cat': 2, 'dog': 3}"
+                - input: '5 6 5 6 5'
+                  expected_output: |
+                    5:3
+                    6:2
+                - input: '9 8 7 8 9 9'
+                  expected_output: |
+                    7:1
+                    8:2
+                    9:3
             solution:
               content: |2-
-                def count_words(sentence):
-                    words = sentence.split()
-                    result = {}
-                    for word in words:
-                        result[word] = result.get(word, 0) + 1
-                    return result
-
-                if __name__ == "__main__":
-                    sentence = input()
-                    print(count_words(sentence))
-
-          - id: merge-dictionaries
-            title: 'Merge Dictionaries'
-            description: Merge two dictionaries, summing values for matching keys.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def merge_dicts(d1, d2):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    d1 = eval(input())
-                    d2 = eval(input())
-                    print(merge_dicts(d1, d2))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: "{'a': 1, 'b': 2}\n{'b': 3, 'c': 4}"
-                  expected_output: "{'a': 1, 'b': 5, 'c': 4}"
-                - input: "{}\n{'x': 10}"
-                  expected_output: "{'x': 10}"
-              hidden: true
-              hidden_cases:
-                - input: "{'x': 1, 'y': 2}\n{'x': 4, 'z': 5}"
-                  expected_output: "{'x': 5, 'y': 2, 'z': 5}"
-            solution:
-              content: |2-
-                def merge_dicts(d1, d2):
-                    result = d1.copy()
-                    for k, v in d2.items():
-                        result[k] = result.get(k, 0) + v
-                    return result
-
-                if __name__ == "__main__":
-                    d1 = eval(input())
-                    d2 = eval(input())
-                    print(merge_dicts(d1, d2))
-
-          - id: stack-simulation
-            title: 'Stack Simulation'
-            description: Implement basic stack operations (push, pop) using a list.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class Stack:
-                    def __init__(self):
-                        self.items = []
-
-                    def push(self, value):
-                        # Your code here
-                        pass
-
-                    def pop(self):
-                        # Your code here
-                        pass
-
-                    def display(self):
-                        return self.items
-
-                if __name__ == "__main__":
-                    s = Stack()
-                    s.push(1)
-                    s.push(2)
-                    s.pop()
-                    print(s.display())
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '[1]'
-                - input: ''
-                  expected_output: '[1]'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '[1, 2]'
-            solution:
-              content: |2-
-                class Stack:
-                    def __init__(self):
-                        self.items = []
-
-                    def push(self, value):
-                        self.items.append(value)
-
-                    def pop(self):
-                        if self.items:
-                            self.items.pop()
-
-                    def display(self):
-                        return self.items
-
-                if __name__ == "__main__":
-                    s = Stack()
-                    s.push(1)
-                    s.push(2)
-                    s.pop()
-                    print(s.display())
-
-          - id: most-common-element
-            title: 'Most Common Element'
-            description: Return the most frequent element in a list. If tie, return any one.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def most_common(lst):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    lst = input().split()
-                    print(most_common(lst))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: 'a b a c a'
-                  expected_output: 'a'
-                - input: 'x y x z x y'
-                  expected_output: 'x'
-              hidden: true
-              hidden_cases:
-                - input: '1 2 3 3 2 2'
-                  expected_output: '2'
-            solution:
-              content: |2-
-                def most_common(lst):
+                def get_frequency(lst):
                     freq = {}
-                    for item in lst:
-                        freq[item] = freq.get(item, 0) + 1
-                    return max(freq, key=freq.get)
+                    for num in lst:
+                        freq[num] = freq.get(num, 0) + 1
+                    return freq
+                if __name__ == "__main__":
+                    nums = list(map(int, input().split()))
+                    freq_dict = get_frequency(nums)
+                    for key in sorted(freq_dict.keys()):
+                        print(f"{key}:{freq_dict[key]}")
+
+
+          - id: merge-and-sort
+            title: 'Merge and Sort Two Lists'
+            description: Merge two input lists and return a sorted list without duplicates.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                def merge_and_sort_unique(lst1, lst2):
+                    # Your code here
+                    pass
 
                 if __name__ == "__main__":
-                    lst = input().split()
-                    print(most_common(lst))
-      
-      - topic_id: functions_recursion
-        topic_title: Functions and Recursion
+                    list1 = list(map(int, input().split()))
+                    list2 = list(map(int, input().split()))
+                    result = merge_and_sort_unique(list1, list2)
+                    print(*result)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: |
+                    1 3 5
+                    2 3 6
+                  expected_output: '1 2 3 5 6'
+                  explanation: 'Merged and sorted without duplicates'
+                - input: |
+                    4 4 4
+                    4 4 4
+                  expected_output: '4'
+                  explanation: 'All elements are the same, only one unique'
+              hidden: true
+              hidden_cases:
+                - input: |
+                    10 20 30
+                    5 15 25
+                  expected_output: '5 10 15 20 25 30'
+                - input: |
+                    7 9 11 13
+                    8 10 12 14
+                  expected_output: '7 8 9 10 11 12 13 14'
+            solution:
+              content: |2-
+                def merge_and_sort_unique(lst1, lst2):
+                    merged = list(set(lst1 + lst2))
+                    merged.sort()
+                    return merged
+
+                if __name__ == "__main__":
+                    list1 = list(map(int, input().split()))
+                    list2 = list(map(int, input().split()))
+                    result = merge_and_sort_unique(list1, list2)
+                    print(*result)
+
+          - id: longest-unique-subarray
+            title: 'Longest Unique Subarray'
+            description: Find the length of the longest contiguous subarray with all unique elements.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                def longest_unique_subarray(arr):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    nums = list(map(int, input().split()))
+                    print(longest_unique_subarray(nums))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 2 3 2 4 5'
+                  expected_output: '4'
+                  explanation: 'Longest unique subarray is [3,2,4,5]'
+                - input: '5 5 5 5'
+                  expected_output: '1'
+                  explanation: 'Only one unique element'
+              hidden: true
+              hidden_cases:
+                - input: '1 2 3 4 5 1 2'
+                  expected_output: '5'
+                - input: '10 20 10 30 40 50 30'
+                  expected_output: '5'
+            solution:
+              content: |2-
+                def longest_unique_subarray(arr):
+                    seen = set()
+                    left = 0
+                    max_len = 0
+                    for right in range(len(arr)):
+                        while arr[right] in seen:
+                            seen.remove(arr[left])
+                            left += 1
+                        seen.add(arr[right])
+                        max_len = max(max_len, right - left + 1)
+                    return max_len
+
+                if __name__ == "__main__":
+                    nums = list(map(int, input().split()))
+                    print(longest_unique_subarray(nums))
+
+          - id: flatten-nested-dictionary
+            title: 'Flatten Nested Dictionary'
+            description: Given a nested dictionary, flatten it into a single-level dictionary with keys representing the path.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                def flatten_dict(d, parent_key='', sep='.'):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    import ast
+                    d = ast.literal_eval(input())
+                    result = flatten_dict(d)
+                    for k in sorted(result):
+                        print(f"{k}:{result[k]}")
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "{'a': 1, 'b': {'c': 2, 'd': {'e': 3}}}"
+                  expected_output: |
+                    a:1
+                    b.c:2
+                    b.d.e:3
+                  explanation: 'Flattened keys represent path in nested dict'
+                - input: "{'x': {'y': {'z': 5}}, 'w': 1}"
+                  expected_output: |
+                    w:1
+                    x.y.z:5
+                  explanation: 'All keys follow path structure with dots'
+              hidden: true
+              hidden_cases:
+                - input: "{'foo': {'bar': 2}, 'baz': {'qux': {'quux': 4}}}"
+                  expected_output: |
+                    baz.qux.quux:4
+                    foo.bar:2
+                - input: "{'a': {'b': {'c': {'d': 9}}}}"
+                  expected_output: |
+                    a.b.c.d:9
+            solution:
+              content: |2-
+                def flatten_dict(d, parent_key='', sep='.'):
+                    items = {}
+                    for k, v in d.items():
+                        new_key = f"{parent_key}{sep}{k}" if parent_key else k
+                        if isinstance(v, dict):
+                            items.update(flatten_dict(v, new_key, sep=sep))
+                        else:
+                            items[new_key] = v
+                    return items
+
+                if __name__ == "__main__":
+                    import ast
+                    d = ast.literal_eval(input())
+                    result = flatten_dict(d)
+                    for k in sorted(result):
+                        print(f"{k}:{result[k]}")
+
+                              
+      - topic_id: Decision Making and Loops in Python
+        topic_title: Control Flow Made Easy
+        short_description: Explore how to control the execution of your code using if-else statements, for and while loops. Gain practical skills by building logic-based mini projects like prime checkers and number games.
+        order: 2
+        questions:
+          - id: number-type
+            title: 'Positive, Negative or Zero'
+            description: Determine if a number is positive, negative, or zero.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def check_number(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    num = int(input())
+                    print(check_number(num))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: 'Positive'
+                - input: '-3'
+                  expected_output: 'Negative'
+              hidden: true
+              hidden_cases:
+                - input: '0'
+                  expected_output: 'Zero'
+                - input: '-1'
+                  expected_output: 'Negative'
+            solution:
+              content: |2-
+                def check_number(n):
+                    if n > 0:
+                        return "Positive"
+                    elif n < 0:
+                        return "Negative"
+                    else:
+                        return "Zero"
+
+                if __name__ == "__main__":
+                    num = int(input())
+                    print(check_number(num))
+
+          - id: max-of-three
+            title: 'Maximum of Three Numbers'
+            description: Return the largest among three numbers using conditional statements.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def max_of_three(a, b, c):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    a, b, c = map(int, input().split())
+                    print(max_of_three(a, b, c))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '10 20 30'
+                  expected_output: '30'
+                - input: '50 40 10'
+                  expected_output: '50'
+              hidden: true
+              hidden_cases:
+                - input: '1 1 1'
+                  expected_output: '1'
+                - input: '9 8 10'
+                  expected_output: '10'
+            solution:
+              content: |2-
+                def max_of_three(a, b, c):
+                    if a >= b and a >= c:
+                        return a
+                    elif b >= a and b >= c:
+                        return b
+                    else:
+                        return c
+
+                if __name__ == "__main__":
+                    a, b, c = map(int, input().split())
+                    print(max_of_three(a, b, c))
+
+          - id: grade-categorizer
+            title: 'Grade Categorizer'
+            description: Print the grade based on marks using if-elif-else conditions.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def get_grade(marks):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    marks = int(input())
+                    print(get_grade(marks))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '85'
+                  expected_output: 'A'
+                - input: '65'
+                  expected_output: 'C'
+              hidden: true
+              hidden_cases:
+                - input: '72'
+                  expected_output: 'B'
+                - input: '33'
+                  expected_output: 'F'
+            solution:
+              content: |2-
+                def get_grade(marks):
+                    if marks >= 80:
+                        return "A"
+                    elif marks >= 70:
+                        return "B"
+                    elif marks >= 60:
+                        return "C"
+                    elif marks >= 50:
+                        return "D"
+                    else:
+                        return "F"
+
+                if __name__ == "__main__":
+                    marks = int(input())
+                    print(get_grade(marks))
+
+
+          - id: leap-year
+            title: 'Leap Year Checker'
+            description: Determine whether the given year is a leap year or not.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def is_leap_year(year):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    year = int(input())
+                    print(is_leap_year(year))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '2000'
+                  expected_output: 'Leap Year'
+                - input: '1900'
+                  expected_output: 'Not a Leap Year'
+              hidden: true
+              hidden_cases:
+                - input: '2024'
+                  expected_output: 'Leap Year'
+                - input: '2100'
+                  expected_output: 'Not a Leap Year'
+            solution:
+              content: |2-
+                def is_leap_year(year):
+                    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+                        return "Leap Year"
+                    else:
+                        return "Not a Leap Year"
+
+                if __name__ == "__main__":
+                    year = int(input())
+                    print(is_leap_year(year))
+
+
+          - id: triangle-type
+            title: 'Triangle Type Checker'
+            description: Classify a triangle as Equilateral, Isosceles, or Scalene based on side lengths.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                def triangle_type(a, b, c):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    a, b, c = map(int, input().split())
+                    print(triangle_type(a, b, c))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3 3 3'
+                  expected_output: 'Equilateral'
+                - input: '3 3 4'
+                  expected_output: 'Isosceles'
+              hidden: true
+              hidden_cases:
+                - input: '3 4 5'
+                  expected_output: 'Scalene'
+                - input: '7 7 10'
+                  expected_output: 'Isosceles'
+            solution:
+              content: |2-
+                def triangle_type(a, b, c):
+                    if a == b == c:
+                        return "Equilateral"
+                    elif a == b or b == c or a == c:
+                        return "Isosceles"
+                    else:
+                        return "Scalene"
+
+                if __name__ == "__main__":
+                    a, b, c = map(int, input().split())
+                    print(triangle_type(a, b, c))
+
+
+          - id: atm-validator
+            title: 'ATM Withdrawal Validator'
+            description: Validate ATM withdrawal based on balance, withdrawal amount and minimum denomination.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                def validate_withdrawal(balance, amount):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    balance, amount = map(int, input().split())
+                    print(validate_withdrawal(balance, amount))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1000 500'
+                  expected_output: 'Transaction Successful'
+                - input: '300 500'
+                  expected_output: 'Insufficient Balance'
+              hidden: true
+              hidden_cases:
+                - input: '1500 1250'
+                  expected_output: 'Transaction Successful'
+                - input: '2000 2451'
+                  expected_output: 'Invalid Amount'
+            solution:
+              content: |2-
+                def validate_withdrawal(balance, amount):
+                    if amount > balance:
+                        return "Insufficient Balance"
+                    elif amount % 50 != 0:
+                        return "Invalid Amount"
+                    else:
+                        return "Transaction Successful"
+
+                if __name__ == "__main__":
+                    balance, amount = map(int, input().split())
+                    print(validate_withdrawal(balance, amount))
+
+      - topic_id: Functions and Modular Programming
+        topic_title: Writing Reusable Code with Functions
         short_description: Understand how to build reusable code with functions and tackle problems using recursion.
         order: 3
         questions:
+        - id: greet-user
+          title: 'Greet the User'
+          description: Write a function that greets a user with "Hello, <name>!".
+          complexity: easy
+          points: 5
+          time_limit_seconds: 5
+          memory_limit_mb: 64
+          starter_code:
+            content: |2-
+              def greet(name):
+                  # Your code here
+                  pass
+
+              if __name__ == "__main__":
+                  user = input()
+                  print(greet(user))
+          test_cases:
+            hidden: false
+            visible_cases:
+              - input: 'Alice'
+                expected_output: 'Hello, Alice!'
+              - input: 'Bob'
+                expected_output: 'Hello, Bob!'
+            hidden: true
+            hidden_cases:
+              - input: 'Charlie'
+                expected_output: 'Hello, Charlie!'
+          solution:
+            content: |2-
+              def greet(name):
+                  return f"Hello, {name}!"
+
+              if __name__ == "__main__":
+                  user = input()
+                  print(greet(user))
+
         - id: square-number
-          title: 'Square a Number'
-          description: Write a function that returns the square of a number.
+          title: 'Square of a Number'
+          description: Write a function that returns the square of a given number.
           complexity: easy
           points: 5
           time_limit_seconds: 5
@@ -564,45 +670,52 @@ courses:
                   num = int(input())
                   print(square(num))
 
-        - id: greet-name
-          title: 'Greet by Name'
-          description: Write a function that takes a name and returns a greeting message.
-          complexity: easy
-          points: 5
+        - id: is-prime
+          title: 'Check Prime'
+          description: Write a function that checks whether a number is prime.
+          complexity: medium
+          points: 10
           time_limit_seconds: 5
           memory_limit_mb: 64
           starter_code:
             content: |2-
-              def greet(name):
+              def is_prime(n):
                   # Your code here
                   pass
 
               if __name__ == "__main__":
-                  name = input()
-                  print(greet(name))
+                  num = int(input())
+                  print(is_prime(num))
           test_cases:
             hidden: false
             visible_cases:
-              - input: 'Alice'
-                expected_output: 'Hello, Alice!'
-              - input: 'Bob'
-                expected_output: 'Hello, Bob!'
+              - input: '7'
+                expected_output: 'True'
+              - input: '4'
+                expected_output: 'False'
             hidden: true
             hidden_cases:
-              - input: 'Zoe'
-                expected_output: 'Hello, Zoe!'
+              - input: '17'
+                expected_output: 'True'
+              - input: '1'
+                expected_output: 'False'
           solution:
             content: |2-
-              def greet(name):
-                  return f"Hello, {name}!"
+              def is_prime(n):
+                  if n <= 1:
+                      return False
+                  for i in range(2, int(n**0.5)+1):
+                      if n % i == 0:
+                          return False
+                  return True
 
               if __name__ == "__main__":
-                  name = input()
-                  print(greet(name))
+                  num = int(input())
+                  print(is_prime(num))
 
-        - id: factorial-recursion
-          title: 'Factorial (Recursion)'
-          description: Use recursion to calculate the factorial of a number.
+        - id: factorial-func
+          title: 'Factorial Function'
+          description: Write a function that calculates the factorial of a given number using recursion.
           complexity: medium
           points: 10
           time_limit_seconds: 5
@@ -625,8 +738,8 @@ courses:
                 expected_output: '1'
             hidden: true
             hidden_cases:
-              - input: '6'
-                expected_output: '720'
+              - input: '3'
+                expected_output: '6'
           solution:
             content: |2-
               def factorial(n):
@@ -638,13 +751,13 @@ courses:
                   num = int(input())
                   print(factorial(num))
 
-        - id: fibonacci-recursion
-          title: 'Fibonacci (Recursion)'
-          description: Return the nth Fibonacci number using recursion.
-          complexity: medium
-          points: 10
-          time_limit_seconds: 5
-          memory_limit_mb: 64
+        - id: fibonacci-series
+          title: 'Fibonacci Series Generator'
+          description: Generate the first n numbers of the Fibonacci series using a function.
+          complexity: hard
+          points: 15
+          time_limit_seconds: 10
+          memory_limit_mb: 128
           starter_code:
             content: |2-
               def fibonacci(n):
@@ -657,621 +770,623 @@ courses:
           test_cases:
             hidden: false
             visible_cases:
-              - input: '0'
-                expected_output: '0'
-              - input: '1'
-                expected_output: '1'
-            hidden: true
-            hidden_cases:
               - input: '5'
-                expected_output: '5'
+                expected_output: '[0, 1, 1, 2, 3]'
+              - input: '1'
+                expected_output: '[0]'
+            hidden: true
+            hidden_cases:
+              - input: '7'
+                expected_output: '[0, 1, 1, 2, 3, 5, 8]'
           solution:
             content: |2-
               def fibonacci(n):
-                  if n <= 1:
-                      return n
-                  return fibonacci(n - 1) + fibonacci(n - 2)
+                  fib = [0, 1]
+                  while len(fib) < n:
+                      fib.append(fib[-1] + fib[-2])
+                  return fib[:n]
 
               if __name__ == "__main__":
                   num = int(input())
                   print(fibonacci(num))
 
-        - id: power-function
-          title: 'Power Function (Recursion)'
-          description: Calculate a raised to the power of b using recursion.
+        - id: calculator
+          title: 'Simple Calculator using Functions'
+          description: Implement a basic calculator using functions for add, subtract, multiply, divide.
           complexity: hard
           points: 15
           time_limit_seconds: 10
-          memory_limit_mb: 64
+          memory_limit_mb: 128
           starter_code:
             content: |2-
-              def power(a, b):
-                  # Your code here
-                  pass
+              def add(a, b): pass
+              def subtract(a, b): pass
+              def multiply(a, b): pass
+              def divide(a, b): pass
 
               if __name__ == "__main__":
-                  base, exponent = map(int, input().split())
-                  print(power(base, exponent))
+                  a, b, op = input().split()
+                  a, b = int(a), int(b)
+                  # Call appropriate function based on op
           test_cases:
             hidden: false
             visible_cases:
-              - input: '2 3'
+              - input: '5 3 add'
                 expected_output: '8'
-              - input: '5 0'
-                expected_output: '1'
+              - input: '10 2 divide'
+                expected_output: '5.0'
             hidden: true
             hidden_cases:
-              - input: '3 4'
-                expected_output: '81'
-          solution:
-            content: |2-
-              def power(a, b):
-                  if b == 0:
-                      return 1
-                  return a * power(a, b - 1)
-
-              if __name__ == "__main__":
-                  base, exponent = map(int, input().split())
-                  print(power(base, exponent))
-
-        - id: sum-of-digits
-          title: 'Sum of Digits (Recursion)'
-          description: Write a recursive function to return the sum of digits of an integer.
-          complexity: hard
-          points: 15
-          time_limit_seconds: 10
-          memory_limit_mb: 64
-          starter_code:
-            content: |2-
-              def sum_of_digits(n):
-                  # Your code here
-                  pass
-
-              if __name__ == "__main__":
-                  number = int(input())
-                  print(sum_of_digits(number))
-          test_cases:
-            hidden: false
-            visible_cases:
-              - input: '123'
+              - input: '4 5 multiply'
+                expected_output: '20'
+              - input: '9 3 subtract'
                 expected_output: '6'
-              - input: '0'
-                expected_output: '0'
-            hidden: true
-            hidden_cases:
-              - input: '999'
-                expected_output: '27'
           solution:
             content: |2-
-              def sum_of_digits(n):
-                  if n == 0:
-                      return 0
-                  return n % 10 + sum_of_digits(n // 10)
+              def add(a, b): return a + b
+              def subtract(a, b): return a - b
+              def multiply(a, b): return a * b
+              def divide(a, b): return a / b
 
               if __name__ == "__main__":
-                  number = int(input())
-                  print(sum_of_digits(number))
+                  a, b, op = input().split()
+                  a, b = int(a), int(b)
+                  if op == 'add':
+                      print(add(a, b))
+                  elif op == 'subtract':
+                      print(subtract(a, b))
+                  elif op == 'multiply':
+                      print(multiply(a, b))
+                  elif op == 'divide':
+                      print(divide(a, b))
+
   
-      - topic_id: oop
-        topic_title: Object-Oriented Programming (OOP)
+      - topic_id: Working with Text Files and Data Storage
+        topic_title: File Handling in Python
         short_description: Learn to structure Python code with classes, objects, and inheritance to build modular programs.
         order: 4
         questions:
-          - id: basic-class
-            title: 'Basic Class Creation'
-            description: Create a class `Person` with attributes `name` and `age`, and a method to print them.
+          - id: read-text-file
+            title: 'Read a Text File'
+            description: Read a file and print its content line by line.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                class Person:
+                def read_file(filename):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    p = Person("Alice", 30)
-                    p.display()
+                    filename = input()
+                    read_file(filename)
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
-                  expected_output: 'Name: Alice, Age: 30'
+                - input: 'sample1.txt'
+                  expected_output: "Hello World\nWelcome to Python\n"
               hidden: true
               hidden_cases:
-                - input: ''
-                  expected_output: 'Name: Bob, Age: 25'
+                - input: 'hidden1.txt'
+                  expected_output: "Hidden file content line 1\nHidden file content line 2\n"
             solution:
               content: |2-
-                class Person:
-                    def __init__(self, name, age):
-                        self.name = name
-                        self.age = age
-
-                    def display(self):
-                        print(f"Name: {self.name}, Age: {self.age}")
+                def read_file(filename):
+                    with open(filename, 'r') as f:
+                        for line in f:
+                            print(line.strip())
 
                 if __name__ == "__main__":
-                    p = Person("Alice", 30)
-                    p.display()
+                    filename = input()
+                    read_file(filename)
 
-          - id: class-methods
-            title: 'Class with Methods'
-            description: Create a class `Rectangle` with methods to calculate area and perimeter.
+          - id: write-to-file
+            title: 'Write to a File'
+            description: Take a string input and write it into a file.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                class Rectangle:
+                def write_file(filename, content):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    r = Rectangle(5, 10)
-                    print(r.area())
-                    print(r.perimeter())
+                    filename = input()
+                    content = input()
+                    write_file(filename, content)
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
-                  expected_output: "50\n30"
+                - input: "output1.txt\nHello Python"
+                  expected_output: ""
               hidden: true
               hidden_cases:
-                - input: ''
-                  expected_output: "6\n10"
+                - input: "out.txt\nAnother line"
+                  expected_output: ""
             solution:
               content: |2-
-                class Rectangle:
-                    def __init__(self, width, height):
-                        self.width = width
-                        self.height = height
-
-                    def area(self):
-                        return self.width * self.height
-
-                    def perimeter(self):
-                        return 2 * (self.width + self.height)
+                def write_file(filename, content):
+                    with open(filename, 'w') as f:
+                        f.write(content)
 
                 if __name__ == "__main__":
-                    r = Rectangle(5, 10)
-                    print(r.area())
-                    print(r.perimeter())
+                    filename = input()
+                    content = input()
+                    write_file(filename, content)
 
-          - id: inheritance-example
-            title: 'Inheritance Example'
-            description: Use inheritance to create a class `Student` that inherits from `Person`.
+          - id: count-lines
+            title: 'Count Lines in a File'
+            description: Write a function to count the number of lines in a given file.
             complexity: medium
             points: 10
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                class Person:
-                    def __init__(self, name):
-                        self.name = name
-
-                class Student(Person):
+                def count_lines(filename):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    s = Student("John", "Math")
-                    s.display()
+                    file = input()
+                    print(count_lines(file))
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
-                  expected_output: 'John studies Math'
+                - input: 'sample2.txt'
+                  expected_output: '3'
               hidden: true
               hidden_cases:
-                - input: ''
-                  expected_output: 'Alice studies History'
-            solution:
-              content: |2-
-                class Person:
-                    def __init__(self, name):
-                        self.name = name
-
-                class Student(Person):
-                    def __init__(self, name, subject):
-                        super().__init__(name)
-                        self.subject = subject
-
-                    def display(self):
-                        print(f"{self.name} studies {self.subject}")
-
-                if __name__ == "__main__":
-                    s = Student("John", "Math")
-                    s.display()
-
-          - id: class-attributes
-            title: 'Class Attributes and Instances'
-            description: Count how many instances of a class have been created using a class attribute.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class Counter:
-                    count = 0
-
-                    def __init__(self):
-                        # Your code here
-                        pass
-
-                if __name__ == "__main__":
-                    a = Counter()
-                    b = Counter()
-                    print(Counter.count)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '2'
-              hidden: true
-              hidden_cases:
-                - input: ''
+                - input: 'file3.txt'
                   expected_output: '5'
             solution:
               content: |2-
-                class Counter:
-                    count = 0
-
-                    def __init__(self):
-                        Counter.count += 1
+                def count_lines(filename):
+                    with open(filename, 'r') as f:
+                        return len(f.readlines())
 
                 if __name__ == "__main__":
-                    a = Counter()
-                    b = Counter()
-                    print(Counter.count)
+                    file = input()
+                    print(count_lines(file))
 
-          - id: private-attributes
-            title: 'Private Attributes and Encapsulation'
-            description: Use private variables and a getter method to access data safely.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class BankAccount:
-                    def __init__(self, balance):
-                        # Your code here
-                        pass
-
-                if __name__ == "__main__":
-                    acc = BankAccount(1000)
-                    print(acc.get_balance())
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '1000'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '2500'
-            solution:
-              content: |2-
-                class BankAccount:
-                    def __init__(self, balance):
-                        self.__balance = balance
-
-                    def get_balance(self):
-                        return self.__balance
-
-                if __name__ == "__main__":
-                    acc = BankAccount(1000)
-                    print(acc.get_balance())
-
-          - id: polymorphism-example
-            title: 'Polymorphism Example'
-            description: Demonstrate polymorphism using a common method in multiple classes.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class Dog:
-                    def speak(self):
-                        return "Woof!"
-
-                class Cat:
-                    # Your code here
-                    pass
-
-                def animal_sound(animal):
-                    return animal.speak()
-
-                if __name__ == "__main__":
-                    c = Cat()
-                    print(animal_sound(c))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: 'Meow!'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: 'Meow!'
-            solution:
-              content: |2-
-                class Dog:
-                    def speak(self):
-                        return "Woof!"
-
-                class Cat:
-                    def speak(self):
-                        return "Meow!"
-
-                def animal_sound(animal):
-                    return animal.speak()
-
-                if __name__ == "__main__":
-                    c = Cat()
-                    print(animal_sound(c))
-
-      - topic_id: algorithms
-        topic_title: Algorithms & Problem Solving
-        short_description: Solve classic algorithmic challenges to boost logical thinking and coding fluency.
-        order: 5
-        questions:
-          - id: power-of-two
-            title: 'Is Power of Two?'
-            description: Check whether a given number is a power of two.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def is_power_of_two(n):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print(is_power_of_two(n))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '8'
-                  expected_output: 'True'
-                - input: '10'
-                  expected_output: 'False'
-              hidden: true
-              hidden_cases:
-                - input: '1'
-                  expected_output: 'True'
-            solution:
-              content: |2-
-                def is_power_of_two(n):
-                    return n > 0 and (n & (n - 1)) == 0
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    print(is_power_of_two(n))
-
-          - id: count-words
-            title: 'Count Words in a Sentence'
-            description: Count the number of words in a given sentence. Words are separated by spaces.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def count_words(sentence):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    sentence = input()
-                    print(count_words(sentence))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: "This is a test"
-                  expected_output: '4'
-                - input: "Python is fun"
-                  expected_output: '3'
-              hidden: true
-              hidden_cases:
-                - input: "  Hello world   "
-                  expected_output: '2'
-            solution:
-              content: |2-
-                def count_words(sentence):
-                    return len(sentence.strip().split())
-
-                if __name__ == "__main__":
-                    sentence = input()
-                    print(count_words(sentence))
-
-          - id: group-by-frequency
-            title: 'Group Elements by Frequency'
-            description: Given a list of numbers, group and return elements by their frequency in descending order.
+          - id: append-to-file
+            title: 'Append Text to File'
+            description: Write a function to append a line to an existing file.
             complexity: medium
             points: 10
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def group_by_frequency(arr):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    arr = list(map(int, input().split()))
-                    print(group_by_frequency(arr))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '4 5 6 5 4 3'
-                  expected_output: '[4, 4, 5, 5, 6, 3]'
-                - input: '9 9 9 8 8 7'
-                  expected_output: '[9, 9, 9, 8, 8, 7]'
-              hidden: true
-              hidden_cases:
-                - input: '1 2 2 3 3 3'
-                  expected_output: '[3, 3, 3, 2, 2, 1]'
-            solution:
-              content: |2-
-                from collections import Counter
-
-                def group_by_frequency(arr):
-                    freq = Counter(arr)
-                    arr.sort(key=lambda x: (-freq[x], arr.index(x)))
-                    return arr
-
-                if __name__ == "__main__":
-                    arr = list(map(int, input().split()))
-                    print(group_by_frequency(arr))
-
-          - id: two-sum
-            title: 'Two Sum Problem'
-            description: >-
-              Given a list of integers and a target value, return the indices (0-based) of the two numbers that add up to the target.
-              If no such pair exists, return -1.
-            complexity: medium
-            points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def two_sum(nums, target):
+                def append_to_file(filename, text):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    target = int(input())
-                    print(two_sum(nums, target))
+                    name = input()
+                    line = input()
+                    append_to_file(name, line)
             test_cases:
               hidden: false
               visible_cases:
-                - input: |-
-                    2 7 11 15
-                    9
-                  expected_output: '[0, 1]'
-                - input: |-
-                    3 2 4
-                    6
-                  expected_output: '[1, 2]'
+                - input: "sample3.txt\nAppended line"
+                  expected_output: ""
               hidden: true
               hidden_cases:
-                - input: |-
-                    1 2 3
-                    7
-                  expected_output: '-1'
+                - input: "myfile.txt\nNew content"
+                  expected_output: ""
             solution:
               content: |2-
-                def two_sum(nums, target):
-                    seen = {}
-                    for i, num in enumerate(nums):
-                        diff = target - num
-                        if diff in seen:
-                            return [seen[diff], i]
-                        seen[num] = i
-                    return -1
+                def append_to_file(filename, text):
+                    with open(filename, 'a') as f:
+                        f.write(text + "\n")
 
                 if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    target = int(input())
-                    print(two_sum(nums, target))
+                    name = input()
+                    line = input()
+                    append_to_file(name, line)
 
-          - id: longest-increasing-subsequence
-            title: 'Longest Increasing Subsequence Length'
-            description: Given a list of numbers, return the length of the longest increasing subsequence.
+          - id: word-frequency
+            title: 'Word Frequency Counter'
+            description: Count the frequency of each word in a file.
             complexity: hard
             points: 15
-            time_limit_seconds: 15
+            time_limit_seconds: 10
             memory_limit_mb: 128
             starter_code:
               content: |2-
-                def lis_length(arr):
+                def word_frequency(filename):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    arr = list(map(int, input().split()))
-                    print(lis_length(arr))
+                    fname = input()
+                    word_frequency(fname)
             test_cases:
               hidden: false
               visible_cases:
-                - input: '10 9 2 5 3 7 101 18'
-                  expected_output: '4'
-                - input: '1 3 5 4 7'
-                  expected_output: '4'
+                - input: 'sample4.txt'
+                  expected_output: 'hello: 2\npython: 1\nworld: 1'
               hidden: true
               hidden_cases:
-                - input: '5 6 7 1 2 3'
-                  expected_output: '3'
+                - input: 'file5.txt'
+                  expected_output: 'data: 3\nscience: 2\npython: 1'
             solution:
               content: |2-
-                def lis_length(arr):
-                    if not arr:
-                        return 0
-                    dp = [1] * len(arr)
-                    for i in range(len(arr)):
-                        for j in range(i):
-                            if arr[i] > arr[j]:
-                                dp[i] = max(dp[i], dp[j] + 1)
-                    return max(dp)
+                def word_frequency(filename):
+                    freq = {}
+                    with open(filename, 'r') as f:
+                        for line in f:
+                            words = line.strip().lower().split()
+                            for word in words:
+                                freq[word] = freq.get(word, 0) + 1
+                    for k in sorted(freq):
+                        print(f"{k}: {freq[k]}")
 
                 if __name__ == "__main__":
-                    arr = list(map(int, input().split()))
-                    print(lis_length(arr))
+                    fname = input()
+                    word_frequency(fname)
 
-          - id: valid-parentheses
-            title: 'Valid Parentheses'
-            description: Check if the input string of parentheses is valid (every open has a close in order).
+          - id: merge-files
+            title: 'Merge Two Files'
+            description: Merge contents of two text files into a third file.
             complexity: hard
             points: 15
             time_limit_seconds: 10
-            memory_limit_mb: 64
+            memory_limit_mb: 128
             starter_code:
               content: |2-
-                def is_valid_parentheses(s):
+                def merge_files(file1, file2, output):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    s = input()
-                    print(is_valid_parentheses(s))
+                    f1 = input()
+                    f2 = input()
+                    fout = input()
+                    merge_files(f1, f2, fout)
             test_cases:
               hidden: false
               visible_cases:
-                - input: '()[]{}'
-                  expected_output: 'True'
-                - input: '(]'
-                  expected_output: 'False'
+                - input: "f1.txt\nf2.txt\nfout.txt"
+                  expected_output: ""
               hidden: true
               hidden_cases:
-                - input: '([{}])'
-                  expected_output: 'True'
+                - input: "alpha.txt\nbeta.txt\ngamma.txt"
+                  expected_output: ""
             solution:
               content: |2-
-                def is_valid_parentheses(s):
-                    stack = []
-                    mapping = {')': '(', ']': '[', '}': '{'}
-                    for char in s:
-                        if char in mapping.values():
-                            stack.append(char)
-                        elif char in mapping:
-                            if not stack or stack.pop() != mapping[char]:
-                                return False
-                    return not stack
+                def merge_files(file1, file2, output):
+                    with open(output, 'w') as out:
+                        with open(file1, 'r') as f1:
+                            out.write(f1.read())
+                        with open(file2, 'r') as f2:
+                            out.write(f2.read())
 
                 if __name__ == "__main__":
-                    s = input()
-                    print(is_valid_parentheses(s))
+                    f1 = input()
+                    f2 = input()
+                    fout = input()
+                    merge_files(f1, f2, fout)
+
+      - topic_id: Object-Oriented Programming Concepts
+        topic_title: Getting Started with OOP in Python
+        short_description: Solve classic algorithmic challenges to boost logical thinking and coding fluency.
+        order: 5
+        questions:
+          - id: class-rectangle
+            title: 'Rectangle Class'
+            description: Create a class `Rectangle` with methods to compute area and perimeter.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Rectangle:
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    l = int(input())
+                    b = int(input())
+                    rect = Rectangle(l, b)
+                    print(rect.area())
+                    print(rect.perimeter())
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "4\n5"
+                  expected_output: "20\n18"
+              hidden: true
+              hidden_cases:
+                - input: "7\n3"
+                  expected_output: "21\n20"
+            solution:
+              content: |2-
+                class Rectangle:
+                    def __init__(self, length, breadth):
+                        self.length = length
+                        self.breadth = breadth
+
+                    def area(self):
+                        return self.length * self.breadth
+
+                    def perimeter(self):
+                        return 2 * (self.length + self.breadth)
+
+                if __name__ == "__main__":
+                    l = int(input())
+                    b = int(input())
+                    rect = Rectangle(l, b)
+                    print(rect.area())
+                    print(rect.perimeter())
+
+          - id: class-student
+            title: 'Student Class'
+            description: Create a `Student` class with name, age, and marks attributes.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Student:
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    name = input()
+                    age = int(input())
+                    marks = float(input())
+                    s = Student(name, age, marks)
+                    print(s.name)
+                    print(s.age)
+                    print(s.marks)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "Alice\n20\n89.5"
+                  expected_output: "Alice\n20\n89.5"
+              hidden: true
+              hidden_cases:
+                - input: "Bob\n22\n75.0"
+                  expected_output: "Bob\n22\n75.0"
+            solution:
+              content: |2-
+                class Student:
+                    def __init__(self, name, age, marks):
+                        self.name = name
+                        self.age = age
+                        self.marks = marks
+
+                if __name__ == "__main__":
+                    name = input()
+                    age = int(input())
+                    marks = float(input())
+                    s = Student(name, age, marks)
+                    print(s.name)
+                    print(s.age)
+                    print(s.marks)
+
+          - id: inheritance-animal
+            title: 'Inheritance - Animal Sounds'
+            description: Implement inheritance where `Dog` and `Cat` inherit from `Animal` class.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class Animal:
+                    # Your code here
+                    pass
+
+                class Dog(Animal):
+                    pass
+
+                class Cat(Animal):
+                    pass
+
+                if __name__ == "__main__":
+                    d = Dog()
+                    c = Cat()
+                    d.sound()
+                    c.sound()
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ""
+                  expected_output: "Bark\nMeow"
+              hidden: true
+              hidden_cases:
+                - input: ""
+                  expected_output: "Bark\nMeow"
+            solution:
+              content: |2-
+                class Animal:
+                    def sound(self):
+                        print("Animal sound")
+
+                class Dog(Animal):
+                    def sound(self):
+                        print("Bark")
+
+                class Cat(Animal):
+                    def sound(self):
+                        print("Meow")
+
+                if __name__ == "__main__":
+                    d = Dog()
+                    c = Cat()
+                    d.sound()
+                    c.sound()
+
+          - id: bank-account
+            title: 'Bank Account Class'
+            description: Create a `BankAccount` class with deposit and withdraw methods.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                class BankAccount:
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    acc = BankAccount(1000)
+                    acc.deposit(500)
+                    acc.withdraw(300)
+                    print(acc.balance)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ""
+                  expected_output: "1200"
+              hidden: true
+              hidden_cases:
+                - input: ""
+                  expected_output: "700"
+            solution:
+              content: |2-
+                class BankAccount:
+                    def __init__(self, balance):
+                        self.balance = balance
+
+                    def deposit(self, amount):
+                        self.balance += amount
+
+                    def withdraw(self, amount):
+                        self.balance -= amount
+
+                if __name__ == "__main__":
+                    acc = BankAccount(1000)
+                    acc.deposit(500)
+                    acc.withdraw(300)
+                    print(acc.balance)
+
+          - id: polymorphism-shape
+            title: 'Polymorphism - Shape Area'
+            description: Demonstrate polymorphism using a base `Shape` class and derived `Circle`, `Square` classes.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                class Shape:
+                    def area(self):
+                        pass
+
+                class Circle(Shape):
+                    # Your code here
+                    pass
+
+                class Square(Shape):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    c = Circle(5)
+                    s = Square(4)
+                    print(c.area())
+                    print(s.area())
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ""
+                  expected_output: "78.5\n16"
+              hidden: true
+              hidden_cases:
+                - input: ""
+                  expected_output: "50.24\n25"
+            solution:
+              content: |2-
+                class Shape:
+                    def area(self):
+                        pass
+
+                class Circle(Shape):
+                    def __init__(self, radius):
+                        self.radius = radius
+
+                    def area(self):
+                        return round(3.14 * self.radius ** 2, 2)
+
+                class Square(Shape):
+                    def __init__(self, side):
+                        self.side = side
+
+                    def area(self):
+                        return self.side ** 2
+
+                if __name__ == "__main__":
+                    c = Circle(5)
+                    s = Square(4)
+                    print(c.area())
+                    print(s.area())
+
+          - id: employee-management
+            title: 'Employee Management System'
+            description: Create a class to manage multiple employees and display their details.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                class Employee:
+                    # Your code here
+                    pass
+
+                def show_employees(employees):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    employees = []
+                    for _ in range(n):
+                        name = input()
+                        salary = int(input())
+                        employees.append(Employee(name, salary))
+                    show_employees(employees)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "2\nJohn\n3000\nJane\n4000"
+                  expected_output: "John: 3000\nJane: 4000"
+              hidden: true
+              hidden_cases:
+                - input: "3\nAva\n5000\nTom\n4500\nMia\n3900"
+                  expected_output: "Ava: 5000\nTom: 4500\nMia: 3900"
+            solution:
+              content: |2-
+                class Employee:
+                    def __init__(self, name, salary):
+                        self.name = name
+                        self.salary = salary
+
+                def show_employees(employees):
+                    for emp in employees:
+                        print(f"{emp.name}: {emp.salary}")
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    employees = []
+                    for _ in range(n):
+                        name = input()
+                        salary = int(input())
+                        employees.append(Employee(name, salary))
+                    show_employees(employees)
+
 
   - id: javascript-basics
     language: javascript
@@ -1281,717 +1396,362 @@ courses:
     estimated_hours: 20
     prerequisites: []
     topics:
-      - topic_id: js_basics
-        topic_title: JavaScript Basics & Control Flow
+      - topic_id: Getting Started with JavaScript
+        topic_title: JavaScript Basics
         short_description: >-
-          Learn the foundation of JavaScript including variables, loops,
-          conditionals, and basic logic building.
+          Learn the foundations of JavaScript, including variables, data types, operators, and how to embed JavaScript into HTML. This module sets the stage for understanding how JavaScript interacts with web pages.
         order: 1
         questions:
-          - id: even-or-odd-js
-            title: 'Even or Odd'
-            description: Determine if the input number is even or odd.
+          - id: js-print-hello
+            title: 'Print Hello'
+            description: Print "Hello, World!" to the console.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function isEvenOrOdd(n) {
-                    // Your code here
-                }
+                // Your code here
 
-                const num = Number(prompt());
-                console.log(isEvenOrOdd(num));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '4'
-                  expected_output: 'Even'
-                  explanation: '4 is divisible by 2'
-                - input: '7'
-                  expected_output: 'Odd'
-                  explanation: '7 is not divisible by 2'
-              hidden: true
-              hidden_cases:
-                - input: '0'
-                  expected_output: 'Even'
-                - input: '101'
-                  expected_output: 'Odd'
+                - input: ''
+                  expected_output: 'Hello, World!'
+                  explanation: 'Should print Hello, World!'
+              hidden: false
             solution:
               content: |2-
-                function isEvenOrOdd(n) {
-                    return n % 2 === 0 ? "Even" : "Odd";
-                }
+                console.log("Hello, World!");
 
-                const num = Number(prompt());
-                console.log(isEvenOrOdd(num));
-
-          - id: sum-upto-n-js
-            title: 'Sum up to N'
-            description: Calculate the sum of numbers from 1 to N.
+          - id: js-add-two-numbers
+            title: 'Add Two Numbers'
+            description: Take two numbers from the user and print their sum.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function sumUptoN(n) {
+                // Read input and print sum
+                function addNumbers(a, b) {
                     // Your code here
                 }
 
-                const n = Number(prompt());
-                console.log(sumUptoN(n));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '5'
-                  expected_output: '15'
-                  explanation: '1 + 2 + 3 + 4 + 5 = 15'
-                - input: '1'
-                  expected_output: '1'
-                  explanation: 'Sum of first 1 number is 1'
+                - input: '3 4'
+                  expected_output: '7'
+                  explanation: '3 + 4 = 7'
+                - input: '10 15'
+                  expected_output: '25'
               hidden: true
               hidden_cases:
-                - input: '100'
-                  expected_output: '5050'
+                - input: '100 100'
+                  expected_output: '200'
             solution:
               content: |2-
-                function sumUptoN(n) {
-                    return (n * (n + 1)) / 2;
+                function addNumbers(a, b) {
+                    console.log(Number(a) + Number(b));
                 }
+                const input = prompt().split(" ");
+                addNumbers(input[0], input[1]);
 
-                const n = Number(prompt());
-                console.log(sumUptoN(n));
-
-          - id: fizz-buzz-js
-            title: 'FizzBuzz'
-            description: Print Fizz if divisible by 3, Buzz if divisible by 5, FizzBuzz if both.
+          - id: js-type-check
+            title: 'Check Type of Variable'
+            description: Print the type of a given variable.
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function fizzBuzz(n) {
+                function checkType(value) {
                     // Your code here
                 }
 
-                const n = Number(prompt());
-                console.log(fizzBuzz(n));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '3'
-                  expected_output: 'Fizz'
-                  explanation: 'Divisible by 3'
-                - input: '5'
-                  expected_output: 'Buzz'
-                  explanation: 'Divisible by 5'
+                - input: '"hello"'
+                  expected_output: 'string'
+                - input: '42'
+                  expected_output: 'number'
               hidden: true
               hidden_cases:
-                - input: '15'
-                  expected_output: 'FizzBuzz'
-                - input: '2'
-                  expected_output: '2'
+                - input: 'true'
+                  expected_output: 'boolean'
             solution:
               content: |2-
-                function fizzBuzz(n) {
-                    if (n % 3 === 0 && n % 5 === 0) return "FizzBuzz";
-                    if (n % 3 === 0) return "Fizz";
-                    if (n % 5 === 0) return "Buzz";
-                    return String(n);
+                function checkType(value) {
+                    console.log(typeof eval(value));
                 }
+                const input = prompt();
+                checkType(input);
 
-                const n = Number(prompt());
-                console.log(fizzBuzz(n));
-
-          - id: multiplication-table-js
-            title: 'Multiplication Table'
-            description: Print the multiplication table for a number up to 10.
+          - id: js-compare-numbers
+            title: 'Compare Two Numbers'
+            description: Compare two numbers and print which one is greater or if they are equal.
             complexity: medium
             points: 10
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function printTable(n) {
+                function compareNumbers(a, b) {
                     // Your code here
                 }
 
-                const n = Number(prompt());
-                printTable(n);
             test_cases:
               hidden: false
               visible_cases:
-                - input: '2'
-                  expected_output: "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20"
-                  explanation: 'Multiplication table from 1 to 10'
+                - input: '5 3'
+                  expected_output: '5 is greater'
+                - input: '4 4'
+                  expected_output: 'Both are equal'
               hidden: true
               hidden_cases:
-                - input: '10'
-                  expected_output: "10 x 1 = 0\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100"
+                - input: '1 99'
+                  expected_output: '99 is greater'
             solution:
               content: |2-
-                function printTable(n) {
-                    for (let i = 1; i <= 10; i++) {
-                        console.log(`${n} x ${i} = ${n * i}`);
-                    }
+                function compareNumbers(a, b) {
+                    a = Number(a);
+                    b = Number(b);
+                    if (a > b) console.log(`${a} is greater`);
+                    else if (b > a) console.log(`${b} is greater`);
+                    else console.log("Both are equal");
                 }
+                const input = prompt().split(" ");
+                compareNumbers(input[0], input[1]);
 
-                const n = Number(prompt());
-                printTable(n);
-
-          - id: palindrome-check-js
-            title: 'Palindrome Check'
-            description: Check whether the given string is a palindrome (reads the same backward and forward).
+          - id: js-swap-values
+            title: 'Swap Two Variables Without Temp'
+            description: Swap two values using arithmetic operations without using a third variable.
             complexity: hard
             points: 15
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function isPalindrome(s) {
+                function swap(a, b) {
                     // Your code here
                 }
 
-                const s = prompt();
-                console.log(isPalindrome(s));
             test_cases:
               hidden: false
               visible_cases:
-                - input: 'racecar'
-                  expected_output: 'true'
-                  explanation: 'racecar is the same forwards and backwards'
-                - input: 'hello'
-                  expected_output: 'false'
-                  explanation: 'hello reversed is olleh'
+                - input: '3 5'
+                  expected_output: '5 3'
               hidden: true
               hidden_cases:
-                - input: 'madam'
-                  expected_output: 'true'
-                - input: 'javascript'
-                  expected_output: 'false'
+                - input: '10 20'
+                  expected_output: '20 10'
             solution:
               content: |2-
-                function isPalindrome(s) {
-                    const cleaned = s.toLowerCase();
-                    return cleaned === cleaned.split('').reverse().join('');
+                function swap(a, b) {
+                    a = Number(a);
+                    b = Number(b);
+                    a = a + b;
+                    b = a - b;
+                    a = a - b;
+                    console.log(a + " " + b);
                 }
+                const input = prompt().split(" ");
+                swap(input[0], input[1]);
 
-                const s = prompt();
-                console.log(isPalindrome(s));
-
-          - id: pattern-printer-js
-            title: 'Pattern Printer'
-            description: Print a right-angled triangle of stars of height N.
+          - id: js-multiple-declarations
+            title: 'Multiple Variable Declarations'
+            description: Declare multiple variables and assign them different types, then print their values and types.
             complexity: hard
             points: 15
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function printPattern(n) {
-                    // Your code here
-                }
+                // Declare variables of different types and print their values and types
 
-                const n = Number(prompt());
-                printPattern(n);
             test_cases:
               hidden: false
               visible_cases:
-                - input: '3'
-                  expected_output: "*\n**\n***"
-                  explanation: 'Each line has increasing stars'
+                - input: ''
+                  expected_output: |
+                    5 number
+                    hello string
+                    true boolean
+                  explanation: 'Variables with different types should be declared and printed.'
               hidden: true
-              hidden_cases:
-                - input: '5'
-                  expected_output: "*\n**\n***\n****\n*****"
             solution:
               content: |2-
-                function printPattern(n) {
-                    for (let i = 1; i <= n; i++) {
-                        console.log('*'.repeat(i));
-                    }
-                }
+                let a = 5;
+                let b = "hello";
+                let c = true;
+                console.log(a + " " + typeof a);
+                console.log(b + " " + typeof b);
+                console.log(c + " " + typeof c);
 
-                const n = Number(prompt());
-                printPattern(n);
 
-      - topic_id: js_data_structures
-        topic_title: Data Structures
+      - topic_id: Making Decisions with JavaScript
+        topic_title: Control Flow and Loops
         short_description: Work with arrays, objects, sets, and maps to manipulate and organize data efficiently.
         order: 2
         questions:
-          - id: reverse-array-js
-            title: 'Reverse Array'
-            description: Reverse an array of integers without using built-in reverse methods.
+          - id: js-if-else-check
+            title: 'Check Positive or Negative'
+            description: Use if-else to check whether a number is positive, negative, or zero.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function reverseArray(arr) {
+                function checkSign(n) {
                     // Your code here
                 }
 
-                const input = prompt().split(' ').map(Number);
-                console.log(reverseArray(input));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 3 4 5'
-                  expected_output: '[5,4,3,2,1]'
-                - input: '10'
-                  expected_output: '[10]'
-              hidden: true
-              hidden_cases:
-                - input: '7 8 9'
-                  expected_output: '[9,8,7]'
-            solution:
-              content: |2-
-                function reverseArray(arr) {
-                    let left = 0, right = arr.length - 1;
-                    while (left < right) {
-                        [arr[left], arr[right]] = [arr[right], arr[left]];
-                        left++;
-                        right--;
-                    }
-                    return arr;
-                }
-
-                const input = prompt().split(' ').map(Number);
-                console.log(reverseArray(input));
-
-          - id: unique-elements-js
-            title: 'Unique Elements'
-            description: Return an array of only the unique elements from the input array.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function uniqueElements(arr) {
-                    // Your code here
-                }
-
-                const input = prompt().split(' ');
-                console.log(uniqueElements(input));
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: 'a b c a b'
-                  expected_output: '["a","b","c"]'
-                - input: '1 2 2 3 4'
-                  expected_output: '["1","2","3","4"]'
-              hidden: true
-              hidden_cases:
-                - input: 'x y x z'
-                  expected_output: '["x","y","z"]'
-            solution:
-              content: |2-
-                function uniqueElements(arr) {
-                    return [...new Set(arr)];
-                }
-
-                const input = prompt().split(' ');
-                console.log(uniqueElements(input));
-
-          - id: object-counter-js
-            title: 'Object Word Counter'
-            description: Count occurrences of each word in a sentence and return an object.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function countWords(sentence) {
-                    // Your code here
-                }
-
-                const sentence = prompt();
-                console.log(countWords(sentence));
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: 'apple banana apple'
-                  expected_output: '{"apple":2,"banana":1}'
-                - input: 'one one two'
-                  expected_output: '{"one":2,"two":1}'
-              hidden: true
-              hidden_cases:
-                - input: 'cat dog cat dog dog'
-                  expected_output: '{"cat":2,"dog":3}'
-            solution:
-              content: |2-
-                function countWords(sentence) {
-                    const words = sentence.split(' ');
-                    return words.reduce((acc, word) => {
-                        acc[word] = (acc[word] || 0) + 1;
-                        return acc;
-                    }, {});
-                }
-
-                const sentence = prompt();
-                console.log(countWords(sentence));
-
-          - id: merge-objects-js
-            title: 'Merge Objects'
-            description: Merge two objects, summing values for matching keys.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function mergeObjects(obj1, obj2) {
-                    // Your code here
-                }
-
-                const obj1 = JSON.parse(prompt());
-                const obj2 = JSON.parse(prompt());
-                console.log(mergeObjects(obj1, obj2));
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '{"a": 1, "b": 2}\n{"b": 3, "c": 4}'
-                  expected_output: '{"a":1,"b":5,"c":4}'
-                - input: '{}\n{"x": 10}'
-                  expected_output: '{"x":10}'
-              hidden: true
-              hidden_cases:
-                - input: '{"x": 1, "y": 2}\n{"x": 4, "z": 5}'
-                  expected_output: '{"x":5,"y":2,"z":5}'
-            solution:
-              content: |2-
-                function mergeObjects(obj1, obj2) {
-                    const result = { ...obj1 };
-                    for (const [key, value] of Object.entries(obj2)) {
-                        result[key] = (result[key] || 0) + value;
-                    }
-                    return result;
-                }
-
-                const obj1 = JSON.parse(prompt());
-                const obj2 = JSON.parse(prompt());
-                console.log(mergeObjects(obj1, obj2));
-
-          - id: stack-simulation-js
-            title: 'Stack Simulation'
-            description: Implement basic stack operations (push, pop) using an array.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class Stack {
-                    constructor() {
-                        this.items = [];
-                    }
-
-                    push(value) {
-                        // Your code here
-                    }
-
-                    pop() {
-                        // Your code here
-                    }
-
-                    display() {
-                        return this.items;
-                    }
-                }
-
-                const s = new Stack();
-                s.push(1);
-                s.push(2);
-                s.pop();
-                console.log(s.display());
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '[1]'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '[1,2]'
-            solution:
-              content: |2-
-                class Stack {
-                    constructor() {
-                        this.items = [];
-                    }
-
-                    push(value) {
-                        this.items.push(value);
-                    }
-
-                    pop() {
-                        if (this.items.length > 0) {
-                            this.items.pop();
-                        }
-                    }
-
-                    display() {
-                        return this.items;
-                    }
-                }
-
-                const s = new Stack();
-                s.push(1);
-                s.push(2);
-                s.pop();
-                console.log(s.display());
-
-          - id: most-common-element-js
-            title: 'Most Common Element'
-            description: Return the most frequent element in an array. If tie, return any one.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function mostCommon(arr) {
-                    // Your code here
-                }
-
-                const input = prompt().split(' ');
-                console.log(mostCommon(input));
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: 'a b a c a'
-                  expected_output: 'a'
-                - input: 'x y x z x y'
-                  expected_output: 'x'
-              hidden: true
-              hidden_cases:
-                - input: '1 2 3 3 2 2'
-                  expected_output: '2'
-            solution:
-              content: |2-
-                function mostCommon(arr) {
-                    const freq = arr.reduce((acc, item) => {
-                        acc[item] = (acc[item] || 0) + 1;
-                        return acc;
-                    }, {});
-                    return Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
-                }
-
-                const input = prompt().split(' ');
-                console.log(mostCommon(input));
-
-      - topic_id: js_functions_scope
-        topic_title: Functions and Scope
-        short_description: Master functions, scope, and closures to create reusable and encapsulated code in JavaScript.
-        order: 3
-        questions:
-          - id: square-number-js
-            title: 'Square a Number'
-            description: Write a function that returns the square of a number.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function square(n) {
-                    // Your code here
-                }
-
-                const num = Number(prompt());
-                console.log(square(num));
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '4'
-                  expected_output: '16'
-                  explanation: '4 * 4 = 16'
+                - input: '5'
+                  expected_output: 'Positive'
                 - input: '-3'
-                  expected_output: '9'
-                  explanation: '-3 * -3 = 9'
+                  expected_output: 'Negative'
               hidden: true
               hidden_cases:
                 - input: '0'
-                  expected_output: '0'
+                  expected_output: 'Zero'
             solution:
               content: |2-
-                function square(n) {
-                    return n * n;
+                function checkSign(n) {
+                    n = Number(n);
+                    if (n > 0) console.log("Positive");
+                    else if (n < 0) console.log("Negative");
+                    else console.log("Zero");
                 }
+                const input = prompt();
+                checkSign(input);
 
-                const num = Number(prompt());
-                console.log(square(num));
-
-          - id: greet-name-js
-            title: 'Greet by Name'
-            description: Write a function that takes a name and returns a greeting message.
+          - id: js-even-numbers-loop
+            title: 'Print Even Numbers Up to N'
+            description: Print all even numbers from 1 to N using a for loop.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function greet(name) {
+                function printEvens(n) {
                     // Your code here
                 }
 
-                const name = prompt();
-                console.log(greet(name));
             test_cases:
               hidden: false
               visible_cases:
-                - input: 'Alice'
-                  expected_output: 'Hello, Alice!'
-                  explanation: 'Greets the provided name'
-                - input: 'Bob'
-                  expected_output: 'Hello, Bob!'
+                - input: '6'
+                  expected_output: '2 4 6'
               hidden: true
               hidden_cases:
-                - input: 'Zoe'
-                  expected_output: 'Hello, Zoe!'
+                - input: '10'
+                  expected_output: '2 4 6 8 10'
             solution:
               content: |2-
-                function greet(name) {
-                    return `Hello, ${name}!`;
+                function printEvens(n) {
+                    n = Number(n);
+                    let result = [];
+                    for (let i = 2; i <= n; i += 2) {
+                        result.push(i);
+                    }
+                    console.log(result.join(" "));
                 }
+                const input = prompt();
+                printEvens(input);
 
-                const name = prompt();
-                console.log(greet(name));
-
-          - id: scope-check-js
-            title: 'Scope Check'
-            description: Predict the output based on variable scope in a function.
+          - id: js-switch-day
+            title: 'Day of the Week'
+            description: Use switch-case to print the day of the week based on number input (1-7).
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function scopeTest() {
-                    let x = 10;
-                    if (true) {
-                        let x = 20;
-                    }
-                    return x;
+                function getDay(num) {
+                    // Your code here
                 }
 
-                console.log(scopeTest());
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
-                  expected_output: '10'
-                  explanation: 'Block-scoped let does not affect outer x'
+                - input: '1'
+                  expected_output: 'Monday'
+                - input: '7'
+                  expected_output: 'Sunday'
               hidden: true
               hidden_cases:
-                - input: ''
-                  expected_output: '10'
+                - input: '4'
+                  expected_output: 'Thursday'
             solution:
               content: |2-
-                function scopeTest() {
-                    let x = 10;
-                    if (true) {
-                        let x = 20; // Different scope, does not overwrite outer x
+                function getDay(num) {
+                    switch(Number(num)) {
+                        case 1: console.log("Monday"); break;
+                        case 2: console.log("Tuesday"); break;
+                        case 3: console.log("Wednesday"); break;
+                        case 4: console.log("Thursday"); break;
+                        case 5: console.log("Friday"); break;
+                        case 6: console.log("Saturday"); break;
+                        case 7: console.log("Sunday"); break;
+                        default: console.log("Invalid");
                     }
-                    return x;
                 }
+                const input = prompt();
+                getDay(input);
 
-                console.log(scopeTest());
-
-          - id: counter-function-js
-            title: 'Counter Function'
-            description: Create a function that returns a counter that increments each time it’s called.
+          - id: js-sum-of-digits
+            title: 'Sum of Digits Using Loop'
+            description: Calculate and print the sum of digits of a number using a while loop.
             complexity: medium
             points: 10
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function createCounter() {
+                function sumOfDigits(n) {
                     // Your code here
                 }
 
-                const counter = createCounter();
-                console.log(counter());
-                console.log(counter());
-                console.log(counter());
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
-                  expected_output: "0\n1\n2"
-                  explanation: 'Counter increments with each call'
+                - input: '123'
+                  expected_output: '6'
+                - input: '456'
+                  expected_output: '15'
               hidden: true
               hidden_cases:
-                - input: ''
-                  expected_output: "0\n1\n2"
+                - input: '789'
+                  expected_output: '24'
             solution:
               content: |2-
-                function createCounter() {
-                    let count = 0;
-                    return function() {
-                        return count++;
-                    };
+                function sumOfDigits(n) {
+                    n = Number(n);
+                    let sum = 0;
+                    while (n > 0) {
+                        sum += n % 10;
+                        n = Math.floor(n / 10);
+                    }
+                    console.log(sum);
                 }
+                const input = prompt();
+                sumOfDigits(input);
 
-                const counter = createCounter();
-                console.log(counter());
-                console.log(counter());
-                console.log(counter());
-
-          - id: closure-multiplier-js
-            title: 'Closure Multiplier'
-            description: Create a function that returns a multiplier function based on a given factor.
+          - id: js-factorial-loop
+            title: 'Factorial Using Loop'
+            description: Compute the factorial of a number using a for loop.
             complexity: hard
             points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function createMultiplier(factor) {
-                    // Your code here
-                }
-
-                const double = createMultiplier(2);
-                const triple = createMultiplier(3);
-                console.log(double(5));
-                console.log(triple(5));
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: "10\n15"
-                  explanation: 'Double multiplies by 2, triple by 3'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: "10\n15"
-            solution:
-              content: |2-
-                function createMultiplier(factor) {
-                    return function(num) {
-                        return num * factor;
-                    };
-                }
-
-                const double = createMultiplier(2);
-                const triple = createMultiplier(3);
-                console.log(double(5));
-                console.log(triple(5));
-
-          - id: recursive-factorial-js
-            title: 'Factorial (Recursion)'
-            description: Use recursion to calculate the factorial of a number.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
@@ -1999,17 +1759,221 @@ courses:
                     // Your code here
                 }
 
-                const num = Number(prompt());
-                console.log(factorial(num));
             test_cases:
               hidden: false
               visible_cases:
                 - input: '5'
                   expected_output: '120'
-                  explanation: '5! = 5 * 4 * 3 * 2 * 1 = 120'
-                - input: '0'
+              hidden: true
+              hidden_cases:
+                - input: '7'
+                  expected_output: '5040'
+            solution:
+              content: |2-
+                function factorial(n) {
+                    n = Number(n);
+                    let fact = 1;
+                    for (let i = 1; i <= n; i++) {
+                        fact *= i;
+                    }
+                    console.log(fact);
+                }
+                const input = prompt();
+                factorial(input);
+
+          - id: js-reverse-number
+            title: 'Reverse a Number'
+            description: Reverse the digits of a number using loops.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function reverseNumber(n) {
+                    // Your code here
+                }
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1234'
+                  expected_output: '4321'
+              hidden: true
+              hidden_cases:
+                - input: '100'
                   expected_output: '1'
-                  explanation: '0! is defined as 1'
+            solution:
+              content: |2-
+                function reverseNumber(n) {
+                    n = Number(n);
+                    let rev = 0;
+                    while (n > 0) {
+                        rev = rev * 10 + (n % 10);
+                        n = Math.floor(n / 10);
+                    }
+                    console.log(rev);
+                }
+                const input = prompt();
+                reverseNumber(input);
+
+
+      - topic_id: Reusable Code with Functions
+        topic_title: Functions and Scope
+        short_description: Explore how to control the flow of your programs using if, else, switch statements, and loops like for, while, and do...while. You'll learn how to write logical, dynamic programs that respond to different inputs.
+        order: 3
+        questions:
+          - id: js-simple-function
+            title: 'Greet the User'
+            description: Create a function that takes a name and prints a greeting.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function greet(name) {
+                    // Your code here
+                }
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'Alice'
+                  expected_output: 'Hello, Alice!'
+                - input: 'Bob'
+                  expected_output: 'Hello, Bob!'
+              hidden: true
+              hidden_cases:
+                - input: 'John'
+                  expected_output: 'Hello, John!'
+            solution:
+              content: |2-
+                function greet(name) {
+                    console.log(`Hello, ${name}!`);
+                }
+                const input = prompt();
+                greet(input);
+
+          - id: js-add-two-numbers
+            title: 'Add Two Numbers Using a Function'
+            description: Create a function that takes two numbers and returns their sum.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function addNumbers(a, b) {
+                    // Your code here
+                }
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3 5'
+                  expected_output: '8'
+                - input: '10 20'
+                  expected_output: '30'
+              hidden: true
+              hidden_cases:
+                - input: '100 200'
+                  expected_output: '300'
+            solution:
+              content: |2-
+                function addNumbers(a, b) {
+                    console.log(Number(a) + Number(b));
+                }
+                const [a, b] = prompt().split(' ');
+                addNumbers(a, b);
+
+          - id: js-function-scope
+            title: 'Function Scope Check'
+            description: Demonstrate variable scope inside and outside of a function.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                let x = 5;
+
+                function changeX() {
+                    // Your code here
+                }
+
+                // Output x here
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: '5'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: '5'
+            solution:
+              content: |2-
+                let x = 5;
+
+                function changeX() {
+                    let x = 10;
+                }
+
+                changeX();
+                console.log(x);
+
+          - id: js-default-parameters
+            title: 'Function with Default Parameters'
+            description: Write a function with default parameters that multiplies two numbers.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function multiply(a, b = 2) {
+                    // Your code here
+                }
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '4'
+                  expected_output: '8'
+                - input: '3 5'
+                  expected_output: '15'
+              hidden: true
+              hidden_cases:
+                - input: '7'
+                  expected_output: '14'
+            solution:
+              content: |2-
+                function multiply(a, b = 2) {
+                    console.log(Number(a) * Number(b));
+                }
+                const input = prompt().split(" ");
+                multiply(...input);
+
+          - id: js-recursive-factorial
+            title: 'Recursive Factorial Function'
+            description: Use recursion to find the factorial of a number.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function factorial(n) {
+                    // Your code here
+                }
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: '120'
               hidden: true
               hidden_cases:
                 - input: '6'
@@ -2017,473 +1981,487 @@ courses:
             solution:
               content: |2-
                 function factorial(n) {
-                    if (n === 0 || n === 1) return 1;
+                    n = Number(n);
+                    if (n === 0) return 1;
                     return n * factorial(n - 1);
                 }
+                const input = prompt();
+                console.log(factorial(input));
 
-                const num = Number(prompt());
-                console.log(factorial(num));
+          - id: js-closure-counter
+            title: 'Closure Counter'
+            description: Demonstrate closures by creating a counter function that remembers its state.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function createCounter() {
+                    // Your code here
+                }
 
-      - topic_id: js_arrays_methods
-        topic_title: Arrays and Methods
+                const counter = createCounter();
+                console.log(counter()); // 1
+                console.log(counter()); // 2
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
+                  expected_output: '1\n2'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: '1\n2'
+            solution:
+              content: |2-
+                function createCounter() {
+                    let count = 0;
+                    return function () {
+                        count += 1;
+                        return count;
+                    };
+                }
+
+                const counter = createCounter();
+                console.log(counter());
+                console.log(counter());
+
+      - topic_id: Interacting with Web Pages
+        topic_title: DOM Manipulation
         short_description: Explore JavaScript arrays and their powerful built-in methods to manipulate and process data effectively.
         order: 4
         questions:
-          - id: array-sum-js
-            title: 'Array Sum'
-            description: Calculate the sum of all numbers in an array.
+          - id: js-change-text
+            title: 'Change Text of an Element'
+            description: Select a paragraph by ID and change its text content.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function arraySum(arr) {
+                // HTML
+                // <p id="message">Hello</p>
+
+                // JavaScript
+                function updateText() {
                     // Your code here
                 }
 
-                const input = prompt().split(' ').map(Number);
-                console.log(arraySum(input));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 3 4 5'
-                  expected_output: '15'
-                  explanation: '1 + 2 + 3 + 4 + 5 = 15'
-                - input: '10'
-                  expected_output: '10'
-                  explanation: 'Single element sum is itself'
+                - input: ''
+                  expected_output: '<p id="message">Welcome!</p>'
               hidden: true
               hidden_cases:
-                - input: '0 0 0'
-                  expected_output: '0'
+                - input: ''
+                  expected_output: '<p id="message">Welcome!</p>'
             solution:
               content: |2-
-                function arraySum(arr) {
-                    return arr.reduce((sum, num) => sum + num, 0);
+                function updateText() {
+                    document.getElementById('message').textContent = 'Welcome!';
                 }
+                updateText();
 
-                const input = prompt().split(' ').map(Number);
-                console.log(arraySum(input));
-
-          - id: filter-even-js
-            title: 'Filter Even Numbers'
-            description: Return an array containing only the even numbers from the input array.
+          - id: js-toggle-class
+            title: 'Toggle a Class on Click'
+            description: Toggle a class "active" on a button when it's clicked.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function filterEven(arr) {
+                // HTML
+                // <button id="myButton">Click me</button>
+
+                // JavaScript
+                function setupButton() {
                     // Your code here
                 }
 
-                const input = prompt().split(' ').map(Number);
-                console.log(filterEven(input));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 3 4 5 6'
-                  expected_output: '[2,4,6]'
-                  explanation: 'Only even numbers are kept'
-                - input: '1 3 5'
-                  expected_output: '[]'
-                  explanation: 'No even numbers in the array'
+                - input: ''
+                  expected_output: 'Class toggled on click'
               hidden: true
               hidden_cases:
-                - input: '2 4 6 8'
-                  expected_output: '[2,4,6,8]'
+                - input: ''
+                  expected_output: 'Class toggled on click'
             solution:
               content: |2-
-                function filterEven(arr) {
-                    return arr.filter(num => num % 2 === 0);
+                function setupButton() {
+                    const btn = document.getElementById('myButton');
+                    btn.addEventListener('click', () => {
+                        btn.classList.toggle('active');
+                    });
                 }
+                setupButton();
 
-                const input = prompt().split(' ').map(Number);
-                console.log(filterEven(input));
-
-          - id: double-numbers-js
-            title: 'Double Numbers'
-            description: Return a new array with each number from the input array doubled.
+          - id: js-create-element
+            title: 'Create and Append Element'
+            description: Create a new list item and append it to an unordered list.
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function doubleNumbers(arr) {
+                // HTML
+                // <ul id="myList"></ul>
+
+                // JavaScript
+                function addListItem() {
                     // Your code here
                 }
 
-                const input = prompt().split(' ').map(Number);
-                console.log(doubleNumbers(input));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 3'
-                  expected_output: '[2,4,6]'
-                  explanation: 'Each number is multiplied by 2'
-                - input: '0 5'
-                  expected_output: '[0,10]'
+                - input: ''
+                  expected_output: '<li>New Item</li> added'
               hidden: true
               hidden_cases:
-                - input: '-1 2 3'
-                  expected_output: '[-2,4,6]'
+                - input: ''
+                  expected_output: '<li>New Item</li> added'
             solution:
               content: |2-
-                function doubleNumbers(arr) {
-                    return arr.map(num => num * 2);
+                function addListItem() {
+                    const ul = document.getElementById('myList');
+                    const li = document.createElement('li');
+                    li.textContent = 'New Item';
+                    ul.appendChild(li);
                 }
+                addListItem();
 
-                const input = prompt().split(' ').map(Number);
-                console.log(doubleNumbers(input));
-
-          - id: find-max-js
-            title: 'Find Maximum'
-            description: Find and return the maximum value in an array of numbers.
+          - id: js-form-input
+            title: 'Get Input Value and Display'
+            description: Read user input from a text box and display it in a paragraph.
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function findMax(arr) {
+                // HTML
+                // <input type="text" id="username" />
+                // <p id="output"></p>
+
+                // JavaScript
+                function showUsername() {
                     // Your code here
                 }
 
-                const input = prompt().split(' ').map(Number);
-                console.log(findMax(input));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '3 1 4 1 5'
-                  expected_output: '5'
-                  explanation: '5 is the largest number'
-                - input: '-1 -5 -2'
-                  expected_output: '-1'
-                  explanation: '-1 is the largest among negatives'
+                - input: 'Alex'
+                  expected_output: '<p id="output">Alex</p>'
               hidden: true
               hidden_cases:
-                - input: '10 2 8 10'
-                  expected_output: '10'
+                - input: 'Jamie'
+                  expected_output: '<p id="output">Jamie</p>'
             solution:
               content: |2-
-                function findMax(arr) {
-                    return Math.max(...arr);
+                function showUsername() {
+                    const name = document.getElementById('username').value;
+                    document.getElementById('output').textContent = name;
                 }
 
-                const input = prompt().split(' ').map(Number);
-                console.log(findMax(input));
-
-          - id: array-chunk-js
-            title: 'Array Chunking'
-            description: Split an array into chunks of a given size and return an array of these chunks.
+          - id: js-delete-element
+            title: 'Remove an Element from DOM'
+            description: Remove a specific div from the DOM using JavaScript.
             complexity: hard
             points: 15
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function chunkArray(arr, size) {
+                // HTML
+                // <div id="toRemove">This will be removed</div>
+
+                // JavaScript
+                function removeDiv() {
                     // Your code here
                 }
 
-                const input = prompt().split(' ');
-                const size = Number(prompt());
-                console.log(chunkArray(input, size));
             test_cases:
               hidden: false
               visible_cases:
-                - input: 'a b c d e\n2'
-                  expected_output: '[["a","b"],["c","d"],["e"]]'
-                  explanation: 'Array split into chunks of size 2'
-                - input: '1 2 3\n1'
-                  expected_output: '[["1"],["2"],["3"]]'
+                - input: ''
+                  expected_output: 'Element removed'
               hidden: true
               hidden_cases:
-                - input: 'x y z w\n3'
-                  expected_output: '[["x","y","z"],["w"]]'
+                - input: ''
+                  expected_output: 'Element removed'
             solution:
               content: |2-
-                function chunkArray(arr, size) {
-                    if (size <= 0) return [];
-                    const result = [];
-                    for (let i = 0; i < arr.length; i += size) {
-                        result.push(arr.slice(i, i + size));
-                    }
-                    return result;
+                function removeDiv() {
+                    const el = document.getElementById('toRemove');
+                    el.parentNode.removeChild(el);
                 }
+                removeDiv();
 
-                const input = prompt().split(' ');
-                const size = Number(prompt());
-                console.log(chunkArray(input, size));
-
-          - id: flatten-array-js
-            title: 'Flatten Array'
-            description: Flatten a nested array (one level deep) into a single-level array.
+          - id: js-dynamic-table
+            title: 'Generate Table from Array'
+            description: Create a table and populate rows from a given array of objects.
             complexity: hard
             points: 15
-            time_limit_seconds: 10
+            time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function flattenArray(arr) {
+                // HTML
+                // <table id="dataTable"><tbody></tbody></table>
+
+                // JavaScript
+                function populateTable(data) {
                     // Your code here
                 }
 
-                const input = JSON.parse(prompt());
-                console.log(flattenArray(input));
             test_cases:
               hidden: false
               visible_cases:
-                - input: '[1, [2, 3], 4]'
-                  expected_output: '[1,2,3,4]'
-                  explanation: 'Nested arrays are flattened one level'
-                - input: '["a", ["b"], ["c", "d"]]'
-                  expected_output: '["a","b","c","d"]'
+                - input: '[{"name": "Alice"}, {"name": "Bob"}]'
+                  expected_output: '<tr><td>Alice</td></tr><tr><td>Bob</td></tr>'
               hidden: true
               hidden_cases:
-                - input: '[5, [], [6, 7]]'
-                  expected_output: '[5,6,7]'
+                - input: '[{"name": "John"}]'
+                  expected_output: '<tr><td>John</td></tr>'
             solution:
               content: |2-
-                function flattenArray(arr) {
-                    return arr.reduce((flat, item) => flat.concat(Array.isArray(item) ? item : [item]), []);
+                function populateTable(data) {
+                    const tbody = document.getElementById('dataTable').querySelector('tbody');
+                    data.forEach(entry => {
+                        const tr = document.createElement('tr');
+                        const td = document.createElement('td');
+                        td.textContent = entry.name;
+                        tr.appendChild(td);
+                        tbody.appendChild(tr);
+                    });
                 }
 
-                const input = JSON.parse(prompt());
-                console.log(flattenArray(input));
+                const input = prompt();
+                const parsed = JSON.parse(input);
+                populateTable(parsed);
 
-      - topic_id: js_arrays_advanced
-        topic_title: Advanced Array Operations
+      - topic_id: Managing Data Structures in JavaScript
+        topic_title: Objects and Arrays
         short_description: Dive deeper into JavaScript array manipulation with advanced methods and techniques.
         order: 6
         questions:
-          - id: unique-elements-js
-            title: 'Unique Elements'
-            description: Return an array containing only unique elements from the input array.
+          - id: js-access-object
+            title: 'Access Object Properties'
+            description: Access and print a specific property of an object.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function getUnique(arr) {
-                    // Your code here
+                const person = {
+                  name: "Alice",
+                  age: 25,
+                  city: "New York"
+                };
+
+                function getName(obj) {
+                  // Your code here
                 }
 
-                const input = prompt().split(' ').map(String);
-                console.log(getUnique(input));
+                console.log(getName(person));
+
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 2 3 3 4'
+                - input: ''
+                  expected_output: 'Alice'
+              hidden: true
+              hidden_cases:
+                - input: ''
+                  expected_output: 'Alice'
+            solution:
+              content: |2-
+                function getName(obj) {
+                  return obj.name;
+                }
+
+          - id: js-array-push
+            title: 'Add Element to Array'
+            description: Push an element into an array and return the updated array.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function addItem(arr, item) {
+                  // Your code here
+                }
+
+                const myArr = [1, 2, 3];
+                console.log(addItem(myArr, 4));
+
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: ''
                   expected_output: '[1,2,3,4]'
-                  explanation: 'Duplicates are removed'
-                - input: 'a a b c'
-                  expected_output: '[a,b,c]'
-                  explanation: 'Only unique strings remain'
               hidden: true
               hidden_cases:
-                - input: '5 5 5'
-                  expected_output: '[5]'
+                - input: ''
+                  expected_output: '[1,2,3,4]'
             solution:
               content: |2-
-                function getUnique(arr) {
-                    return [...new Set(arr)];
+                function addItem(arr, item) {
+                  arr.push(item);
+                  return arr;
                 }
 
-                const input = prompt().split(' ').map(String);
-                console.log(getUnique(input));
-
-          - id: array-intersection-js
-            title: 'Array Intersection'
-            description: Find and return common elements between two arrays.
+          - id: js-merge-objects
+            title: 'Merge Two Objects'
+            description: Merge two JavaScript objects and return the result.
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function arrayIntersection(arr1, arr2) {
-                    // Your code here
+                function mergeObjects(obj1, obj2) {
+                  // Your code here
                 }
 
-                const input1 = prompt().split(' ').map(Number);
-                const input2 = prompt().split(' ').map(Number);
-                console.log(arrayIntersection(input1, input2));
+                const o1 = { a: 1, b: 2 };
+                const o2 = { b: 3, c: 4 };
+                console.log(mergeObjects(o1, o2));
+
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 3 4\n2 4 6'
-                  expected_output: '[2,4]'
-                  explanation: '2 and 4 are common in both arrays'
-                - input: '5 6 7\n8 9'
-                  expected_output: '[]'
-                  explanation: 'No common elements'
+                - input: ''
+                  expected_output: '{"a":1,"b":3,"c":4}'
               hidden: true
               hidden_cases:
-                - input: '1 1 2\n1 2 2'
-                  expected_output: '[1,2]'
+                - input: ''
+                  expected_output: '{"a":1,"b":3,"c":4}'
             solution:
               content: |2-
-                function arrayIntersection(arr1, arr2) {
-                    return arr1.filter(item => arr2.includes(item));
+                function mergeObjects(obj1, obj2) {
+                  return { ...obj1, ...obj2 };
                 }
 
-                const input1 = prompt().split(' ').map(Number);
-                const input2 = prompt().split(' ').map(Number);
-                console.log(arrayIntersection(input1, input2));
-
-          - id: rotate-array-js
-            title: 'Rotate Array'
-            description: Rotate an array to the right by k steps.
+          - id: js-filter-array
+            title: 'Filter Array of Numbers'
+            description: Return an array containing only even numbers.
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function rotateArray(arr, k) {
-                    // Your code here
+                function filterEven(arr) {
+                  // Your code here
                 }
 
-                const input = prompt().split(' ').map(Number);
-                const k = Number(prompt());
-                console.log(rotateArray(input, k));
+                console.log(filterEven([1, 2, 3, 4, 5, 6]));
+
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 3 4 5\n2'
-                  expected_output: '[4,5,1,2,3]'
-                  explanation: 'Array rotated right by 2 steps'
-                - input: '1 2 3\n1'
-                  expected_output: '[3,1,2]'
+                - input: ''
+                  expected_output: '[2,4,6]'
               hidden: true
               hidden_cases:
-                - input: '1 2\n0'
-                  expected_output: '[1,2]'
+                - input: ''
+                  expected_output: '[2,4,6]'
             solution:
               content: |2-
-                function rotateArray(arr, k) {
-                    k = k % arr.length;
-                    return [...arr.slice(-k), ...arr.slice(0, -k)];
+                function filterEven(arr) {
+                  return arr.filter(num => num % 2 === 0);
                 }
 
-                const input = prompt().split(' ').map(Number);
-                const k = Number(prompt());
-                console.log(rotateArray(input, k));
-
-          - id: array-difference-js
-            title: 'Array Difference'
-            description: Return elements in the first array that are not in the second array.
-            complexity: medium
-            points: 10
+          - id: js-nested-object-access
+            title: 'Access Nested Object'
+            description: Access a deeply nested property in an object.
+            complexity: hard
+            points: 15
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function arrayDifference(arr1, arr2) {
-                    // Your code here
+                const user = {
+                  name: "John",
+                  address: {
+                    city: "LA",
+                    geo: {
+                      lat: 34.05,
+                      lng: -118.25
+                    }
+                  }
+                };
+
+                function getLatitude(obj) {
+                  // Your code here
                 }
 
-                const input1 = prompt().split(' ').map(Number);
-                const input2 = prompt().split(' ').map(Number);
-                console.log(arrayDifference(input1, input2));
+                console.log(getLatitude(user));
+
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 2 3 4\n2 4'
-                  expected_output: '[1,3]'
-                  explanation: '1 and 3 are not in the second array'
-                - input: '5 6\n5 6 7'
-                  expected_output: '[]'
+                - input: ''
+                  expected_output: '34.05'
               hidden: true
               hidden_cases:
-                - input: '1 2 3\n3 4 5'
-                  expected_output: '[1,2]'
+                - input: ''
+                  expected_output: '34.05'
             solution:
               content: |2-
-                function arrayDifference(arr1, arr2) {
-                    return arr1.filter(item => !arr2.includes(item));
+                function getLatitude(obj) {
+                  return obj.address.geo.lat;
                 }
 
-                const input1 = prompt().split(' ').map(Number);
-                const input2 = prompt().split(' ').map(Number);
-                console.log(arrayDifference(input1, input2));
-
-          - id: merge-sorted-js
-            title: 'Merge Sorted Arrays'
-            description: Merge two sorted arrays into a single sorted array.
+          - id: js-group-by-property
+            title: 'Group Objects by Property'
+            description: Group an array of objects by a specified key.
             complexity: hard
             points: 15
             time_limit_seconds: 10
-            memory_limit_mb: 64
+            memory_limit_mb: 128
             starter_code:
               content: |2-
-                function mergeSortedArrays(arr1, arr2) {
-                    // Your code here
+                function groupBy(arr, key) {
+                  // Your code here
                 }
 
-                const input1 = prompt().split(' ').map(Number);
-                const input2 = prompt().split(' ').map(Number);
-                console.log(mergeSortedArrays(input1, input2));
+                const data = [
+                  { category: 'fruit', name: 'apple' },
+                  { category: 'vegetable', name: 'carrot' },
+                  { category: 'fruit', name: 'banana' }
+                ];
+
+                console.log(groupBy(data, 'category'));
+
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1 3 5\n2 4 6'
-                  expected_output: '[1,2,3,4,5,6]'
-                  explanation: 'Merged and sorted'
-                - input: '1 2\n3'
-                  expected_output: '[1,2,3]'
+                - input: ''
+                  expected_output: '{"fruit":[{"category":"fruit","name":"apple"},{"category":"fruit","name":"banana"}],"vegetable":[{"category":"vegetable","name":"carrot"}]}'
               hidden: true
               hidden_cases:
-                - input: '2 4 6\n1 3 5'
-                  expected_output: '[1,2,3,4,5,6]'
+                - input: ''
+                  expected_output: '{"fruit":[...],"vegetable":[...]}'
             solution:
               content: |2-
-                function mergeSortedArrays(arr1, arr2) {
-                    return [...arr1, ...arr2].sort((a, b) => a - b);
+                function groupBy(arr, key) {
+                  return arr.reduce((acc, obj) => {
+                    const groupKey = obj[key];
+                    if (!acc[groupKey]) acc[groupKey] = [];
+                    acc[groupKey].push(obj);
+                    return acc;
+                  }, {});
                 }
-
-                const input1 = prompt().split(' ').map(Number);
-                const input2 = prompt().split(' ').map(Number);
-                console.log(mergeSortedArrays(input1, input2));
-
-          - id: array-partition-js
-            title: 'Partition Array'
-            description: Partition an array into two groups based on a condition (e.g., even vs. odd).
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function partitionArray(arr) {
-                    // Your code here
-                }
-
-                const input = prompt().split(' ').map(Number);
-                console.log(partitionArray(input));
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '1 2 3 4 5'
-                  expected_output: '[[2,4],[1,3,5]]'
-                  explanation: 'Even numbers in first group, odd in second'
-                - input: '1 3 5'
-                  expected_output: '[[],[1,3,5]]'
-                  explanation: 'No even numbers'
-              hidden: true
-              hidden_cases:
-                - input: '2 4 6'
-                  expected_output: '[[2,4,6],[]]'
-            solution:
-              content: |2-
-                function partitionArray(arr) {
-                    return [arr.filter(num => num % 2 === 0), arr.filter(num => num % 2 !== 0)];
-                }
-
-                const input = prompt().split(' ').map(Number);
-                console.log(partitionArray(input));
