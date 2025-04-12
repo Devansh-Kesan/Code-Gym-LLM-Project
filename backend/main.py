@@ -3,6 +3,12 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from services.llm_hint import generate_progressive_hints
+from services.llm_error import generate_error_explanation
+from services.llm_testcases import generate_test_cases
+from services.llm_review import generate_code_review
+from services.pydantic_models import LLMRequest
+
 import yaml
 import os
 
@@ -41,7 +47,7 @@ def load_config(path="config.yaml"):
 # Load everything from config.yaml
 load_config()
 # print("CCD",courses_data)
-print("QQD",questions_data)
+# print("QQD",questions_data)
 
 
 @app.get("/debug")
@@ -80,3 +86,39 @@ def get_question(question_id: str):
     if not question:
         raise HTTPException(status_code=404, detail="Question not found")
     return question
+
+@app.post("/llm/hint")
+def get_hint(request: LLMRequest):
+    hints = generate_progressive_hints(
+        question_title=request.title,
+        question_description=request.description,
+        user_code=request.code
+    )
+    return {"hints": hints}
+
+@app.post("/llm/explain-error")
+def get_error_explanation(request: LLMRequest):
+    explanations = generate_error_explanation(
+        question_title=request.title,
+        question_description=request.description,
+        user_code=request.code
+    )
+    return {"explanations": explanations}
+
+@app.post("/llm/test-cases")
+def get_test_cases(request: LLMRequest):
+    test_cases = generate_test_cases(
+        question_title=request.title,
+        question_description=request.description,
+        user_code=request.code
+    )
+    return {"test_cases": test_cases}
+
+@app.post("/llm/code-review")
+def get_code_review(request: LLMRequest):
+    review = generate_code_review(
+        question_title=request.title,
+        question_description=request.description,
+        user_code=request.code
+    )
+    return {"review": review}

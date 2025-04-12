@@ -1,21 +1,28 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const params = new URLSearchParams(window.location.search);
-    const courseId = params.get("course_id");
-    const topicId = params.get("topic_id");
-    const question_id = params.get("question_id");
+// Global DOM variables
+const problemTitle = document.querySelector('.problem-title');
+const problemCourse = document.querySelector('#course-name');
+const problemTopic = document.querySelector('#topic-name');
+const problemComplexity = document.querySelector('#complexity');
+const problemDescription = document.querySelector('.problem-description');
+const testCasesContainer = document.querySelector('.test-cases');
+const codeEditorTextarea = document.getElementById('code-editor');
+const hintBtn = document.getElementById("hint-btn");
+const errorBtn = document.getElementById("error-btn");
+const reviewBtn = document.getElementById("review-btn");
+const testBtn = document.getElementById("test-btn");
+const llmContent = document.getElementById("llm-content");
+const llmResponse = document.getElementById("llm-response");
+const params = new URLSearchParams(window.location.search);
+const courseId = params.get("course_id");
+const topicId = params.get("topic_id");
+const question_id = params.get("question_id");
 
-    // if (!courseId || !topicId || !difficulty) {
-    //     alert("Missing query parameters.");
-    //     return;
-    // }
+let codeMirror; // we'll initialize this later globally
 
-    const problemTitle = document.querySelector('.problem-title');
-    const problemDescription = document.querySelector('.problem-description');
-    const testCasesContainer = document.querySelector('.test-cases');
-    const codeEditorTextarea = document.getElementById('code-editor');
 
-    // Initialize CodeMirror
-    const codeMirror = CodeMirror.fromTextArea(codeEditorTextarea, {
+async function initializeEditorPage() {
+    // Init CodeMirror
+    codeMirror = CodeMirror.fromTextArea(codeEditorTextarea, {
         mode: courseId.includes("python") ? "python" : "javascript",
         theme: "dracula",
         lineNumbers: true,
@@ -28,39 +35,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         styleActiveLine: true,
         lineWrapping: true,
         extraKeys: {
-            "Tab": function(cm) {
-                if (cm.somethingSelected()) {
-                    cm.indentSelection("add");
-                } else {
-                    cm.replaceSelection("    ", "end", "+input");
-                }
-            },
-            "Shift-Tab": function(cm) {
-                cm.indentSelection("subtract");
-            },
-            "Ctrl-/": function(cm) {
-                cm.toggleComment();
-            },
-            "Cmd-/": function(cm) {
-                cm.toggleComment();
-            }
+            "Tab": cm => cm.somethingSelected() ? cm.indentSelection("add") : cm.replaceSelection("    ", "end", "+input"),
+            "Shift-Tab": cm => cm.indentSelection("subtract"),
+            "Ctrl-/": cm => cm.toggleComment(),
+            "Cmd-/": cm => cm.toggleComment()
         }
     });
 
     try {
-        const res = await fetch(`http://localhost:8000/courses/${courseId}/topics/${topicId}/questions/${question_id}`);
-        const problem = await res.json();
-        console.log(problem)
+        const [res, res1, res2] = await Promise.all([
+            fetch(`http://localhost:8000/courses/${courseId}/topics/${topicId}/questions/${question_id}`),
+            fetch(`http://localhost:8000/courses/${courseId}/topics/${topicId}`),
+            fetch(`http://localhost:8000/courses/${courseId}/`)
+        ]);
 
-        // Update UI with question details
+        const [problem, topic, course] = await Promise.all([res.json(), res1.json(), res2.json()]);
+
+        // Populate UI
         problemTitle.textContent = problem.title;
         problemDescription.textContent = problem.description;
+        problemCourse.textContent = course.title;
+        problemTopic.textContent = topic.topic_title;
+        problemComplexity.textContent = problem.complexity;
         codeMirror.setValue(problem.starter_code.content);
 
-        // Display visible test cases
+        // Test Cases
         testCasesContainer.innerHTML = '<h3>Visible Test Cases</h3>';
         problem.test_cases.visible_cases.forEach((testCase, index) => {
-            div = document.createElement('div');
+            const div = document.createElement('div');
             div.className = 'test-case';
             div.innerHTML = `
                 <div><strong>Test Case ${index + 1}</strong></div>
@@ -77,4 +79,121 @@ document.addEventListener('DOMContentLoaded', async () => {
         problemTitle.textContent = "Error loading problem";
         problemDescription.textContent = "Unable to load the problem. Please try again later.";
     }
+}
+
+function setupHintFeature() {
+    if (!hintBtn) return;
+
+    hintBtn.addEventListener("click", async () => {
+        const code = codeMirror.getValue();
+        // console.log(code)
+        const title = problemTitle.textContent;
+        const description = problemDescription.textContent;
+
+        llmContent.textContent = "Generating hints...";
+        llmResponse.style.display = "block";
+
+        try {
+            const response = await fetch("http://localhost:8000/llm/hint", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, description, code })
+            });
+
+            const data = await response.json();
+            llmContent.textContent = data.hints;
+        } catch (error) {
+            llmContent.textContent = "Failed to get hints. Please try again.";
+            console.error("Error fetching hint:", error);
+        }
+    });
+}
+
+function setupErrorExplanationFeature() {
+    if (!errorBtn) return;
+
+    errorBtn.addEventListener("click", async () => {
+        const code = codeMirror.getValue();
+        const title = problemTitle.textContent;
+        const description = problemDescription.textContent;
+
+        llmContent.textContent = "Analyzing error...";
+        llmResponse.style.display = "block";
+
+        try {
+            const response = await fetch("http://localhost:8000/llm/explain-error", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, description, code })
+            });
+
+            const data = await response.json();
+            llmContent.textContent = data.explanations;
+        } catch (error) {
+            llmContent.textContent = "Failed to analyze error. Please try again.";
+            console.error("Error fetching error explanation:", error);
+        }
+    });
+}
+
+function setupTestCaseGenerationFeature() {
+    if (!testBtn) return;
+
+    testBtn.addEventListener("click", async () => {
+        const code = codeMirror.getValue();
+        const title = problemTitle.textContent;
+        const description = problemDescription.textContent;
+
+        llmContent.textContent = "Generating test cases...";
+        llmResponse.style.display = "block";
+
+        try {
+            const response = await fetch("http://localhost:8000/llm/test-cases", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, description, code })
+            });
+
+            const data = await response.json();
+            llmContent.textContent = data.test_cases;
+        } catch (error) {
+            llmContent.textContent = "Failed to generate test cases. Please try again.";
+            console.error("Error generating test cases:", error);
+        }
+    });
+}
+
+function setupCodeReviewFeature() {
+    if (!reviewBtn) return;
+
+    reviewBtn.addEventListener("click", async () => {
+        const code = codeMirror.getValue();
+        const title = problemTitle.textContent;
+        const description = problemDescription.textContent;
+
+        llmContent.textContent = "Reviewing code...";
+        llmResponse.style.display = "block";
+
+        try {
+            const response = await fetch("http://localhost:8000/llm/code-review", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, description, code })
+            });
+
+            const data = await response.json();
+            llmContent.textContent = data.review;
+        } catch (error) {
+            llmContent.textContent = "Failed to review code. Please try again.";
+            console.error("Error fetching review:", error);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await initializeEditorPage();
+    setupHintFeature();  // You can also call other feature functions here later
+    setupErrorExplanationFeature();         // wire Error feature 
+    setupTestCaseGenerationFeature();              // wire Test Case feature 
+    setupCodeReviewFeature();               // wire Code Review feature 
 });

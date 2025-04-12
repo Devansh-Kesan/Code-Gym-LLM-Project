@@ -31,6 +31,19 @@ body {
     margin-top: 0;
     color: #2c3e50;
 }
+.problem-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.problem-meta span {
+    background-color: #f0f0f0;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
 .problem-description {
     background-color: #f8f9fa;
     padding: 15px;
