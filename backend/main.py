@@ -2,6 +2,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 
 from services.llm_hint import generate_progressive_hints
 from services.llm_error import generate_error_explanation
@@ -47,7 +48,15 @@ def load_config(path="config.yaml"):
 # Load everything from config.yaml
 load_config()
 # print("CCD",courses_data)
-# print("QQD",questions_data)
+
+i=0
+for k,v in questions_data.items():
+    i+=1
+    # print(f"K : {k} and V : {v}")
+    # i+=1
+    # if (i==1):
+    #     break
+print(i)
 
 
 @app.get("/debug")
@@ -122,3 +131,29 @@ def get_code_review(request: LLMRequest):
         user_code=request.code
     )
     return {"review": review}
+
+class RunCodeRequest(BaseModel):
+    code: str
+    question_id: str
+
+@app.post("/run-code")
+def run_user_code(request:RunCodeRequest):
+    code=request.code
+    question_id=request.question_id
+    detail=questions_data[question_id]
+    test_case=detail["test_cases"]
+    visible_l=test_case["visible_cases"]
+    hidden_l=test_case["hidden_cases"]
+    # here required for devanse is code,visible and hiddenl.
+    # example
+    # for 1st Question: sum-of-list
+    # visible_l:  [{'input': '1 2 3 4 5', 'expected_output': '15', 'explanation': 'Sum = 1+2+3+4+5 = 15'}, {'input': '10 20 30', 'expected_output': '60', 'explanation': 'Sum = 10+20+30 = 60'}]
+    # hidden_l: [{'input': '0 0 0', 'expected_output': '0'}, {'input': '100 -50 25', 'expected_output': '75'}]
+
+    # @devansh once cross check buddy
+
+    #sample return 
+    # return {"results":"hello","visible":True,"hidden":True}
+
+
+    

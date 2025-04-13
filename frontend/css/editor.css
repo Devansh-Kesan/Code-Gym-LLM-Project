@@ -95,11 +95,11 @@ button {
 .llm-btn:hover {
     background-color: #2980b9;
 }
-.reset-btn {
+.run-btn {
     background-color: #e74c3c;
     color: white;
 }
-.reset-btn:hover {
+.run-btn:hover {
     background-color: #c0392b;
 }
 .results-container {

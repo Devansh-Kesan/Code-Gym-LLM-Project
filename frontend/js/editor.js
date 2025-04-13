@@ -17,6 +17,11 @@ const courseId = params.get("course_id");
 const topicId = params.get("topic_id");
 const question_id = params.get("question_id");
 
+// console.log("A",courseId)
+// console.log("B",topicId)
+// console.log("C",question_id)
+
+
 let codeMirror; // we'll initialize this later globally
 
 
@@ -190,10 +195,48 @@ function setupCodeReviewFeature() {
     });
 }
 
+const runBtn=document.getElementById("run-btn");
+const resultContainer=document.getElementById("results-container")
+const resultContent=document.getElementById("results-content")
+
+async function runCode(){
+    if (!runBtn) return;
+    runBtn.addEventListener("click",async ()=>{
+        const code=codeMirror.getValue();
+        // const questionId=params.get("question_id");
+        // const courseId = params.get("course_id");
+        // const topicId = params.get("topic_id");
+        // const question_id = params.get("question_id");
+
+        resultContent.textContent="Running Code...";
+        resultContainer.style.display="block";
+
+        try{
+            const response=await fetch("http://localhost:8000/run-code",{
+                method:"POST",
+                headers:{ "Content-Type":"application/json" },
+                body:JSON.stringify({code:code,question_id:question_id})
+            });
+            const data=await response.json();
+            // console.log(data)
+            //accordinglt update here what backend sends 
+            resultContent.textContent=data.results;
+        }
+        catch(error){
+            resultContent.textContent="Failed to run code. Please Try Again";
+            console.error("Error running Code:", error);
+        }
+
+    })
+}
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     await initializeEditorPage();
     setupHintFeature();  // You can also call other feature functions here later
     setupErrorExplanationFeature();         // wire Error feature 
     setupTestCaseGenerationFeature();              // wire Test Case feature 
     setupCodeReviewFeature();               // wire Code Review feature 
+    runCode();
+    // console.log("mirrorval",codeMirror.getValue())
 });
