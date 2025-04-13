@@ -145,6 +145,28 @@ def run_user_code(request:RunCodeRequest):
 
     return result
 
+    #sample output : 
+    {
+    "passed": 2,
+    "failed": 0,
+    "total": 2,
+    "test_results": [
+        {
+        "test_name": "test_visible_0.py",
+        "passed": true,
+        "is_hidden": false,
+        "error": ""
+        },
+        {
+        "test_name": "test_visible_1.py",
+        "passed": true,
+        "is_hidden": false,
+        "error": ""
+        }
+    ]
+    }
+
+
 @app.post("/run-code-all")
 def run_user_code(request:RunCodeRequest):
     code=request.code
@@ -153,6 +175,43 @@ def run_user_code(request:RunCodeRequest):
     result = test_with_real_docker(question_id,code,True)
 
     return result
+
+    #sample output
+    {
+    "passed": 0,
+    "failed": 4,
+    "total": 4,
+    "test_results": [
+        {
+        "test_name": "test_visible_0.py",
+        "passed": false,
+        "is_hidden": false,
+        "error": "AssertionError",
+        "expected": "15",
+        "actual": "1\n1"
+        },
+        {
+        "test_name": "test_visible_1.py",
+        "passed": false,
+        "is_hidden": false,
+        "error": "AssertionError",
+        "expected": "60",
+        "actual": "1\n10"
+        },
+        {
+        "test_name": "test_hidden_1.py",
+        "passed": false,
+        "is_hidden": true,
+        "error": "Hidden test case failed"
+        },
+        {
+        "test_name": "test_hidden_0.py",
+        "passed": false,
+        "is_hidden": true,
+        "error": "Hidden test case failed"
+        }
+    ]
+    }
 
 
 

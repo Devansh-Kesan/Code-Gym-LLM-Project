@@ -196,6 +196,7 @@ function setupCodeReviewFeature() {
 }
 
 const runBtn=document.getElementById("run-btn");
+const SubBtn=document.getElementById("submit-btn");
 const resultContainer=document.getElementById("results-container")
 const resultContent=document.getElementById("results-content")
 
@@ -220,11 +221,70 @@ async function runCode(){
             const data=await response.json();
             // console.log(data)
             //accordinglt update here what backend sends 
-            resultContent.textContent=data.results;
+
+            let resultText="";
+            if (data.test_results){
+                data.test_results.forEach(test=>{
+                    if (!test.passed){
+                        resultText+=`Test case: ${test.test_name}\nError: ${test.error}\n\n`
+                    }
+                });
+            }
+
+            if (resultText==""){
+                resultText="All visible test cases passed.";
+            }
+
+            resultContent.textContent=resultText;
+            
         }
         catch(error){
             resultContent.textContent="Failed to run code. Please Try Again";
             console.error("Error running Code:", error);
+        }
+
+    })
+}
+
+async function Submit() {
+    if (!SubBtn) return;
+    SubBtn.addEventListener("click",async ()=>{
+        const code=codeMirror.getValue();
+
+        resultContainer.textContent="Running Code.."
+        resultContent.style.display="block"
+
+        try{
+            const response=await fetch("http://localhost:8000/run-code-all",{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({code:code,question_id:question_id})
+            });
+
+            const data=await response.json();
+
+            let resultText="";
+            if (data.total === data.passed){
+                resultText="Accepted! All test cases passed";
+            }else{
+                data.test_results.forEach(test=>{
+                    if (!test.passed){
+                        resultText+=`Test case: ${test.test_name} \nError: ${test.error}`;
+                    }
+                    if (test.expected){
+                        resultText+=`\nExpected: ${test.expected}`;
+                    }
+                    if (test.actual){
+                        resultText+=`\nactual: ${test.actual}`;
+                    }
+                    resultText+=`\n\n`;
+                });
+            }
+            resultContainer.textContent=resultText;
+        }
+        catch(error){
+            resultContainer.textContent='Failed to run code. Please Try Again'
+            console.error("Error runnning code ",error)
         }
 
     })
@@ -238,5 +298,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupTestCaseGenerationFeature();              // wire Test Case feature 
     setupCodeReviewFeature();               // wire Code Review feature 
     runCode();
+    Submit();
     // console.log("mirrorval",codeMirror.getValue())
 });
