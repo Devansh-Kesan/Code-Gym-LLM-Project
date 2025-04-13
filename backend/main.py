@@ -9,6 +9,7 @@ from services.llm_error import generate_error_explanation
 from services.llm_testcases import generate_test_cases
 from services.llm_review import generate_code_review
 from services.pydantic_models import LLMRequest
+from test_submission_function import test_with_real_docker
 
 import yaml
 import os
@@ -140,20 +141,20 @@ class RunCodeRequest(BaseModel):
 def run_user_code(request:RunCodeRequest):
     code=request.code
     question_id=request.question_id
-    detail=questions_data[question_id]
-    test_case=detail["test_cases"]
-    visible_l=test_case["visible_cases"]
-    hidden_l=test_case["hidden_cases"]
-    # here required for devanse is code,visible and hiddenl.
-    # example
-    # for 1st Question: sum-of-list
-    # visible_l:  [{'input': '1 2 3 4 5', 'expected_output': '15', 'explanation': 'Sum = 1+2+3+4+5 = 15'}, {'input': '10 20 30', 'expected_output': '60', 'explanation': 'Sum = 10+20+30 = 60'}]
-    # hidden_l: [{'input': '0 0 0', 'expected_output': '0'}, {'input': '100 -50 25', 'expected_output': '75'}]
+    result = test_with_real_docker(question_id,code,False)
 
-    # @devansh once cross check buddy
+    return result
 
-    #sample return 
-    # return {"results":"hello","visible":True,"hidden":True}
+@app.post("/run-code-all")
+def run_user_code(request:RunCodeRequest):
+    code=request.code
+    question_id=request.question_id
+    
+    result = test_with_real_docker(question_id,code,True)
+
+    return result
+
+
 
 
     
