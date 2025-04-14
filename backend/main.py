@@ -11,6 +11,8 @@ from services.llm_review import generate_code_review
 from services.pydantic_models import LLMRequest
 from test_submission_function import test_with_real_docker
 
+from js_test import test_with_real_docker_js
+
 import yaml
 import os
 
@@ -229,6 +231,23 @@ def run_user_code(request:RunCodeRequest):
     # ]
     # }
 
+
+@app.post("/run-code-js")
+def run_user_code(request:RunCodeRequest):
+    code=request.code
+    question_id=request.question_id
+    result = test_with_real_docker_js(question_id,code,False)
+
+    return result
+
+@app.post("/run-code-all-js")
+def run_user_code(request:RunCodeRequest):
+    code=request.code
+    question_id=request.question_id
+    
+    result = test_with_real_docker_js(question_id,code,True)
+
+    return result
 
 
 
