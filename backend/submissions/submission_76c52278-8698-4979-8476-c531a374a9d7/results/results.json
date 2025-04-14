@@ -1,0 +1,35 @@
+{
+  "passed": 0,
+  "failed": 4,
+  "total": 4,
+  "test_results": [
+    {
+      "test_name": "test_hidden_0.py",
+      "passed": false,
+      "is_hidden": true,
+      "error": "Hidden test case failed"
+    },
+    {
+      "test_name": "test_hidden_1.py",
+      "passed": false,
+      "is_hidden": true,
+      "error": "Hidden test case failed"
+    },
+    {
+      "test_name": "test_visible_0.py",
+      "passed": false,
+      "is_hidden": false,
+      "error": "AssertionError",
+      "expected": "15",
+      "actual": "None"
+    },
+    {
+      "test_name": "test_visible_1.py",
+      "passed": false,
+      "is_hidden": false,
+      "error": "AssertionError",
+      "expected": "60",
+      "actual": "None"
+    }
+  ]
+}

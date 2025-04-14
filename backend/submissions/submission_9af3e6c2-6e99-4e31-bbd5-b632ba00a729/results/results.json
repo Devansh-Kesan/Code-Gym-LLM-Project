@@ -1,0 +1,23 @@
+{
+  "passed": 0,
+  "failed": 2,
+  "total": 2,
+  "test_results": [
+    {
+      "test_name": "test_visible_0.py",
+      "passed": false,
+      "is_hidden": false,
+      "error": "AssertionError",
+      "expected": "15",
+      "actual": "None"
+    },
+    {
+      "test_name": "test_visible_1.py",
+      "passed": false,
+      "is_hidden": false,
+      "error": "AssertionError",
+      "expected": "60",
+      "actual": "None"
+    }
+  ]
+}

@@ -24,6 +24,7 @@ const question_id = params.get("question_id");
 
 let codeMirror; // we'll initialize this later globally
 
+// let rendered = false;
 
 async function initializeEditorPage() {
     // Init CodeMirror
@@ -65,7 +66,7 @@ async function initializeEditorPage() {
         codeMirror.setValue(problem.starter_code.content);
 
         // Test Cases
-        testCasesContainer.innerHTML = '<h3>Visible Test Cases</h3>';
+        testCasesContainer.innerHTML = '<h3>Visible Test Caseasdass</h3>';
         problem.test_cases.visible_cases.forEach((testCase, index) => {
             const div = document.createElement('div');
             div.className = 'test-case';
@@ -201,45 +202,49 @@ const resultContainer=document.getElementById("results-container")
 const resultContent=document.getElementById("results-content")
 
 async function runCode(){
-    if (!runBtn) return;
+    if (!runBtn) return;    
     runBtn.addEventListener("click",async ()=>{
         const code=codeMirror.getValue();
         // const questionId=params.get("question_id");
         // const courseId = params.get("course_id");
         // const topicId = params.get("topic_id");
-        // const question_id = params.get("question_id");
+        // const question_id = params.get("question_id"); 
 
         resultContent.textContent="Running Code...";
         resultContainer.style.display="block";
 
         try{
-            const response=await fetch("http://localhost:8000/run-code",{
+            const response= await fetch("http://localhost:8000/run-code",{
                 method:"POST",
                 headers:{ "Content-Type":"application/json" },
-                body:JSON.stringify({code:code,question_id:question_id})
+                body:JSON.stringify({code:code,question_id:question_id}),
+                // mode:"cors",
             });
-            const data=await response.json();
-            // console.log(data)
-            //accordinglt update here what backend sends 
+            
+            // console.log("hello")
+            const data = await response.json();
+            console.log(data);
 
-            let resultText="";
-            if (data.test_results){
-                data.test_results.forEach(test=>{
-                    if (!test.passed){
-                        resultText+=`Test case: ${test.test_name}\nError: ${test.error}\n\n`
+            let resultText = "";
+            if (data.test_results) {
+                data.test_results.forEach(test => {
+                    if (!test.passed) {
+                        resultText += `Test case: ${test.test_name}<br>Error: ${test.error}<br><br>`;
                     }
                 });
             }
 
-            if (resultText==""){
-                resultText="All visible test cases passed.";
+            if (resultText === "") {
+                resultText = "All visible test cases passed.";
             }
 
-            resultContent.textContent=resultText;
+            // resultContent.textContent = resultText; // Corrected to resultContent
+            resultContent.innerHTML = resultText;
+            // resultContainer.textContent=data.results;
             
         }
         catch(error){
-            resultContent.textContent="Failed to run code. Please Try Again";
+            resultContent.textContent = "Failed to run code. Please Try Again";
             console.error("Error running Code:", error);
         }
 
@@ -251,8 +256,8 @@ async function Submit() {
     SubBtn.addEventListener("click",async ()=>{
         const code=codeMirror.getValue();
 
-        resultContainer.textContent="Running Code.."
-        resultContent.style.display="block"
+        resultContent.textContent="Running Code...";
+        resultContainer.style.display="block";
 
         try{
             const response=await fetch("http://localhost:8000/run-code-all",{
@@ -262,29 +267,33 @@ async function Submit() {
             });
 
             const data=await response.json();
+            console.log("hello")
+            console.log(data);
 
             let resultText="";
             if (data.total === data.passed){
                 resultText="Accepted! All test cases passed";
             }else{
-                data.test_results.forEach(test=>{
-                    if (!test.passed){
-                        resultText+=`Test case: ${test.test_name} \nError: ${test.error}`;
+                data.test_results.forEach(test => {
+                    if (!test.passed) {
+                        resultText += `Test case: ${test.test_name}<br>Error: ${test.error}`;
                     }
-                    if (test.expected){
-                        resultText+=`\nExpected: ${test.expected}`;
+                    if (test.expected) {
+                        resultText += `<br>Expected: ${test.expected}`;
                     }
-                    if (test.actual){
-                        resultText+=`\nactual: ${test.actual}`;
+                    if (test.actual) {
+                        resultText += `<br>Actual: ${test.actual}`;
                     }
-                    resultText+=`\n\n`;
+                    resultText += `<br><br>`;
                 });
             }
-            resultContainer.textContent=resultText;
+            // resultContent.textContent = resultText; 
+            resultContent.innerHTML = resultText; 
+            console.log("done")
         }
         catch(error){
-            resultContainer.textContent='Failed to run code. Please Try Again'
-            console.error("Error runnning code ",error)
+            resultContent.textContent = "Failed to run code. Please Try Again";
+            console.error("Error running Code:", error);
         }
 
     })
@@ -292,12 +301,11 @@ async function Submit() {
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await initializeEditorPage();
-    setupHintFeature();  // You can also call other feature functions here later
-    setupErrorExplanationFeature();         // wire Error feature 
-    setupTestCaseGenerationFeature();              // wire Test Case feature 
-    setupCodeReviewFeature();               // wire Code Review feature 
-    runCode();
-    Submit();
-    // console.log("mirrorval",codeMirror.getValue())
-});
+        initializeEditorPage();
+        setupHintFeature();  // You can also call other feature functions here later
+        setupErrorExplanationFeature();         // wire Error feature 
+        setupTestCaseGenerationFeature();              // wire Test Case feature 
+        setupCodeReviewFeature();               // wire Code Review feature 
+        Submit();
+        runCode();
+    });

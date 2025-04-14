@@ -1,0 +1,19 @@
+{
+  "passed": 2,
+  "failed": 0,
+  "total": 2,
+  "test_results": [
+    {
+      "test_name": "test_visible_0.py",
+      "passed": true,
+      "is_hidden": false,
+      "error": ""
+    },
+    {
+      "test_name": "test_visible_1.py",
+      "passed": true,
+      "is_hidden": false,
+      "error": ""
+    }
+  ]
+}

@@ -16,10 +16,18 @@ import os
 
 app = FastAPI()
 
+origins = [
+    # "http://localhost",
+    # "http://localhost:5501",
+    # "http://127.0.0.1",
+    # "http://127.0.0.1:5501",
+    "*"
+]
+
 # Enable CORS so frontend can call API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -124,6 +132,7 @@ def get_test_cases(request: LLMRequest):
     )
     return {"test_cases": test_cases}
 
+
 @app.post("/llm/code-review")
 def get_code_review(request: LLMRequest):
     review = generate_code_review(
@@ -142,29 +151,32 @@ def run_user_code(request:RunCodeRequest):
     code=request.code
     question_id=request.question_id
     result = test_with_real_docker(question_id,code,False)
+    print("??????????????????????????????????????????????")
+    print(result)
+    print("??????????????????????????????????????????????")
 
     return result
 
     #sample output : 
-    {
-    "passed": 2,
-    "failed": 0,
-    "total": 2,
-    "test_results": [
-        {
-        "test_name": "test_visible_0.py",
-        "passed": true,
-        "is_hidden": false,
-        "error": ""
-        },
-        {
-        "test_name": "test_visible_1.py",
-        "passed": true,
-        "is_hidden": false,
-        "error": ""
-        }
-    ]
-    }
+    # {
+    # "passed": 2,
+    # "failed": 0,
+    # "total": 2,
+    # "test_results": [
+    #     {
+    #     "test_name": "test_visible_0.py",
+    #     "passed": true,
+    #     "is_hidden": false,
+    #     "error": ""
+    #     },
+    #     {
+    #     "test_name": "test_visible_1.py",
+    #     "passed": true,
+    #     "is_hidden": false,
+    #     "error": ""
+    #     }
+    # ]
+    # }
 
 
 @app.post("/run-code-all")
@@ -174,44 +186,48 @@ def run_user_code(request:RunCodeRequest):
     
     result = test_with_real_docker(question_id,code,True)
 
+    print("??????????????????????????????????????????????")
+    print(result)
+    print("??????????????????????????????????????????????")
+
     return result
 
     #sample output
-    {
-    "passed": 0,
-    "failed": 4,
-    "total": 4,
-    "test_results": [
-        {
-        "test_name": "test_visible_0.py",
-        "passed": false,
-        "is_hidden": false,
-        "error": "AssertionError",
-        "expected": "15",
-        "actual": "1\n1"
-        },
-        {
-        "test_name": "test_visible_1.py",
-        "passed": false,
-        "is_hidden": false,
-        "error": "AssertionError",
-        "expected": "60",
-        "actual": "1\n10"
-        },
-        {
-        "test_name": "test_hidden_1.py",
-        "passed": false,
-        "is_hidden": true,
-        "error": "Hidden test case failed"
-        },
-        {
-        "test_name": "test_hidden_0.py",
-        "passed": false,
-        "is_hidden": true,
-        "error": "Hidden test case failed"
-        }
-    ]
-    }
+    # {
+    # "passed": 0,
+    # "failed": 4,
+    # "total": 4,
+    # "test_results": [
+    #     {
+    #     "test_name": "test_visible_0.py",
+    #     "passed": false,
+    #     "is_hidden": false,
+    #     "error": "AssertionError",
+    #     "expected": "15",
+    #     "actual": "1\n1"
+    #     },
+    #     {
+    #     "test_name": "test_visible_1.py",
+    #     "passed": false,
+    #     "is_hidden": false,
+    #     "error": "AssertionError",
+    #     "expected": "60",
+    #     "actual": "1\n10"
+    #     },
+    #     {
+    #     "test_name": "test_hidden_1.py",
+    #     "passed": false,
+    #     "is_hidden": true,
+    #     "error": "Hidden test case failed"
+    #     },
+    #     {
+    #     "test_name": "test_hidden_0.py",
+    #     "passed": false,
+    #     "is_hidden": true,
+    #     "error": "Hidden test case failed"
+    #     }
+    # ]
+    # }
 
 
 
