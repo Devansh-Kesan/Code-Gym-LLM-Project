@@ -46,6 +46,7 @@ async function initializeEditorPage() {
             "Ctrl-/": cm => cm.toggleComment(),
             "Cmd-/": cm => cm.toggleComment()
         }
+        
     });
 
     try {
