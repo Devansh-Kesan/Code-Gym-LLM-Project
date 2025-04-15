@@ -5,6 +5,7 @@ import yaml
 import json
 from pathlib import Path
 import textwrap
+import shutil
 
 def process_code_submission(user_code, problem_id, hidden=False):
     """Process a JavaScript code submission by running it in a Docker container and storing results.
@@ -18,6 +19,17 @@ def process_code_submission(user_code, problem_id, hidden=False):
         dict: Test results or error information.
     """
     try:
+        # Empty the submissions folder if it exists
+        submissions_dir = Path("submissions")
+        if submissions_dir.exists():
+            for item in submissions_dir.iterdir():
+                if item.is_dir():
+                    shutil.rmtree(item)
+                else:
+                    item.unlink()
+        else:
+            submissions_dir.mkdir(exist_ok=True)
+
         # Set up directory structure
         submission_id = str(uuid.uuid4())
         base_dir = Path("submissions") / f"submission_{submission_id}"
@@ -27,17 +39,13 @@ def process_code_submission(user_code, problem_id, hidden=False):
         for directory in (code_dir, tests_dir, results_dir):
             directory.mkdir(parents=True, exist_ok=True)
         
-        print(f"Created directories: {base_dir}")
-
         # Save the user's JavaScript code
         code_file = code_dir / "solution.js"
         with open(code_file, "w") as f:
             f.write(user_code)
-        print(f"Saved user code to: {code_file}")
 
         # Load problem configuration from config.yaml
         config_path = Path(__file__).parent / "config.yaml"
-        print(f"Loading config from: {config_path}")
         with open(config_path, "r") as f:
             config = yaml.safe_load(f)
         
@@ -57,24 +65,19 @@ def process_code_submission(user_code, problem_id, hidden=False):
         
         if not problem_config:
             raise ValueError(f"Problem with ID {problem_id} not found")
-        print(f"Found problem: {problem_title}")
 
         # Get visible test cases
         visible_test_cases = problem_config["test_cases"]["visible_cases"]
-        print(f"Total visible test cases: {len(visible_test_cases)}")
         
         # Get hidden test cases if requested
         hidden_test_cases = []
         if hidden and "hidden_cases" in problem_config["test_cases"]:
             hidden_test_cases = problem_config["test_cases"]["hidden_cases"]
-            print(f"Total hidden test cases: {len(hidden_test_cases)}")
         
         # Combine test cases based on hidden parameter
         test_cases = visible_test_cases
         if hidden:
             test_cases = visible_test_cases + hidden_test_cases
-        
-        print(f"Processing {len(test_cases)} total test cases")
         
         # Generate Jest test files for each test case
         for i, test_case in enumerate(test_cases):
@@ -85,10 +88,6 @@ def process_code_submission(user_code, problem_id, hidden=False):
             # Properly format the input - make sure it ends with a newline for readline
             input_data = json.dumps(test_case["input"])[1:-1] + "\\n"
             expected_output = json.dumps(test_case["expected_output"])[1:-1]
-            
-            test_type = "Hidden" if is_hidden else "Visible"
-            print(f"{test_type} Test - Input: {input_data}")
-            print(f"{test_type} Test - Expected: {expected_output}")
             
             test_content = textwrap.dedent(f"""
                 const {{ spawnSync }} = require('child_process');
@@ -130,11 +129,6 @@ def process_code_submission(user_code, problem_id, hidden=False):
             test_file = tests_dir / f"test_{test_id}.test.js"
             with open(test_file, "w") as f:
                 f.write(test_content)
-            print(f"Generated test file: {test_file}")
-
-        # Verify directory contents
-        print(f"Code dir contents: {os.listdir(code_dir)}")
-        print(f"Tests dir contents: {os.listdir(tests_dir)}")
 
         # Run the Docker container with aligned Jest command
         cmd = [
@@ -144,7 +138,6 @@ def process_code_submission(user_code, problem_id, hidden=False):
             "-v", f"{results_dir.absolute()}:/results",
             "code-gym-tester-js"
         ]
-        print(f"Docker command: {' '.join(cmd)}")
 
         # Execute Docker command with detailed error capture
         process = subprocess.run(
@@ -152,32 +145,35 @@ def process_code_submission(user_code, problem_id, hidden=False):
             capture_output=True,
             text=True
         )
-        print(f"Docker returncode: {process.returncode}")
-        print(f"Docker stdout: {process.stdout}")
-        print(f"Docker stderr: {process.stderr}")
 
         if process.returncode != 0 and not results_dir.joinpath("results.json").exists():
-            return {
+            error_result = {
                 "error": f"Docker execution failed: {process.stderr}",
                 "passed": 0,
                 "failed": len(test_cases),
                 "total": len(test_cases)
             }
+            # Write error result to results.json
+            with open(results_dir / "results.json", "w") as f:
+                json.dump(error_result, f, indent=2)
+            return error_result
 
         # Load and process the test results
         results_file = results_dir / "results.json"
         if not results_file.exists():
-            print("Results file not found")
-            return {
+            error_result = {
                 "error": "Results file not created by Docker container",
                 "passed": 0,
                 "failed": len(test_cases),
                 "total": len(test_cases)
             }
+            # Write error result to results.json
+            with open(results_dir / "results.json", "w") as f:
+                json.dump(error_result, f, indent=2)
+            return error_result
 
         with open(results_file, "r") as f:
             results = json.load(f)
-        print("Loaded results.json")
 
         # Process Jest results into a simplified format
         processed_results = {
@@ -215,22 +211,38 @@ def process_code_submission(user_code, problem_id, hidden=False):
                         lines = failure_message.split("\n")
                         expected = next((line.split(": ")[1] for line in lines if "Expected:" in line), "N/A")
                         received = next((line.split(": ")[1] for line in lines if "Received:" in line), "N/A")
-                        test_info["error"] = "AssertionError"
+                        test_info["error"] = "Wrong Answer"
                         test_info["expected"] = expected.strip('"')
                         test_info["actual"] = received.strip('"')
                 
                 processed_results["test_results"].append(test_info)
 
+        # Write the processed results to results.json, overwriting the Jest output
+        with open(results_file, "w") as f:
+            json.dump(processed_results, f, indent=2)
+            
         return processed_results
 
     except Exception as e:
-        print(f"Error processing submission: {str(e)}")
-        return {
+        error_result = {
             "error": f"Error processing submission: {str(e)}",
             "passed": 0,
             "failed": 0,
             "total": 0
         }
+        
+        # Try to write the error to results.json if possible
+        try:
+            results_dir = Path("submissions") / f"submission_{submission_id}" / "results"
+            if not results_dir.exists():
+                results_dir.mkdir(parents=True, exist_ok=True)
+            with open(results_dir / "results.json", "w") as f:
+                json.dump(error_result, f, indent=2)
+        except Exception:
+            # If we can't even write the error, just return it
+            pass
+            
+        return error_result
 
 # Example usage
 if __name__ == "__main__":
@@ -239,10 +251,6 @@ if __name__ == "__main__":
     """
     # To run with only visible test cases
     result_visible = process_code_submission(sample_code, "js-print-hello", hidden=False)
-    print("Results with visible test cases only:")
-    print(json.dumps(result_visible, indent=2))
     
     # To run with both visible and hidden test cases
     result_all = process_code_submission(sample_code, "js-print-hello", hidden=True)
-    print("\nResults with all test cases:")
-    print(json.dumps(result_all, indent=2))

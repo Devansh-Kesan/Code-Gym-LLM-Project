@@ -247,6 +247,7 @@ def run_user_code(request:RunCodeRequest):
     
     result = test_with_real_docker_js(question_id,code,True)
 
+    print(result)
     return result
 
 

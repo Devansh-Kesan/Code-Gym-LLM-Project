@@ -1452,11 +1452,22 @@ courses:
                   expected_output: '200'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function addNumbers(a, b) {
                     console.log(Number(a) + Number(b));
                 }
-                const input = prompt().split(" ");
-                addNumbers(input[0], input[1]);
+
+                rl.on('line', (input) => {
+                    const [a, b] = input.trim().split(" ");
+                    addNumbers(a, b);
+                    rl.close();
+                });
 
           - id: js-type-check
             title: 'Check Type of Variable'
@@ -1484,11 +1495,27 @@ courses:
                   expected_output: 'boolean'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function checkType(value) {
-                    console.log(typeof eval(value));
+                    try {
+                        // Safely evaluate the input to determine its type
+                        const evaluated = eval(value);
+                        console.log(typeof evaluated);
+                    } catch (e) {
+                        console.log('undefined'); // Handle invalid input
+                    }
                 }
-                const input = prompt();
-                checkType(input);
+
+                rl.on('line', (input) => {
+                    checkType(input.trim());
+                    rl.close();
+                });
 
           - id: js-compare-numbers
             title: 'Compare Two Numbers'
@@ -1516,6 +1543,13 @@ courses:
                   expected_output: '99 is greater'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function compareNumbers(a, b) {
                     a = Number(a);
                     b = Number(b);
@@ -1523,8 +1557,12 @@ courses:
                     else if (b > a) console.log(`${b} is greater`);
                     else console.log("Both are equal");
                 }
-                const input = prompt().split(" ");
-                compareNumbers(input[0], input[1]);
+
+                rl.on('line', (input) => {
+                    const [a, b] = input.trim().split(" ");
+                    compareNumbers(a, b);
+                    rl.close();
+                });
 
           - id: js-swap-values
             title: 'Swap Two Variables Without Temp'
@@ -1550,6 +1588,13 @@ courses:
                   expected_output: '20 10'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function swap(a, b) {
                     a = Number(a);
                     b = Number(b);
@@ -1558,9 +1603,12 @@ courses:
                     a = a - b;
                     console.log(a + " " + b);
                 }
-                const input = prompt().split(" ");
-                swap(input[0], input[1]);
 
+                rl.on('line', (input) => {
+                    const [a, b] = input.trim().split(" ");
+                    swap(a, b);
+                    rl.close();
+                });
           - id: js-multiple-declarations
             title: 'Multiple Variable Declarations'
             description: Declare multiple variables and assign them different types, then print their values and types.
@@ -1623,14 +1671,24 @@ courses:
                   expected_output: 'Zero'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function checkSign(n) {
                     n = Number(n);
                     if (n > 0) console.log("Positive");
                     else if (n < 0) console.log("Negative");
                     else console.log("Zero");
                 }
-                const input = prompt();
-                checkSign(input);
+
+                rl.on('line', (input) => {
+                    checkSign(input.trim());
+                    rl.close();
+                });
 
           - id: js-even-numbers-loop
             title: 'Print Even Numbers Up to N'
@@ -1656,6 +1714,13 @@ courses:
                   expected_output: '2 4 6 8 10'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function printEvens(n) {
                     n = Number(n);
                     let result = [];
@@ -1664,9 +1729,11 @@ courses:
                     }
                     console.log(result.join(" "));
                 }
-                const input = prompt();
-                printEvens(input);
 
+                rl.on('line', (input) => {
+                    printEvens(input.trim());
+                    rl.close();
+                });
           - id: js-switch-day
             title: 'Day of the Week'
             description: Use switch-case to print the day of the week based on number input (1-7).
@@ -1693,6 +1760,13 @@ courses:
                   expected_output: 'Thursday'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function getDay(num) {
                     switch(Number(num)) {
                         case 1: console.log("Monday"); break;
@@ -1705,8 +1779,11 @@ courses:
                         default: console.log("Invalid");
                     }
                 }
-                const input = prompt();
-                getDay(input);
+
+                rl.on('line', (input) => {
+                    getDay(input.trim());
+                    rl.close();
+                });
 
           - id: js-sum-of-digits
             title: 'Sum of Digits Using Loop'
@@ -1734,6 +1811,13 @@ courses:
                   expected_output: '24'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function sumOfDigits(n) {
                     n = Number(n);
                     let sum = 0;
@@ -1743,8 +1827,11 @@ courses:
                     }
                     console.log(sum);
                 }
-                const input = prompt();
-                sumOfDigits(input);
+
+                rl.on('line', (input) => {
+                    sumOfDigits(input.trim());
+                    rl.close();
+                });
 
           - id: js-factorial-loop
             title: 'Factorial Using Loop'
@@ -1770,6 +1857,13 @@ courses:
                   expected_output: '5040'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function factorial(n) {
                     n = Number(n);
                     let fact = 1;
@@ -1778,8 +1872,11 @@ courses:
                     }
                     console.log(fact);
                 }
-                const input = prompt();
-                factorial(input);
+
+                rl.on('line', (input) => {
+                    factorial(input.trim());
+                    rl.close();
+                });
 
           - id: js-reverse-number
             title: 'Reverse a Number'
@@ -1805,6 +1902,13 @@ courses:
                   expected_output: '1'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function reverseNumber(n) {
                     n = Number(n);
                     let rev = 0;
@@ -1814,8 +1918,11 @@ courses:
                     }
                     console.log(rev);
                 }
-                const input = prompt();
-                reverseNumber(input);
+
+                rl.on('line', (input) => {
+                    reverseNumber(input.trim());
+                    rl.close();
+                });
 
 
       - topic_id: Reusable Code with Functions
@@ -1849,11 +1956,21 @@ courses:
                   expected_output: 'Hello, John!'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function greet(name) {
                     console.log(`Hello, ${name}!`);
                 }
-                const input = prompt();
-                greet(input);
+
+                rl.on('line', (input) => {
+                    greet(input.trim());
+                    rl.close();
+                });
 
           - id: js-add-two-numbers
             title: 'Add Two Numbers Using a Function'
@@ -1881,11 +1998,22 @@ courses:
                   expected_output: '300'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function addNumbers(a, b) {
                     console.log(Number(a) + Number(b));
                 }
-                const [a, b] = prompt().split(' ');
-                addNumbers(a, b);
+
+                rl.on('line', (input) => {
+                    const [a, b] = input.trim().split(' ');
+                    addNumbers(a, b);
+                    rl.close();
+                });
 
           - id: js-function-scope
             title: 'Function Scope Check'
@@ -1950,11 +2078,22 @@ courses:
                   expected_output: '14'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function multiply(a, b = 2) {
                     console.log(Number(a) * Number(b));
                 }
-                const input = prompt().split(" ");
-                multiply(...input);
+
+                rl.on('line', (input) => {
+                    const args = input.trim().split(" ");
+                    multiply(...args);
+                    rl.close();
+                });
 
           - id: js-recursive-factorial
             title: 'Recursive Factorial Function'
@@ -1980,13 +2119,23 @@ courses:
                   expected_output: '720'
             solution:
               content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
                 function factorial(n) {
                     n = Number(n);
                     if (n === 0) return 1;
                     return n * factorial(n - 1);
                 }
-                const input = prompt();
-                console.log(factorial(input));
+
+                rl.on('line', (input) => {
+                    console.log(factorial(input.trim()));
+                    rl.close();
+                });
 
           - id: js-closure-counter
             title: 'Closure Counter'

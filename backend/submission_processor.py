@@ -5,10 +5,23 @@ import uuid
 import subprocess
 from pathlib import Path
 import textwrap
+import shutil
+
 
 def process_code_submission(user_code, problem_id, hidden=True):
     current_dir = os.getcwd()
     submissions_dir = os.path.join(current_dir, "submissions")
+
+    # Empty the submissions folder if it exists
+    if os.path.exists(submissions_dir):
+        for item in os.listdir(submissions_dir):
+            item_path = os.path.join(submissions_dir, item)
+            if os.path.isdir(item_path):
+                shutil.rmtree(item_path)
+            else:
+                os.remove(item_path)
+    else:
+        os.makedirs(submissions_dir, exist_ok=True)
 
     submission_id = str(uuid.uuid4())
     
@@ -192,7 +205,7 @@ def process_code_submission(user_code, problem_id, hidden=True):
                                 if error_data.get("error_type") == "AssertionError":
                                     test_result["expected"] = error_data["expected"]
                                     test_result["actual"] = error_data["actual"]
-                                    test_result["error"] = "AssertionError"
+                                    test_result["error"] = "Wrong Answer"
                             except json.JSONDecodeError:
                                 test_result["error"] = json_str
             with open(results_file, "w") as f:

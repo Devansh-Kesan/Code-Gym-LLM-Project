@@ -39,5 +39,5 @@ if __name__ == "__main__":
     nums = list(map(int, input().split()))
     print(sum_of_list(nums))
 """
-    results = test_with_real_docker(problem_id,user_code)
+    results = test_with_real_docker(problem_id,user_code,True)
     
