@@ -8,6 +8,7 @@ from services.llm_hint import generate_progressive_hints
 from services.llm_error import generate_error_explanation
 from services.llm_testcases import generate_test_cases
 from services.llm_review import generate_code_review
+from services.llm_scaffold import scaffold_question
 from services.pydantic_models import LLMRequest
 from test_submission_function import test_with_real_docker
 
@@ -143,6 +144,16 @@ def get_code_review(request: LLMRequest):
         user_code=request.code
     )
     return {"review": review}
+
+@app.post("/llm/question-scaffold")
+def get_question_scaffolding(request: LLMRequest):
+    scaffold = scaffold_question(
+        question_title=request.title,
+        question_description=request.description,
+        user_code=request.code
+    )
+    return {"scaffold_data": scaffold}
+
 
 class RunCodeRequest(BaseModel):
     code: str

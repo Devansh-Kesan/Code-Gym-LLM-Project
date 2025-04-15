@@ -9,6 +9,7 @@ const codeEditorTextarea = document.getElementById('code-editor');
 const hintBtn = document.getElementById("hint-btn");
 const errorBtn = document.getElementById("error-btn");
 const reviewBtn = document.getElementById("review-btn");
+const scaffoldBtn = document.getElementById("scaffold-btn");
 const testBtn = document.getElementById("test-btn");
 const llmContent = document.getElementById("llm-content");
 const llmResponse = document.getElementById("llm-response");
@@ -67,7 +68,7 @@ async function initializeEditorPage() {
         codeMirror.setValue(problem.starter_code.content);
 
         // Test Cases
-        testCasesContainer.innerHTML = '<h3>Visible Test Caseasdass</h3>';
+        testCasesContainer.innerHTML = '<h3>Visible Test Cases</h3>';
         problem.test_cases.visible_cases.forEach((testCase, index) => {
             const div = document.createElement('div');
             div.className = 'test-case';
@@ -193,6 +194,34 @@ function setupCodeReviewFeature() {
         } catch (error) {
             llmContent.textContent = "Failed to review code. Please try again.";
             console.error("Error fetching review:", error);
+        }
+    });
+}
+
+function setupQuestionScaffoldFeature() {
+    if (!scaffoldBtn) return;
+    console.log("hai bhai hai")
+
+    scaffoldBtn.addEventListener("click", async () => {
+        const code = codeMirror.getValue();
+        const title = problemTitle.textContent;
+        const description = problemDescription.textContent;
+
+        llmContent.textContent = "Generating scaffold...";
+        llmResponse.style.display = "block";
+
+        try {
+            const response = await fetch("http://localhost:8000/llm/question-scaffold", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, description, code })
+            });
+
+            const data = await response.json();
+            llmContent.textContent = data.scaffold_data;
+        } catch (error) {
+            llmContent.textContent = "Failed to scaffold question. Please try again.";
+            console.error("Error fetching scaffold:", error);
         }
     });
 }
@@ -330,6 +359,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         setupErrorExplanationFeature();         // wire Error feature 
         setupTestCaseGenerationFeature();              // wire Test Case feature 
         setupCodeReviewFeature();               // wire Code Review feature 
+        setupQuestionScaffoldFeature();
         Submit();
         runCode();
     });
