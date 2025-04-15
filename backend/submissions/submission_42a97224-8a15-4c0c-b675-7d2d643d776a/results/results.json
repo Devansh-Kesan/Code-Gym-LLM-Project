@@ -1,0 +1,33 @@
+{
+  "passed": 0,
+  "failed": 3,
+  "total": 3,
+  "test_results": [
+    {
+      "test_id": "visible_0",
+      "passed": false,
+      "is_hidden": false,
+      "error": "Wrong Answer",
+      "expected": "Monday",
+      "actual": "Monday1"
+    },
+    {
+      "test_id": "visible_1",
+      "passed": false,
+      "is_hidden": false,
+      "error": "Wrong Answer",
+      "expected": "Sunday",
+      "actual": "Sunday1"
+    },
+    {
+      "test_id": "hidden_0",
+      "passed": false,
+      "is_hidden": true,
+      "error": "Wrong Answer",
+      "expected": "Thursday",
+      "actual": "Thursday1"
+    }
+  ],
+  "problem_id": "js-switch-day",
+  "problem_title": "Day of the Week"
+}

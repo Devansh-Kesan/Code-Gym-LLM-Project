@@ -10,9 +10,9 @@ from services.llm_testcases import generate_test_cases
 from services.llm_review import generate_code_review
 from services.llm_scaffold import scaffold_question
 from services.pydantic_models import LLMRequest
-from test_submission_function import test_with_real_docker
 
-from js_test import test_with_real_docker_js
+from submission_processor import process_code_submission_flow
+from js_submission_processor import process_js_submission_flow
 
 import yaml
 import os
@@ -161,104 +161,41 @@ class RunCodeRequest(BaseModel):
 
 @app.post("/run-code")
 def run_user_code(request:RunCodeRequest):
-    code=request.code
-    question_id=request.question_id
-    result = test_with_real_docker(question_id,code,False)
-    # print("??????????????????????????????????????????????")
-    # print(result)
-    # print("??????????????????????????????????????????????")
-
+    result = process_code_submission_flow(
+        user_code=request.code,
+        problem_id=request.question_id,
+        hidden=False
+    )
     return result
-
-    #sample output : 
-    # {
-    # "passed": 2,
-    # "failed": 0,
-    # "total": 2,
-    # "test_results": [
-    #     {
-    #     "test_name": "test_visible_0.py",
-    #     "passed": true,
-    #     "is_hidden": false,
-    #     "error": ""
-    #     },
-    #     {
-    #     "test_name": "test_visible_1.py",
-    #     "passed": true,
-    #     "is_hidden": false,
-    #     "error": ""
-    #     }
-    # ]
-    # }
 
 
 @app.post("/run-code-all")
 def run_user_code(request:RunCodeRequest):
-    code=request.code
-    question_id=request.question_id
-    
-    result = test_with_real_docker(question_id,code,True)
-
-    # print("??????????????????????????????????????????????")
-    # print(result)
-    # print("??????????????????????????????????????????????")
-
+    result = process_code_submission_flow(
+        user_code=request.code,
+        problem_id=request.question_id,
+        hidden=True
+    )
     return result
-
-    #sample output
-    # {
-    # "passed": 0,
-    # "failed": 4,
-    # "total": 4,
-    # "test_results": [
-    #     {
-    #     "test_name": "test_visible_0.py",
-    #     "passed": false,
-    #     "is_hidden": false,
-    #     "error": "AssertionError",
-    #     "expected": "15",
-    #     "actual": "1\n1"
-    #     },
-    #     {
-    #     "test_name": "test_visible_1.py",
-    #     "passed": false,
-    #     "is_hidden": false,
-    #     "error": "AssertionError",
-    #     "expected": "60",
-    #     "actual": "1\n10"
-    #     },
-    #     {
-    #     "test_name": "test_hidden_1.py",
-    #     "passed": false,
-    #     "is_hidden": true,
-    #     "error": "Hidden test case failed"
-    #     },
-    #     {
-    #     "test_name": "test_hidden_0.py",
-    #     "passed": false,
-    #     "is_hidden": true,
-    #     "error": "Hidden test case failed"
-    #     }
-    # ]
-    # }
 
 
 @app.post("/run-code-js")
 def run_user_code(request:RunCodeRequest):
-    code=request.code
-    question_id=request.question_id
-    result = test_with_real_docker_js(question_id,code,False)
-
+    result = process_js_submission_flow(
+        user_code=request.code,
+        problem_id=request.question_id,
+        hidden=False
+    )
     return result
+
 
 @app.post("/run-code-all-js")
 def run_user_code(request:RunCodeRequest):
-    code=request.code
-    question_id=request.question_id
-    
-    result = test_with_real_docker_js(question_id,code,True)
-
-    print(result)
+    result = process_js_submission_flow(
+        user_code=request.code,
+        problem_id=request.question_id,
+        hidden=True
+    )
     return result
 
 
