@@ -211,11 +211,13 @@ async function runCode(){
         // const topicId = params.get("topic_id");
         // const question_id = params.get("question_id"); 
 
+        const endpoint = courseId.includes("python") ? "run-code" : "run-code-js";
+        console.log(endpoint)
         resultContent.textContent="Running Code...";
         resultContainer.style.display="block";
 
         try{
-            const response= await fetch("http://localhost:8000/run-code",{
+            const response= await fetch(`http://localhost:8000/${endpoint}`,{
                 method:"POST",
                 headers:{ "Content-Type":"application/json" },
                 body:JSON.stringify({code:code,question_id:question_id}),
@@ -227,16 +229,27 @@ async function runCode(){
             console.log(data);
 
             let resultText = "";
-            if (data.test_results) {
-                data.test_results.forEach(test => {
-                    if (!test.passed) {
-                        resultText += `Test case: ${test.test_name}<br>Error: ${test.error}<br><br>`;
-                    }
-                });
-            }
-
-            if (resultText === "") {
-                resultText = "All visible test cases passed.";
+            if (courseId.includes("python")) {
+                if (data.test_results) {
+                    data.test_results.forEach(test => {
+                        if (!test.passed) {
+                            resultText += `Test case: ${test.test_name}<br>Error: ${test.error}<br>Expected: ${test.expected}<br>Actual: ${test.actual}<br><br>`;
+                        }
+                    });
+                }
+                if (resultText === "") {
+                    resultText = "All visible test cases passed.";
+                }
+            } else if (courseId.includes("javascript")) {
+                if (data.passed === data.total && data.total > 0) {
+                    resultText = "Accepted! All test cases passed";
+                } else if (data.test_results) {
+                    data.test_results.forEach(test => {
+                        if (!test.passed) {
+                            resultText += `Test Case: ${test.test_id}<br>Error: ${test.error}<br>Expected: ${test.expected}<br>Actual: ${test.actual}<br><br>`;
+                        }
+                    });
+                }
             }
 
             // resultContent.textContent = resultText; // Corrected to resultContent
@@ -257,37 +270,48 @@ async function Submit() {
     SubBtn.addEventListener("click",async ()=>{
         const code=codeMirror.getValue();
 
+        const endpoint = courseId.includes("python") ? "run-code-all" : "run-code-all-js";
         resultContent.textContent="Running Code...";
         resultContainer.style.display="block";
 
         try{
-            const response=await fetch("http://localhost:8000/run-code-all",{
+            const response=await fetch(`http://localhost:8000/${endpoint}`,{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({code:code,question_id:question_id})
             });
 
             const data=await response.json();
-            console.log("hello")
+            // console.log("hello")
             console.log(data);
 
-            let resultText="";
-            if (data.total === data.passed){
-                resultText="Accepted! All test cases passed";
-            }else{
-                data.test_results.forEach(test => {
-                    if (!test.passed) {
-                        resultText += `Test case: ${test.test_name}<br>Error: ${test.error}`;
+            let resultText = "";
+            if (courseId.includes("python")) {
+                if (data.total === data.passed) {
+                    resultText = "Accepted! All test cases passed";
+                } else {
+                    data.test_results.forEach(test => {
+                        if (!test.passed) {
+                            resultText += `Test case: ${test.test_name}<br>Error: ${test.error}`;
+                            resultText += `<br><br>`;
+                        }
+                    });
+                    if (resultText === "") {
+                        resultText = "Some issue occured";
                     }
-                    if (test.expected) {
-                        resultText += `<br>Expected: ${test.expected}`;
-                    }
-                    if (test.actual) {
-                        resultText += `<br>Actual: ${test.actual}`;
-                    }
-                    resultText += `<br><br>`;
-                });
+                }
+            }else if (courseId.includes("javascript")) {
+                if (data.passed === data.total && data.total > 0) {
+                    resultText = "Accepted! All test cases passed";
+                } else if (data.test_results) {
+                    data.test_results.forEach(test => {
+                        if (!test.passed) {
+                            resultText += `Test Case: ${test.test_id}<br>Error: ${test.error}<br><br>`;
+                        }
+                    });
+                }
             }
+
             // resultContent.textContent = resultText; 
             resultContent.innerHTML = resultText; 
             console.log("done")
@@ -298,8 +322,7 @@ async function Submit() {
         }
 
     })
-}
-
+}       
 
 document.addEventListener('DOMContentLoaded', async () => {
         initializeEditorPage();
