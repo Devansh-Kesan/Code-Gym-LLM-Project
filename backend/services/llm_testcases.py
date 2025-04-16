@@ -1,36 +1,54 @@
 from .query_llm import chat_with_llm
+import mlflow
 
 def generate_test_cases(question_title: str, question_description: str, user_code: str) -> str:
-    prompt = f"""
-    You are a Python testing expert.
+    with mlflow.start_run(run_name="LLM_Feature: Generate Test Cases"):
+        # Log key parameters
+        mlflow.log_param("feature", "generate_test_cases")
+        mlflow.log_param("question_title", question_title)
 
-    PROBLEM:
-    Title: {question_title}
-    Description: {question_description}
+        # Log input artifacts
+        mlflow.log_text(question_description, "question_description.txt")
+        mlflow.log_text(user_code, "user_code.py")
 
-    STUDENT CODE:
-    {user_code}
+        # Prompt for LLM
+        prompt = f"""
+        You are a Python testing expert.
 
-    TASK:
-    Generate exactly 2-3 additional test cases focusing on edge cases and performance issues.
-    Follow the given format strictly. Don't give any extra explanations.
+        PROBLEM:
+        Title: {question_title}
+        Description: {question_description}
 
-    FORMAT (use exactly this format with no additional explanations):
+        STUDENT CODE:
+        {user_code}
 
-    TEST CASE 1:
-    Input: [provide input]
-    Expected Output: [provide expected output]
-    Focus: [one brief phrase describing what this test checks]
+        TASK:
+        Generate exactly 2-3 additional test cases focusing on edge cases and performance issues.
+        Follow the given format strictly. Don't give any extra explanations.
 
-    TEST CASE 2:
-    Input: [provide input]
-    Expected Output: [provide expected output]
-    Focus: [one brief phrase describing what this test checks]
+        FORMAT (use exactly this format with no additional explanations):
 
-    TEST CASE 3 (optional):
-    Input: [provide input]
-    Expected Output: [provide expected output]
-    Focus: [one brief phrase describing what this test checks]
-    """
-    response = chat_with_llm(prompt)
-    return response
+        TEST CASE 1:
+        Input: [provide input]
+        Expected Output: [provide expected output]
+        Focus: [one brief phrase describing what this test checks]
+
+        TEST CASE 2:
+        Input: [provide input]
+        Expected Output: [provide expected output]
+        Focus: [one brief phrase describing what this test checks]
+
+        TEST CASE 3 (optional):
+        Input: [provide input]
+        Expected Output: [provide expected output]
+        Focus: [one brief phrase describing what this test checks]
+        """
+
+        # LLM interaction
+        response = chat_with_llm(prompt)
+
+        # Log the output
+        mlflow.log_text(response, "llm_generated_test_cases.txt")
+        mlflow.log_metric("response_length", len(response))
+
+        return response

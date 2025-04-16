@@ -1,0 +1,23 @@
+{
+  "passed": 1,
+  "failed": 1,
+  "total": 2,
+  "test_results": [
+    {
+      "test_name": "test_visible_0.py",
+      "passed": false,
+      "is_hidden": false,
+      "error": "Wrong Answer",
+      "expected": "Positive",
+      "actual": "Negative"
+    },
+    {
+      "test_name": "test_visible_1.py",
+      "passed": true,
+      "is_hidden": false,
+      "error": ""
+    }
+  ],
+  "problem_id": "number-type",
+  "problem_title": "Positive, Negative or Zero"
+}
