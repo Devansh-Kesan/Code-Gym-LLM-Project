@@ -1,3 +1,6 @@
+import os
+import json
+from pathlib import Path
 # backend/main.py
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -61,6 +64,31 @@ def load_config(path="config.yaml"):
 load_config()
 # print("CCD",courses_data)
 
+def get_latest_submission_error():
+    # Path to the submissions directory
+    submissions_dir = Path("submissions")
+    
+    # Find all submission folders (assuming they start with 'submit')
+    submission_folders = [f for f in submissions_dir.iterdir() 
+                         if f.is_dir() and f.name.startswith("submission")]
+    
+    if not submission_folders:
+        return None  # No submissions found
+    
+    # Get the most recent submission (by modification time)
+    latest_submission = max(submission_folders, key=os.path.getmtime)
+    
+    # Path to the results.json file
+    results_file = latest_submission / "results" / "results.json"
+    
+    if not results_file.exists():
+        return None  # results.json doesn't exist
+    
+    # Load and return the error from the JSON file
+    with open(results_file, 'r') as f:
+        results_data = json.load(f)
+        return results_data# Assuming error is stored in 'error' key
+
 i=0
 for k,v in questions_data.items():
     i+=1
@@ -119,7 +147,21 @@ def get_hint(request: LLMRequest):
 
 @app.post("/llm/explain-error")
 def get_error_explanation(request: LLMRequest):
+    error = get_latest_submission_error()
+    p = []
+    if not error:
+        return {"explanations":"Please run the code at least once to see the error and explanations."}
+    if error["problem_title"]==request.title:
+        ft = questions_data[error["problem_id"]]["test_cases"]["visible_cases"]
+        for j,k in zip(ft,error["test_results"]):
+            if not k["passed"]:
+                k["input"] = j["input"]
+                p.append(k)
+    else:
+        return {"explanations":"Please run the code at least once to see the error and explanations."}
+    
     explanations = generate_error_explanation(
+        error_list = p,
         question_title=request.title,
         question_description=request.description,
         user_code=request.code
@@ -198,6 +240,9 @@ def run_user_code(request:RunCodeRequest):
     )
     return result
 
-
-
-    
+# error_message = get_latest_submission_error()
+# if error_message:
+#     print("Found error:", error_message)
+#     # Use error_message as input to your LLM
+# else:
+#     print("No error found or no submissions available")

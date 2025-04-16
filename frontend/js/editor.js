@@ -200,7 +200,6 @@ function setupCodeReviewFeature() {
 
 function setupQuestionScaffoldFeature() {
     if (!scaffoldBtn) return;
-    console.log("hai bhai hai")
 
     scaffoldBtn.addEventListener("click", async () => {
         const code = codeMirror.getValue();
