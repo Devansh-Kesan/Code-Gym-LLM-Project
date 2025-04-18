@@ -1,11 +1,16 @@
-from .query_llm import chat_with_llm
+"""LLM Review Module."""
+
 import mlflow
 from prefect import flow, task
-from typing import Dict
+
+from .query_llm import chat_with_llm
+
 
 @task(name="prepare_review_prompt")
-def prepare_prompt(question_title: str, question_description: str, user_code: str) -> str:
-    prompt = f"""
+def prepare_prompt(question_title: str,
+                   question_description: str, user_code: str) -> str:
+    """Prepre prompt for the LLM."""
+    return f"""
     You are a code reviewer evaluating student code.
 
     PROBLEM:
@@ -26,13 +31,14 @@ def prepare_prompt(question_title: str, question_description: str, user_code: st
 
     COMPLEXITY: [Time and Space complexity of the solution in Big O-notation]
 
-    APPROACH: [Optimal or suboptimal, if suboptimal briefly suggest a better approach and don't give extra unrelated suggestions]
+    APPROACH: [Optimal or suboptimal, if suboptimal briefly suggest
+    a better approach and don't give extra unrelated suggestions]
     """
-    return prompt
 
 @task(name="log_review_metrics")
-def log_mlflow_data(question_title: str, question_description: str, 
+def log_mlflow_data(question_title: str, question_description: str,
                     user_code: str, response: str) -> None:
+    """Log mlflow data."""
     mlflow.log_param("feature", "generate_code_review")
     mlflow.log_param("question_title", question_title)
     mlflow.log_text(question_description, "question_description.txt")
@@ -41,15 +47,17 @@ def log_mlflow_data(question_title: str, question_description: str,
     mlflow.log_metric("response_length", len(response))
 
 @flow(name="Generate Code Review")
-def generate_code_review(question_title: str, question_description: str, user_code: str) -> str:
+def generate_code_review(question_title: str,
+                        question_description: str, user_code: str) -> str:
+    """generate_code_review."""
     with mlflow.start_run(run_name="LLM_Feature: Code Review"):
         # Prepare the prompt
         prompt = prepare_prompt(question_title, question_description, user_code)
-        
+
         # Get LLM response
         response = chat_with_llm(prompt)
-        
+
         # Log MLflow metrics and data
         log_mlflow_data(question_title, question_description, user_code, response)
-        
+
         return response

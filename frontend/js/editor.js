@@ -4,6 +4,8 @@ const problemCourse = document.querySelector('#course-name');
 const problemTopic = document.querySelector('#topic-name');
 const problemComplexity = document.querySelector('#complexity');
 const problemDescription = document.querySelector('.problem-description');
+const inputDescription = document.querySelector('#input-description-content')
+const inputConstraints = document.querySelector('#input-constraints-content')
 const testCasesContainer = document.querySelector('.test-cases');
 const codeEditorTextarea = document.getElementById('code-editor');
 const hintBtn = document.getElementById("hint-btn");
@@ -65,6 +67,8 @@ async function initializeEditorPage() {
         problemCourse.textContent = course.title;
         problemTopic.textContent = topic.topic_title;
         problemComplexity.textContent = problem.complexity;
+        inputDescription.textContent = problem.input
+        inputConstraints.textContent = problem.input_constraints
         codeMirror.setValue(problem.starter_code.content);
 
         // Test Cases

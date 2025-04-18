@@ -12,7 +12,7 @@ from services.llm_error import generate_error_explanation
 from services.llm_testcases import generate_test_cases
 from services.llm_review import generate_code_review
 from services.llm_scaffold import scaffold_question
-from services.pydantic_models import LLMRequest
+from services.pydantic_models import LLMRequest,RunCodeRequest
 
 from submission_processor import process_code_submission_flow
 from js_submission_processor import process_js_submission_flow
@@ -195,11 +195,6 @@ def get_question_scaffolding(request: LLMRequest):
         user_code=request.code
     )
     return {"scaffold_data": scaffold}
-
-
-class RunCodeRequest(BaseModel):
-    code: str
-    question_id: str
 
 @app.post("/run-code")
 def run_user_code(request:RunCodeRequest):

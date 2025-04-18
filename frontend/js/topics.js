@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.className = "card";
         card.innerHTML = `
           <h3>${topic.topic_title}</h3>
-          <p>${topic.short_description}</p>
         `;
         card.onclick = () => {
           window.location.href = `questions.html?course_id=${courseId}&topic_id=${topic.topic_id}`;

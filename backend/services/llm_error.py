@@ -1,8 +1,15 @@
-from .query_llm import chat_with_llm
-from typing import List
+"""LLM Error Explain Model."""
+
 import mlflow
 
-def generate_error_explanation(error_list: List[dict], question_title: str, question_description: str, user_code: str) -> str:
+from .query_llm import chat_with_llm
+
+
+def generate_error_explanation(error_list: list[dict],
+                               question_title: str,
+                               question_description: str,
+                               user_code: str) -> str:
+    """Generate error explanation."""
     with mlflow.start_run():
         # Log input parameters
         mlflow.log_param("feature", "explain_error")
@@ -27,9 +34,12 @@ def generate_error_explanation(error_list: List[dict], question_title: str, ques
 
         "Errors":
         {error_list}
-        
+
         TASK:
-        Explain the errors according to the testcases occurred for the question and also identify and explain any runtime or compile-time errors in the code. Focus only on explaining what the errors mean in simple terms.
+        Explain the errors according to the testcases occurred for
+        the question and also identify and
+        explain any runtime or compile-time errors in the code.
+        Focus only on explaining what the errors mean in simple terms.
 
         FORMAT (use exactly this format):
 
@@ -41,7 +51,7 @@ def generate_error_explanation(error_list: List[dict], question_title: str, ques
 
         Cause
         [1-2 sentences identifying the specific part of code causing the error]
-        
+
         Fix
         [Brief fix to correct the errors. Don't give the code, just give an idea.]
 
