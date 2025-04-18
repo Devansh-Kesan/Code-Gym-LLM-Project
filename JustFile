@@ -34,11 +34,11 @@ start-all:
   @echo "Checking and freeing up required ports..."
   # Kill processes on ports 4200, 8000, and 9000 if occupied
   uv run bash -c "lsof -ti:4200 | xargs --no-run-if-empty kill -9"
-  uv run bash -c "lsof -ti:8000 | xargs --no-run-if-empty kill -9"
+  uv run bash -c "lsof -ti:8080 | xargs --no-run-if-empty kill -9"
   uv run bash -c "lsof -ti:9000 | xargs --no-run-if-empty kill -9"
   @echo "Starting all servers in background..."
   uv run prefect server start > prefect_server.log 2>&1 &
-  cd backend && uv run fastapi run main.py > ../backend_server.log 2>&1 &
+  cd backend && uv run uvicorn main:app --port 8080 --reload > ../backend_server.log 2>&1 &
   uv run python -m http.server 9000 > frontend_server.log 2>&1 &
   @echo "All servers started! Check log files."
 
