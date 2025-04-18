@@ -55,13 +55,13 @@ def setup_directories(submission_id: str):
 @task(name="write_js_code")
 def write_user_code(code_dir: Path, user_code: str):
     code_file = code_dir / "solution.js"
-    with open(code_file, "w") as f:
+    with open(code_file, "w", encoding="utf-8") as f:
         f.write(user_code)
 
 @task(name="load_js_problem_config")
 def load_problem_config(problem_id: str):
     config_path = Path(__file__).parent / "config.yaml"
-    with open(config_path, "r") as f:
+    with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
     
     for course in config.get("courses", []):
@@ -128,7 +128,7 @@ def generate_test_files(tests_dir: Path, test_cases: list, visible_cases_count: 
         """)
         
         test_file = tests_dir / f"test_{test_id}.test.js"
-        with open(test_file, "w") as f:
+        with open(test_file, "w", encoding="utf-8") as f:
             f.write(test_content)
 
 @task(name="run_js_tests")
@@ -141,7 +141,7 @@ def run_tests(code_dir: Path, tests_dir: Path, results_dir: Path):
         "code-gym-tester-js"
     ]
 
-    process = subprocess.run(cmd, capture_output=True, text=True)
+    process = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
     return process
 
 @task(name="process_js_results")
@@ -155,11 +155,11 @@ def process_results(results_dir: Path, test_cases: list, problem_id: str, proble
             "failed": len(test_cases),
             "total": len(test_cases)
         }
-        with open(results_file, "w") as f:
+        with open(results_file, "w", encoding="utf-8") as f:
             json.dump(error_result, f, indent=2)
         return error_result
 
-    with open(results_file, "r") as f:
+    with open(results_file, "r", encoding="utf-8") as f:
         results = json.load(f)
 
     processed_results = {
@@ -173,14 +173,12 @@ def process_results(results_dir: Path, test_cases: list, problem_id: str, proble
 
     for test_result in results.get("testResults", []):
         for assertion in test_result.get("assertionResults", []):
-            test_path = test_result.get("name", "")
-            test_file_name = os.path.basename(test_path)
-            test_id = test_file_name.replace("test_", "").replace(".test.js", "")
-            
-            is_hidden = test_id.startswith("hidden_")
+            test_path = assertion.get("ancestorTitles", "")[0]
+            test_file_name = test_path
+            is_hidden = "hidden_" in test_file_name
             
             test_info = {
-                "test_id": test_id,
+                "test_id": test_file_name,
                 "passed": assertion["status"] == "passed",
                 "is_hidden": is_hidden
             }
@@ -200,7 +198,7 @@ def process_results(results_dir: Path, test_cases: list, problem_id: str, proble
             
             processed_results["test_results"].append(test_info)
 
-    with open(results_file, "w") as f:
+    with open(results_file, "w", encoding="utf-8") as f:
         json.dump(processed_results, f, indent=2)
         
     return processed_results

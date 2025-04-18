@@ -1,0 +1,24 @@
+{
+  "passed": 3,
+  "failed": 0,
+  "total": 3,
+  "test_results": [
+    {
+      "test_id": "Test hidden_0",
+      "passed": true,
+      "is_hidden": true
+    },
+    {
+      "test_id": "Test visible_0",
+      "passed": true,
+      "is_hidden": false
+    },
+    {
+      "test_id": "Test visible_1",
+      "passed": true,
+      "is_hidden": false
+    }
+  ],
+  "problem_id": "js-add-two-numbers",
+  "problem_title": "Add Two Numbers"
+}
