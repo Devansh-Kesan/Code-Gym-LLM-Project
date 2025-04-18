@@ -1,30 +1,32 @@
-# js_test.py
-import os
+"""Test module for JavaScript code submissions using Docker."""
+
 import sys
 from pathlib import Path
 
 # Import the process_code_submission function for JavaScript
 # Adjust the import path if necessary to match your project structure
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 from js_submission_processor import process_code_submission
 
-def test_with_real_docker_js(problem_id, user_code, hidden):
-    """
-    Test the process_code_submission function with a real Docker container for JavaScript.
-    """
-    print("Testing process_code_submission function with Docker for JavaScript...")
-    
-    try:
-        # Call the actual function
-        results = process_code_submission(user_code, problem_id,hidden)
-        
-        return results
-        
-    except Exception as e:
-        print(f"Error testing function: {str(e)}")
-        return None
 
-# Run the test
+def test_with_real_docker_js(
+    problem_id: str,
+    user_code: str,
+    *,
+    hidden: bool,
+) -> dict | None:
+    """Test process_code_submission function with real Docker container for JS."""
+    try:
+        return process_code_submission(
+            user_code=user_code,
+            problem_id=problem_id,
+            hidden=hidden,
+        )
+    except RuntimeError as exc:
+        error_message = f"Error testing function: {exc!s}"
+        raise RuntimeError(error_message) from exc
+
+
 if __name__ == "__main__":
     problem_id = "js-switch-day"
     user_code = """
@@ -52,8 +54,9 @@ rl.question("", (input) => {
   getDay(input);
   rl.close();
 });
-
-
 """
-    results = test_with_real_docker_js(problem_id, user_code, True)
-    print("Test Results:", results)
+    results = test_with_real_docker_js(
+        problem_id=problem_id,
+        user_code=user_code,
+        hidden=True,
+    )

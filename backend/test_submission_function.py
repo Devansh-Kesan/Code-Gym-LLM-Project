@@ -1,30 +1,49 @@
-# test_submission_function.py
-import os
+"""Test submission function with Docker container."""
+
 import sys
 from pathlib import Path
+from typing import Any
 
 # Import the process_code_submission function
 # Adjust the import path if necessary to match your project structure
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 from submission_processor import process_code_submission
 
-def test_with_real_docker(problem_id, user_code, hidden):
+
+def test_with_real_docker(
+    problem_id: str,
+    user_code: str,
+    *,  # Force keyword arguments after this point
+    hidden: bool,
+) -> dict[str, Any] | None:
+    """Test the process_code_submission function with a real Docker container.
+
+    Args:
+        problem_id: The ID of the problem being tested
+        user_code: The user's code to be tested
+        hidden: Whether to include hidden test cases
+
+    Returns:
+        Dictionary with test results or None if an error occurred
+
     """
-    Test the process_code_submission function with a real Docker container.
-    """
-    print("Testing process_code_submission function with Docker...")
-    
     try:
         # Call the actual function
-        results = process_code_submission(user_code, problem_id, hidden)
-        
-        return results
-        
-    except Exception as e:
-        print(f"Error testing function: {str(e)}")
-        return None
+        return process_code_submission(
+            user_code=user_code,
+            problem_id=problem_id,
+            hidden=hidden,
+        )
 
-# Run the test
+    except (ValueError, RuntimeError) as exc:
+        return {
+            "error": f"Error testing function: {exc!s}",
+            "passed": 0,
+            "failed": 0,
+            "total": 0,
+        }
+
+
 if __name__ == "__main__":
     problem_id = "sum-of-list"
     user_code = """
@@ -39,5 +58,8 @@ if __name__ == "__main__":
     nums = list(map(int, input().split()))
     print(sum_of_list(nums))
 """
-    results = test_with_real_docker(problem_id,user_code,True)
-    
+    results = test_with_real_docker(
+        problem_id=problem_id,
+        user_code=user_code,
+        hidden=True,
+    )
