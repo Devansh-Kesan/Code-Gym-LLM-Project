@@ -508,7 +508,7 @@ courses:
                   explanation: '0th line is always 1'
                 - input: '2'
                   expected_output: "1 2 1"
-                  explanation: '2nd line of Pascal's Triangle'
+                  explanation: '2nd line of Pascals Triangle'
               hidden: true
               hidden_cases:
                 - input: '4'
@@ -2653,4 +2653,3 @@ courses:
                 const counter = createCounter();
                 console.log(counter());
                 console.log(counter());
-
