@@ -343,10 +343,20 @@ async function Submit() {
                 if (data.total === data.passed) {
                     resultText = "<div class='all-passed'>Accepted! All test cases passed</div>";
                 } else {
+                    let testNumber_hidden=0;
+                    let testNumber_visible=0;
                     data.test_results.forEach((test, index) => {
-                        const testNumber = index + 1;
+                        let formattedTestName ="";
                         const visibility = test.is_hidden ? "hidden" : "visible";
-                        const formattedTestName = `Test Case (${visibility}): ${testNumber}`;
+                        if (visibility=='hidden'){
+                            testNumber_hidden+=1;
+                            formattedTestName = `Test Case (${visibility}): ${testNumber_hidden}`;
+                        }
+                        else{
+                            testNumber_visible+=1;
+                            formattedTestName = `Test Case (${visibility}): ${testNumber_visible}`;
+                        }
+
 
                         if (!test.passed) {
                             resultText += `<div class="test-case failed">`;
