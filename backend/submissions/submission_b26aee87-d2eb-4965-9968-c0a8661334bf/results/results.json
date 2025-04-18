@@ -1,6 +1,6 @@
 {
-  "passed": 1,
-  "failed": 1,
+  "passed": 0,
+  "failed": 2,
   "total": 2,
   "test_results": [
     {
@@ -9,13 +9,15 @@
       "is_hidden": false,
       "error": "Wrong Answer",
       "expected": "Positive",
-      "actual": "Negative"
+      "actual": "Neg\nNone"
     },
     {
       "test_name": "test_visible_1.py",
-      "passed": true,
+      "passed": false,
       "is_hidden": false,
-      "error": ""
+      "error": "Wrong Answer",
+      "expected": "Negative",
+      "actual": "Neg\nNone"
     }
   ],
   "problem_id": "number-type",

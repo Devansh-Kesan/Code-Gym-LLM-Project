@@ -1,4 +1,5 @@
 from prefect import flow, task
+import mlflow
 import os
 import uuid
 import subprocess
@@ -7,6 +8,27 @@ import json
 from pathlib import Path
 import textwrap
 import shutil
+
+@task(name="log_submission_metrics")
+def log_submission_metrics(results: dict, user_code: str, problem_id: str) -> None:
+    """Log metrics and artifacts for a submission"""
+    mlflow.log_param("problem_id", problem_id)
+    mlflow.log_param("total_tests", results["total"])
+    
+    # Log metrics
+    mlflow.log_metric("tests_passed", results["passed"])
+    mlflow.log_metric("tests_failed", results["failed"])
+    mlflow.log_metric("success_rate", results["passed"] / results["total"] if results["total"] > 0 else 0)
+    
+    # Log artifacts
+    mlflow.log_text(user_code, "submitted_code.js")
+    if "error" in results:
+        mlflow.log_text(results["error"], "error.txt")
+    
+    # Log test results
+    if "test_results" in results:
+        test_results_str = json.dumps(results["test_results"], indent=2)
+        mlflow.log_text(test_results_str, "test_results.json")
 
 @task(name="setup_js_directories")
 def setup_directories(submission_id: str):
@@ -183,32 +205,39 @@ def process_results(results_dir: Path, test_cases: list, problem_id: str, proble
         
     return processed_results
 
+# Modify the main flow to include MLflow logging
 @flow(name="process_js_submission")
 def process_js_submission_flow(user_code: str, problem_id: str, hidden: bool = False):
     try:
-        submission_id = str(uuid.uuid4())
-        
-        # Setup directories
-        code_dir, tests_dir, results_dir = setup_directories(submission_id)
-        
-        # Write user code
-        write_user_code(code_dir, user_code)
-        
-        # Load problem configuration
-        problem_config, problem_title = load_problem_config(problem_id)
-        
-        # Prepare test cases
-        test_cases, visible_cases_count = prepare_test_cases(problem_config, hidden)
-        
-        # Generate test files
-        generate_test_files(tests_dir, test_cases, visible_cases_count)
-        
-        # Run tests
-        run_tests(code_dir, tests_dir, results_dir)
-        
-        # Process results
-        return process_results(results_dir, test_cases, problem_id, problem_title)
-        
+        with mlflow.start_run(run_name=f"JS_Submission_{problem_id}"):
+            submission_id = str(uuid.uuid4())
+            
+            # Setup directories
+            code_dir, tests_dir, results_dir = setup_directories(submission_id)
+            
+            # Write user code
+            write_user_code(code_dir, user_code)
+            
+            # Load problem configuration
+            problem_config, problem_title = load_problem_config(problem_id)
+            
+            # Prepare test cases
+            test_cases, visible_cases_count = prepare_test_cases(problem_config, hidden)
+            
+            # Generate test files
+            generate_test_files(tests_dir, test_cases, visible_cases_count)
+            
+            # Run tests
+            process = run_tests(code_dir, tests_dir, results_dir)
+            
+            # Process results
+            results = process_results(results_dir, test_cases, problem_id, problem_title)
+            
+            # Log metrics and artifacts
+            log_submission_metrics(results, user_code, problem_id)
+            
+            return results
+            
     except Exception as e:
         error_result = {
             "error": f"Error processing submission: {str(e)}",
@@ -216,6 +245,9 @@ def process_js_submission_flow(user_code: str, problem_id: str, hidden: bool = F
             "failed": 0,
             "total": 0
         }
+        # Log error metrics
+        with mlflow.start_run(run_name=f"JS_Submission_Error_{problem_id}"):
+            log_submission_metrics(error_result, user_code, problem_id)
         return error_result
 
 if __name__ == "__main__":
