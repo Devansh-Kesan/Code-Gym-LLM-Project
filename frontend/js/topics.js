@@ -28,4 +28,3 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.innerHTML = "<p>Failed to load topics. Try again later.</p>";
     }
   });
-  

@@ -164,147 +164,157 @@ courses:
                     n = int(input())
                     print(fizz_buzz(n))
 
-          - id: multiplication-table
-            title: 'Multiplication Table'
+          - id: prime-checker
+            title: 'Prime Number Checker'
             description: |
-              Write a function that prints the multiplication table of a given number from 1 to 10.
-              Each line should be in the format: `n x i = result`.
+              Write a function that checks if a given number is prime and returns "Prime" or "Not Prime".
+              A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
             input: |
               A single integer n
             input_constraints: |
-              1 <= n <= 100
+              1 <= n <= 10^6
             complexity: medium
             points: 10
             time_limit_seconds: 10
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def print_table(n):
+                def check_prime(n):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
                     n = int(input())
-                    print_table(n)
+                    print(check_prime(n))
             test_cases:
               hidden: false
               visible_cases:
-                - input: '2'
-                  expected_output: "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20"
-                  explanation: 'Multiplication table from 1 to 10'
+                - input: '7'
+                  expected_output: "Prime"
+                  explanation: '7 has no divisors other than 1 and itself'
+                - input: '10'
+                  expected_output: "Not Prime"
+                  explanation: '10 is divisible by 2 and 5'
               hidden: true
               hidden_cases:
-                - input: '10'
-                  expected_output: "10 x 1 = 10\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100"
+                - input: '1'
+                  expected_output: "Not Prime"
+                - input: '2'
+                  expected_output: "Prime"
+                - input: '7919'
+                  expected_output: "Prime"
+                - input: '1000000'
+                  expected_output: "Not Prime"
             solution:
               content: |2-
-                def print_table(n):
-                    for i in range(1, 11):
-                        print(f"{n} x {i} = {n * i}")
+                def check_prime(n):
+                    if n <= 1:
+                        return "Not Prime"
+                    if n == 2:
+                        return "Prime"
+                    if n % 2 == 0:
+                        return "Not Prime"
+                    for i in range(3, int(n**0.5) + 1, 2):
+                        if n % i == 0:
+                            return "Not Prime"
+                    return "Prime"
 
                 if __name__ == "__main__":
                     n = int(input())
-                    print_table(n)
+                    print(check_prime(n))
 
-          - id: digit-mirror-pyramid
-            title: 'Digit Mirror Pyramid'
+          - id: sum-of-digits
+            title: 'Sum of Digits'
             description: |
-              Write a function to print a mirrored pyramid of digits of height `N`. Each row `i` should contain numbers in ascending order from 1 to i, followed by descending order back to 1.
-              The pyramid must be centered using spaces on the left for symmetry.
+              Write a function that calculates and returns the sum of all digits in a given positive integer.
             input: |
-              A single integer n representing the height of the pyramid
+              A single positive integer n
             input_constraints: |
-              1 <= n <= 20
-            complexity: hard
-            points: 20
+              1 <= n <= 10^9
+            complexity: medium
+            points: 10
             time_limit_seconds: 10
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def print_mirror_pyramid(n):
+                def sum_of_digits(n):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
                     n = int(input())
-                    print_mirror_pyramid(n)
+                    print(sum_of_digits(n))
             test_cases:
               hidden: false
               visible_cases:
-                - input: '3'
-                  expected_output: "  1\n 121\n12321"
-                  explanation: 'Pyramid with mirrored digits'
+                - input: '12345'
+                  expected_output: "15"
               hidden: true
               hidden_cases:
-                - input: '5'
-                  expected_output: "    1\n   121\n  12321\n 1234321\n123454321"
-                - input: '6'
-                  expected_output: "     1\n    121\n   12321\n  1234321\n 123454321\n12345654321"
+                - input: '999'
+                  expected_output: "27"
+                - input: '100000000'
+                  expected_output: "1"
             solution:
               content: |2-
-                def print_mirror_pyramid(n):
-                    for i in range(1, n + 1):
-                        # Leading spaces
-                        spaces = ' ' * (n - i)
-                        # Ascending numbers
-                        left = ''.join(str(j) for j in range(1, i + 1))
-                        # Descending numbers
-                        right = ''.join(str(j) for j in range(i - 1, 0, -1))
-                        print(spaces + left + right)
+                def sum_of_digits(n):
+                    total = 0
+                    while n > 0:
+                        total += n % 10
+                        n = n // 10
+                    return total
 
                 if __name__ == "__main__":
                     n = int(input())
-                    print_mirror_pyramid(n)
+                    print(sum_of_digits(n))
 
-
-          - id: diamond-printer
-            title: 'Diamond Shape Printer'
+          - id: binary-converter
+            title: 'Binary Converter'
             description: |
-              Write a function that prints a diamond made of stars (`*`) given an odd integer `N`. The widest row (middle) should contain `N` stars.
-              The output should be vertically symmetric and properly aligned with spaces.
+              Write a function that converts a given positive integer to its binary representation (as a string).
+              Do not use built-in conversion functions.
             input: |
-              A single odd integer n
+              A single positive integer n
             input_constraints: |
-              1 <= n <= 99  
-              n is always an odd number
+              1 <= n <= 10^6
             complexity: hard
             points: 15
             time_limit_seconds: 10
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def print_diamond(n):
+                def to_binary(n):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
                     n = int(input())
-                    print_diamond(n)
+                    print(to_binary(n))
             test_cases:
               hidden: false
               visible_cases:
-                - input: '3'
-                  expected_output: " *\n***\n *"
-                  explanation: 'Diamond with 3 rows, symmetrical'
+                - input: '10'
+                  expected_output: "1010"
               hidden: true
               hidden_cases:
-                - input: '5'
-                  expected_output: "  *\n ***\n*****\n ***\n  *"
-                - input: '7'
-                  expected_output: "   *\n  ***\n *****\n*******\n *****\n  ***\n   *"
+                - input: '1'
+                  expected_output: "1"
+                - input: '255'
+                  expected_output: "11111111"
             solution:
               content: |2-
-                def print_diamond(n):
-                    for i in range(1, n + 1, 2):
-                        spaces = (n - i) // 2
-                        print(' ' * spaces + '*' * i)
-                    for i in range(n - 2, 0, -2):
-                        spaces = (n - i) // 2
-                        print(' ' * spaces + '*' * i)
+                def to_binary(n):
+                    if n == 0:
+                        return "0"
+                    binary = []
+                    while n > 0:
+                        binary.append(str(n % 2))
+                        n = n // 2
+                    return ''.join(reversed(binary))
 
                 if __name__ == "__main__":
                     n = int(input())
-                    print_diamond(n)
+                    print(to_binary(n))
 
       - topic_id: functions_recursion
         topic_title: Functions and Recursion
@@ -465,58 +475,60 @@ courses:
                     num = int(input())
                     print(fibonacci(num))
 
-          - id: pascals-triangle
-            title: "Pascal's Triangle"
+          - id: nth-pascals-line
+            title: "Nth Line of Pascal's Triangle"
             description: |
-              Write a function that prints Pascal's Triangle up to height `n`. Each row contains values of binomial coefficients, where each number is the sum of the two numbers directly above it.
+              Write a function that returns the nth line (0-indexed) of Pascal's Triangle as a space-separated string.
+              Each number in Pascal's Triangle is the sum of the two numbers directly above it.
 
-              For example, for `n = 4`, the output would be:
-              ```
-              1
-              1 1
-              1 2 1
-              1 3 3 1
-              ```
-            input: A single integer n.
-            input_constraints: 1 <= n <= 10
+              Example:
+              For n = 3, the output should be "1 3 3 1" (the 3rd line)
+            input: |
+              A single integer n (0-indexed)
+            input_constraints: |
+              0 <= n <= 20
             complexity: hard
             points: 15
             time_limit_seconds: 10
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def print_pascals_triangle(n):
+                def nth_pascals_line(n):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    height = int(input())
-                    print_pascals_triangle(height)
+                    n = int(input())
+                    print(nth_pascals_line(n))
             test_cases:
               hidden: false
               visible_cases:
+                - input: '0'
+                  expected_output: "1"
+                  explanation: '0th line is always 1'
                 - input: '2'
-                  expected_output: "1\n1 1"
-                - input: '3'
-                  expected_output: "1\n1 1\n1 2 1"
+                  expected_output: "1 2 1"
+                  explanation: '2nd line of Pascal's Triangle'
               hidden: true
               hidden_cases:
+                - input: '4'
+                  expected_output: "1 4 6 4 1"
                 - input: '5'
-                  expected_output: "1\n1 1\n1 2 1\n1 3 3 1\n1 4 6 4 1"
+                  expected_output: "1 5 10 10 5 1"
+                - input: '7'
+                  expected_output: "1 7 21 35 35 21 7 1"
             solution:
               content: |2-
-                def print_pascals_triangle(n):
-                    for i in range(n):
-                        val = 1
-                        row = []
-                        for j in range(i + 1):
-                            row.append(str(val))
-                            val = val * (i - j) // (j + 1)
-                        print(" ".join(row))
+                def nth_pascals_line(n):
+                    line = [1]
+                    for k in range(1, n + 1):
+                        next_val = line[-1] * (n - k + 1) // k
+                        line.append(next_val)
+                    return ' '.join(map(str, line))
 
                 if __name__ == "__main__":
-                    height = int(input())
-                    print_pascals_triangle(height)
+                    n = int(input())
+                    print(nth_pascals_line(n))
 
           - id: is-palindrome-recursion
             title: 'Check Palindrome (Recursion)'
