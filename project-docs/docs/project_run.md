@@ -63,7 +63,7 @@ just start-prefect-server
 ```
 This will launch the Prefect UI, allowing you to interact with and monitor flows through a web-based interface.
 
-**Now open `http://localhost:9000` in your browser to view the running application.**
+**Now open `http://127.0.0.1:9000` in your browser to view the running application.**
 
 
 
