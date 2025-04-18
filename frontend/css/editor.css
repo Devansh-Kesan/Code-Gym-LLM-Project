@@ -50,10 +50,10 @@ body {
     border-radius: 6px;
     margin-bottom: 20px;
 }
-.test-cases {
+.test-cases-in {
     margin-bottom: 20px;
 }
-.test-case {
+.test-case-in {
     background-color: #f8f9fa;
     padding: 12px;
     border-radius: 6px;
@@ -181,4 +181,55 @@ button {
     border-radius: 4px;
     margin: 20px 0;
     border-left: 4px solid #e74c3c;
+}
+.test-case {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.failed {
+    background-color: #ffe0e0;
+    border-color: #ffb3b3;
+}
+
+.passed {
+    background-color: #e0ffe0;
+    border-color: #b3ffb3;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.expected {
+    color: blue;
+}
+
+.actual {
+    color: green;
+}
+
+.status {
+    font-weight: bold;
+    color: green;
+}
+
+.all-passed {
+    background-color: #ccffcc;
+    padding: 10px;
+    border: 1px solid #99ff99;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.error-message {
+    background-color: #ffdddd;
+    color: #cc0000;
+    padding: 10px;
+    border: 1px solid #ffaaaa;
+    border-radius: 5px;
+    font-weight: bold;
 }

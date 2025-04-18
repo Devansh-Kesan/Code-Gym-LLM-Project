@@ -1,6 +1,6 @@
 def check_number(n):
     # Your code here
-    print("Neg")
+    return "Negative"
 
 if __name__ == "__main__":
     num = int(input())

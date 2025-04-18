@@ -25,7 +25,7 @@ def log_mlflow_metrics(prompt: str, output: str, model: str) -> None:
     mlflow.log_metric("response_length", len(output))
 
 @flow(name="LLM Chat Flow")
-def chat_with_llm(prompt: str, model: str = "qwen2.5:7b") -> str:
+def chat_with_llm(prompt: str, model: str = "qwen2.5") -> str:
     """Main flow for chatting with LLM and logging results"""
     with mlflow.start_run(run_name="LLM_Model_Response", nested=True):
         # Query the model

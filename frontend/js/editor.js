@@ -231,13 +231,13 @@ const resultContainer=document.getElementById("results-container")
 const resultContent=document.getElementById("results-content")
 
 async function runCode(){
-    if (!runBtn) return;    
+    if (!runBtn) return;
     runBtn.addEventListener("click",async ()=>{
         const code=codeMirror.getValue();
         // const questionId=params.get("question_id");
         // const courseId = params.get("course_id");
         // const topicId = params.get("topic_id");
-        // const question_id = params.get("question_id"); 
+        // const question_id = params.get("question_id");
 
         const endpoint = courseId.includes("python") ? "run-code" : "run-code-js";
         console.log(endpoint)
@@ -251,7 +251,7 @@ async function runCode(){
                 body:JSON.stringify({code:code,question_id:question_id}),
                 // mode:"cors",
             });
-            
+
             // console.log("hello")
             const data = await response.json();
             console.log(data);
@@ -259,22 +259,47 @@ async function runCode(){
             let resultText = "";
             if (courseId.includes("python")) {
                 if (data.test_results) {
-                    data.test_results.forEach(test => {
+                    data.test_results.forEach((test, index) => {
+                        const testNumber = index + 1;
+                        const visibility = test.is_hidden ? "hidden" : "visible";
+                        const formattedTestName = `Test Case (${visibility}): ${testNumber}`;
+
                         if (!test.passed) {
-                            resultText += `Test case: ${test.test_name}<br>Error: ${test.error}<br>Expected: ${test.expected}<br>Actual: ${test.actual}<br><br>`;
+                            resultText += `<div class="test-case failed">`;
+                            resultText += `<strong>${formattedTestName}</strong><br>`;
+                            resultText += `<strong>Error:</strong> <span class="error">${test.error}</span><br>`;
+                            resultText += `<strong>Expected:</strong> <span class="expected">${test.expected}</span><br>`;
+                            resultText += `<strong>Actual:</strong> <span class="actual">${test.actual}</span><br><br>`;
+                            resultText += `</div>`;
+                        } else {
+                            resultText += `<div class="test-case passed">`;
+                            resultText += `<strong>${formattedTestName}</strong> - <span class="status">Passed</span><br><br>`;
+                            resultText += `</div>`;
                         }
                     });
                 }
                 if (resultText === "") {
-                    resultText = "All visible test cases passed.";
+                    resultText = "<div class='all-passed'>All visible test cases passed.</div>";
                 }
             } else if (courseId.includes("javascript")) {
                 if (data.passed === data.total && data.total > 0) {
-                    resultText = "Accepted! All test cases passed";
+                    resultText = "<div class='all-passed'>Accepted! All test cases passed</div>";
                 } else if (data.test_results) {
                     data.test_results.forEach(test => {
+                        const visibility = test.is_hidden ? "hidden" : "visible";
+                        const formattedTestId = `Test Case (${visibility}): ${test.test_id}`;
+
                         if (!test.passed) {
-                            resultText += `Test Case: ${test.test_id}<br>Error: ${test.error}<br>Expected: ${test.expected}<br>Actual: ${test.actual}<br><br>`;
+                            resultText += `<div class="test-case failed">`;
+                            resultText += `<strong>${formattedTestId}</strong><br>`;
+                            resultText += `<strong>Error:</strong> <span class="error">${test.error}</span><br>`;
+                            resultText += `<strong>Expected:</strong> <span class="expected">${test.expected}</span><br>`;
+                            resultText += `<strong>Actual:</strong> <span class="actual">${test.actual}</span><br><br>`;
+                            resultText += `</div>`;
+                        } else {
+                            resultText += `<div class="test-case passed">`;
+                            resultText += `<strong>${formattedTestId}</strong> - <span class="status">Passed</span><br><br>`;
+                            resultText += `</div>`;
                         }
                     });
                 }
@@ -283,10 +308,10 @@ async function runCode(){
             // resultContent.textContent = resultText; // Corrected to resultContent
             resultContent.innerHTML = resultText;
             // resultContainer.textContent=data.results;
-            
+
         }
         catch(error){
-            resultContent.textContent = "Failed to run code. Please Try Again";
+            resultContent.textContent = "<div class='error-message'>Failed to run code. Please Try Again</div>";
             console.error("Error running Code:", error);
         }
 
@@ -316,41 +341,62 @@ async function Submit() {
             let resultText = "";
             if (courseId.includes("python")) {
                 if (data.total === data.passed) {
-                    resultText = "Accepted! All test cases passed";
+                    resultText = "<div class='all-passed'>Accepted! All test cases passed</div>";
                 } else {
-                    data.test_results.forEach(test => {
+                    data.test_results.forEach((test, index) => {
+                        const testNumber = index + 1;
+                        const visibility = test.is_hidden ? "hidden" : "visible";
+                        const formattedTestName = `Test Case (${visibility}): ${testNumber}`;
+
                         if (!test.passed) {
-                            resultText += `Test case: ${test.test_name}<br>Error: ${test.error}`;
+                            resultText += `<div class="test-case failed">`;
+                            resultText += `<strong>${formattedTestName}</strong><br>`;
+                            resultText += `<strong>Error:</strong> <span class="error">${test.error}</span>`;
                             resultText += `<br><br>`;
+                            resultText += `</div>`;
+                        } else {
+                            resultText += `<div class="test-case passed">`;
+                            resultText += `<strong>${formattedTestName}</strong> - <span class="status">Passed</span><br><br>`;
+                            resultText += `</div>`;
                         }
                     });
                     if (resultText === "") {
-                        resultText = "Some issue occured";
+                        resultText = "<div class='error-message'>Some issue occurred</div>";
                     }
                 }
             }else if (courseId.includes("javascript")) {
                 if (data.passed === data.total && data.total > 0) {
-                    resultText = "Accepted! All test cases passed";
+                    resultText = "<div class='all-passed'>Accepted! All test cases passed</div>";
                 } else if (data.test_results) {
                     data.test_results.forEach(test => {
+                        const visibility = test.is_hidden ? "hidden" : "visible";
+                        const formattedTestId = `Test Case (${visibility}): ${test.test_id}`;
+
                         if (!test.passed) {
-                            resultText += `Test Case: ${test.test_id}<br>Error: ${test.error}<br><br>`;
+                            resultText += `<div class="test-case failed">`;
+                            resultText += `<strong>${formattedTestId}</strong><br>`;
+                            resultText += `<strong>Error:</strong> <span class="error">${test.error}</span><br><br>`;
+                            resultText += `</div>`;
+                        } else {
+                            resultText += `<div class="test-case passed">`;
+                            resultText += `<strong>${formattedTestId}</strong> - <span class="status">Passed</span><br><br>`;
+                            resultText += `</div>`;
                         }
                     });
                 }
             }
 
-            // resultContent.textContent = resultText; 
-            resultContent.innerHTML = resultText; 
+            // resultContent.textContent = resultText;
+            resultContent.innerHTML = resultText;
             console.log("done")
         }
         catch(error){
-            resultContent.textContent = "Failed to run code. Please Try Again";
+            resultContent.textContent = "<div class='error-message'>Failed to run code. Please Try Again</div>";
             console.error("Error running Code:", error);
         }
 
     })
-}       
+}   
 
 document.addEventListener('DOMContentLoaded', async () => {
         initializeEditorPage();
