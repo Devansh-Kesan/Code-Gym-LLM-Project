@@ -18,1296 +18,846 @@ courses:
     estimated_hours: 20
     prerequisites: []
     topics:                              
-      - topic_id: Decision Making and Loops in Python
-        topic_title: Control Flow Made Easy
-        short_description: Explore how to control the execution of your code using if-else statements, for and while loops. Gain practical skills by building logic-based mini projects like prime checkers and number games.
-        order: 2
+      - topic_id: python_basics
+        topic_title: Python Basics & Control Flow
         questions:
-          - id: number-type
-            title: 'Positive, Negative or Zero'
-            description: Determine if a number is positive, negative, or zero.
+          - id: even-or-odd
+            title: 'Even or Odd'
+            description: |
+              Write a function that determines whether a given integer is even or odd.
+            input_format: |
+              A single integer n
+            constraints: |
+              -1000 ≤ n ≤ 1000
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def check_number(n):
+                def is_even_or_odd(n):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
                     num = int(input())
-                    print(check_number(num))
+                    print(is_even_or_odd(num))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '4'
+                  expected_output: 'Even'
+                  explanation: '4 is divisible by 2'
+                - input: '7'
+                  expected_output: 'Odd'
+                  explanation: '7 is not divisible by 2'
+              hidden: true
+              hidden_cases:
+                - input: '0'
+                  expected_output: 'Even'
+                - input: '101'
+                  expected_output: 'Odd'
+            solution:
+              content: |2-
+                def is_even_or_odd(n):
+                    return "Even" if n % 2 == 0 else "Odd"
+
+                if __name__ == "__main__":
+                    num = int(input())
+                    print(is_even_or_odd(num))
+
+          - id: sum-upto-n
+            title: 'Sum up to N'
+            description: Write a function that calculates the sum of all integers from 1 to a given number N.
+            input_format: |
+              A single integer n
+            constraints: |
+              1 ≤ n ≤ 10^6
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def sum_upto_n(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(sum_upto_n(n))
             test_cases:
               hidden: false
               visible_cases:
                 - input: '5'
-                  expected_output: 'Positive'
-                - input: '-3'
-                  expected_output: 'Negative'
+                  expected_output: '15'
+                  explanation: '1 + 2 + 3 + 4 + 5 = 15'
+                - input: '1'
+                  expected_output: '1'
+                  explanation: 'Sum of first 1 number is 1'
               hidden: true
               hidden_cases:
-                - input: '0'
-                  expected_output: 'Zero'
-                - input: '-1'
-                  expected_output: 'Negative'
+                - input: '100'
+                  expected_output: '5050'
             solution:
               content: |2-
-                def check_number(n):
-                    if n > 0:
-                        return "Positive"
-                    elif n < 0:
-                        return "Negative"
+                def sum_upto_n(n):
+                    return n * (n + 1) // 2
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(sum_upto_n(n))
+
+          - id: fizz-buzz
+            title: 'FizzBuzz'
+            description: |
+              Write a function that returns:
+              - "Fizz" if the number is divisible by 3,
+              - "Buzz" if the number is divisible by 5,
+              - "FizzBuzz" if the number is divisible by both 3 and 5,
+              - Otherwise, return the number itself as a string.
+            input_format: |
+              A single integer n
+            constraints: |
+              1 ≤ n ≤ 10^4
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def fizz_buzz(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(fizz_buzz(n))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3'
+                  expected_output: 'Fizz'
+                  explanation: 'Divisible by 3'
+                - input: '5'
+                  expected_output: 'Buzz'
+                  explanation: 'Divisible by 5'
+              hidden: true
+              hidden_cases:
+                - input: '15'
+                  expected_output: 'FizzBuzz'
+                - input: '2'
+                  expected_output: '2'
+            solution:
+              content: |2-
+                def fizz_buzz(n):
+                    if n % 3 == 0 and n % 5 == 0:
+                        return "FizzBuzz"
+                    elif n % 3 == 0:
+                        return "Fizz"
+                    elif n % 5 == 0:
+                        return "Buzz"
                     else:
-                        return "Zero"
+                        return str(n)
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(fizz_buzz(n))
+
+          - id: multiplication-table
+            title: 'Multiplication Table'
+            description: |
+              Write a function that prints the multiplication table of a given number from 1 to 10.
+              Each line should be in the format: `n x i = result`.
+            input_format: |
+              A single integer n
+            constraints: |
+              1 ≤ n ≤ 100
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def print_table(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_table(n)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '2'
+                  expected_output: "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20"
+                  explanation: 'Multiplication table from 1 to 10'
+              hidden: true
+              hidden_cases:
+                - input: '10'
+                  expected_output: "10 x 1 = 10\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50\n10 x 6 = 60\n10 x 7 = 70\n10 x 8 = 80\n10 x 9 = 90\n10 x 10 = 100"
+            solution:
+              content: |2-
+                def print_table(n):
+                    for i in range(1, 11):
+                        print(f"{n} x {i} = {n * i}")
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_table(n)
+
+          - id: digit-mirror-pyramid
+            title: 'Digit Mirror Pyramid'
+            description: |
+              Write a function to print a mirrored pyramid of digits of height `N`. Each row `i` should contain numbers in ascending order from 1 to i, followed by descending order back to 1.
+              The pyramid must be centered using spaces on the left for symmetry.
+            input_format: |
+              A single integer n representing the height of the pyramid
+            constraints: |
+              1 ≤ n ≤ 20
+            complexity: hard
+            points: 20
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def print_mirror_pyramid(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_mirror_pyramid(n)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3'
+                  expected_output: "  1\n 121\n12321"
+                  explanation: 'Pyramid with mirrored digits'
+              hidden: true
+              hidden_cases:
+                - input: '5'
+                  expected_output: "    1\n   121\n  12321\n 1234321\n123454321"
+                - input: '6'
+                  expected_output: "     1\n    121\n   12321\n  1234321\n 123454321\n12345654321"
+            solution:
+              content: |2-
+                def print_mirror_pyramid(n):
+                    for i in range(1, n + 1):
+                        # Leading spaces
+                        spaces = ' ' * (n - i)
+                        # Ascending numbers
+                        left = ''.join(str(j) for j in range(1, i + 1))
+                        # Descending numbers
+                        right = ''.join(str(j) for j in range(i - 1, 0, -1))
+                        print(spaces + left + right)
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_mirror_pyramid(n)
+
+
+          - id: diamond-printer
+            title: 'Diamond Shape Printer'
+            description: |
+              Write a function that prints a diamond made of stars (`*`) given an odd integer `N`. The widest row (middle) should contain `N` stars.
+              The output should be vertically symmetric and properly aligned with spaces.
+            input_format: |
+              A single odd integer n
+            constraints: |
+              1 ≤ n ≤ 99  
+              n is always an odd number
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def print_diamond(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_diamond(n)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '3'
+                  expected_output: " *\n***\n *"
+                  explanation: 'Diamond with 3 rows, symmetrical'
+              hidden: true
+              hidden_cases:
+                - input: '5'
+                  expected_output: "  *\n ***\n*****\n ***\n  *"
+                - input: '7'
+                  expected_output: "   *\n  ***\n *****\n*******\n *****\n  ***\n   *"
+            solution:
+              content: |2-
+                def print_diamond(n):
+                    for i in range(1, n + 1, 2):
+                        spaces = (n - i) // 2
+                        print(' ' * spaces + '*' * i)
+                    for i in range(n - 2, 0, -2):
+                        spaces = (n - i) // 2
+                        print(' ' * spaces + '*' * i)
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print_diamond(n)
+
+      - topic_id: functions_recursion
+        topic_title: Functions and Recursion
+        questions:
+          - id: square-number
+            title: 'Square a Number'
+            description: Write a function that takes an integer and returns its square (the number multiplied by itself).
+            input: A single integer n.
+            input_constraints: -1000 ≤ n ≤ 1000
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def square(n):
+                    # Your code here
+                    pass
 
                 if __name__ == "__main__":
                     num = int(input())
-                    print(check_number(num))
+                    print(square(num))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '4'
+                  expected_output: '16'
+                - input: '-3'
+                  expected_output: '9'
+              hidden: true
+              hidden_cases:
+                - input: '0'
+                  expected_output: '0'
+            solution:
+              content: |2-
+                def square(n):
+                    return n * n
 
-          - id: max-of-three
-            title: 'Maximum of Three Numbers'
-            description: Return the largest among three numbers using conditional statements.
+                if __name__ == "__main__":
+                    num = int(input())
+                    print(square(num))
+
+          - id: greet-name
+            title: 'Greet by Name'
+            description: Write a function that takes a string name and returns a personalized greeting in the format "Hello, Name!".
+            input: A single word string representing a person's name.
+            input_constraints: 1 ≤ length of name ≤ 50
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def max_of_three(a, b, c):
+                def greet(name):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    a, b, c = map(int, input().split())
-                    print(max_of_three(a, b, c))
+                    name = input()
+                    print(greet(name))
             test_cases:
               hidden: false
               visible_cases:
-                - input: '10 20 30'
-                  expected_output: '30'
-                - input: '50 40 10'
-                  expected_output: '50'
+                - input: 'Alice'
+                  expected_output: 'Hello, Alice!'
+                - input: 'Bob'
+                  expected_output: 'Hello, Bob!'
               hidden: true
               hidden_cases:
-                - input: '1 1 1'
+                - input: 'Zoe'
+                  expected_output: 'Hello, Zoe!'
+            solution:
+              content: |2-
+                def greet(name):
+                    return f"Hello, {name}!"
+
+                if __name__ == "__main__":
+                    name = input()
+                    print(greet(name))
+
+          - id: factorial-recursion
+            title: 'Factorial (Recursion)'
+            description: Write a recursive function that computes the factorial of a non-negative integer n. The factorial of n is the product of all positive integers less than or equal to n.
+            input: A single integer n.
+            input_constraints: 0 ≤ n ≤ 12
+            complexity: medium
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                def factorial(n):
+                    # Your code here
+                    pass
+
+                if __name__ == "__main__":
+                    num = int(input())
+                    print(factorial(num))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: '120'
+                - input: '0'
                   expected_output: '1'
-                - input: '9 8 10'
-                  expected_output: '10'
+              hidden: true
+              hidden_cases:
+                - input: '6'
+                  expected_output: '720'
             solution:
               content: |2-
-                def max_of_three(a, b, c):
-                    if a >= b and a >= c:
-                        return a
-                    elif b >= a and b >= c:
-                        return b
-                    else:
-                        return c
+                def factorial(n):
+                    if n == 0 or n == 1:
+                        return 1
+                    return n * factorial(n - 1)
 
                 if __name__ == "__main__":
-                    a, b, c = map(int, input().split())
-                    print(max_of_three(a, b, c))
+                    num = int(input())
+                    print(factorial(num))
 
-          - id: grade-categorizer
-            title: 'Grade Categorizer'
-            description: Print the grade based on marks using if-elif-else conditions.
+          - id: fibonacci-recursion
+            title: 'Fibonacci (Recursion)'
+            description: Write a recursive function that returns the nth Fibonacci number. The Fibonacci sequence starts with 0 and 1, and each subsequent number is the sum of the previous two.
+            input: A single integer n.
+            input_constraints: 0 ≤ n ≤ 20
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def get_grade(marks):
+                def fibonacci(n):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    marks = int(input())
-                    print(get_grade(marks))
+                    num = int(input())
+                    print(fibonacci(num))
             test_cases:
               hidden: false
               visible_cases:
-                - input: '85'
-                  expected_output: 'A'
-                - input: '65'
-                  expected_output: 'C'
+                - input: '0'
+                  expected_output: '0'
+                - input: '1'
+                  expected_output: '1'
               hidden: true
               hidden_cases:
-                - input: '72'
-                  expected_output: 'B'
-                - input: '33'
-                  expected_output: 'F'
+                - input: '5'
+                  expected_output: '5'
             solution:
               content: |2-
-                def get_grade(marks):
-                    if marks >= 80:
-                        return "A"
-                    elif marks >= 70:
-                        return "B"
-                    elif marks >= 60:
-                        return "C"
-                    elif marks >= 50:
-                        return "D"
-                    else:
-                        return "F"
+                def fibonacci(n):
+                    if n <= 1:
+                        return n
+                    return fibonacci(n - 1) + fibonacci(n - 2)
 
                 if __name__ == "__main__":
-                    marks = int(input())
-                    print(get_grade(marks))
+                    num = int(input())
+                    print(fibonacci(num))
 
+          - id: pascals-triangle
+            title: "Pascal's Triangle"
+            description: |
+              Write a function that prints Pascal's Triangle up to height `n`. Each row contains values of binomial coefficients, where each number is the sum of the two numbers directly above it.
 
-          - id: leap-year
-            title: 'Leap Year Checker'
-            description: Determine whether the given year is a leap year or not.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
+              For example, for `n = 4`, the output would be:
+              ```
+              1
+              1 1
+              1 2 1
+              1 3 3 1
+              ```
+            input: A single integer n.
+            input_constraints: 1 ≤ n ≤ 10
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                def is_leap_year(year):
+                def print_pascals_triangle(n):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    year = int(input())
-                    print(is_leap_year(year))
+                    height = int(input())
+                    print_pascals_triangle(height)
             test_cases:
               hidden: false
               visible_cases:
-                - input: '2000'
-                  expected_output: 'Leap Year'
-                - input: '1900'
-                  expected_output: 'Not a Leap Year'
+                - input: '2'
+                  expected_output: "1\n1 1"
+                - input: '3'
+                  expected_output: "1\n1 1\n1 2 1"
               hidden: true
               hidden_cases:
-                - input: '2024'
-                  expected_output: 'Leap Year'
-                - input: '2100'
-                  expected_output: 'Not a Leap Year'
+                - input: '5'
+                  expected_output: "1\n1 1\n1 2 1\n1 3 3 1\n1 4 6 4 1"
             solution:
               content: |2-
-                def is_leap_year(year):
-                    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-                        return "Leap Year"
-                    else:
-                        return "Not a Leap Year"
+                def print_pascals_triangle(n):
+                    for i in range(n):
+                        val = 1
+                        row = []
+                        for j in range(i + 1):
+                            row.append(str(val))
+                            val = val * (i - j) // (j + 1)
+                        print(" ".join(row))
 
                 if __name__ == "__main__":
-                    year = int(input())
-                    print(is_leap_year(year))
+                    height = int(input())
+                    print_pascals_triangle(height)
 
-
-          - id: triangle-type
-            title: 'Triangle Type Checker'
-            description: Classify a triangle as Equilateral, Isosceles, or Scalene based on side lengths.
+          - id: is-palindrome-recursion
+            title: 'Check Palindrome (Recursion)'
+            description: Write a recursive function to check if a given string is a palindrome. A palindrome is a word that reads the same backward as forward.
+            input: A lowercase string s without spaces or punctuation.
+            input_constraints: 1 ≤ length of s ≤ 100
             complexity: hard
             points: 15
             time_limit_seconds: 10
-            memory_limit_mb: 128
+            memory_limit_mb: 64
             starter_code:
               content: |2-
-                def triangle_type(a, b, c):
+                def is_palindrome(s):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    a, b, c = map(int, input().split())
-                    print(triangle_type(a, b, c))
+                    text = input()
+                    print(is_palindrome(text))
             test_cases:
               hidden: false
               visible_cases:
-                - input: '3 3 3'
-                  expected_output: 'Equilateral'
-                - input: '3 3 4'
-                  expected_output: 'Isosceles'
+                - input: 'madam'
+                  expected_output: 'True'
+                - input: 'hello'
+                  expected_output: 'False'
               hidden: true
               hidden_cases:
-                - input: '3 4 5'
-                  expected_output: 'Scalene'
-                - input: '7 7 10'
-                  expected_output: 'Isosceles'
+                - input: 'racecar'
+                  expected_output: 'True'
             solution:
               content: |2-
-                def triangle_type(a, b, c):
-                    if a == b == c:
-                        return "Equilateral"
-                    elif a == b or b == c or a == c:
-                        return "Isosceles"
-                    else:
-                        return "Scalene"
+                def is_palindrome(s):
+                    if len(s) <= 1:
+                        return True
+                    if s[0] != s[-1]:
+                        return False
+                    return is_palindrome(s[1:-1])
 
                 if __name__ == "__main__":
-                    a, b, c = map(int, input().split())
-                    print(triangle_type(a, b, c))
-
-
-          - id: atm-validator
-            title: 'ATM Withdrawal Validator'
-            description: Validate ATM withdrawal based on balance, withdrawal amount and minimum denomination.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                def validate_withdrawal(balance, amount):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    balance, amount = map(int, input().split())
-                    print(validate_withdrawal(balance, amount))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '1000 500'
-                  expected_output: 'Transaction Successful'
-                - input: '300 500'
-                  expected_output: 'Insufficient Balance'
-              hidden: true
-              hidden_cases:
-                - input: '1500 1250'
-                  expected_output: 'Transaction Successful'
-                - input: '2000 2451'
-                  expected_output: 'Invalid Amount'
-            solution:
-              content: |2-
-                def validate_withdrawal(balance, amount):
-                    if amount > balance:
-                        return "Insufficient Balance"
-                    elif amount % 50 != 0:
-                        return "Invalid Amount"
-                    else:
-                        return "Transaction Successful"
-
-                if __name__ == "__main__":
-                    balance, amount = map(int, input().split())
-                    print(validate_withdrawal(balance, amount))
-
-      - topic_id: Functions and Modular Programming
-        topic_title: Writing Reusable Code with Functions
-        short_description: Understand how to build reusable code with functions and tackle problems using recursion.
-        order: 3
+                    text = input()
+                    print(is_palindrome(text))
+        
+      - topic_id: algos
+        topic_title: Algorithms and Problem Solving
         questions:
-        - id: greet-user
-          title: 'Greet the User'
-          description: Write a function that greets a user with "Hello, <name>!".
-          complexity: easy
-          points: 5
-          time_limit_seconds: 5
-          memory_limit_mb: 64
-          starter_code:
-            content: |2-
-              def greet(name):
-                  # Your code here
-                  pass
-
-              if __name__ == "__main__":
-                  user = input()
-                  print(greet(user))
-          test_cases:
-            hidden: false
-            visible_cases:
-              - input: 'Alice'
-                expected_output: 'Hello, Alice!'
-              - input: 'Bob'
-                expected_output: 'Hello, Bob!'
-            hidden: true
-            hidden_cases:
-              - input: 'Charlie'
-                expected_output: 'Hello, Charlie!'
-          solution:
-            content: |2-
-              def greet(name):
-                  return f"Hello, {name}!"
-
-              if __name__ == "__main__":
-                  user = input()
-                  print(greet(user))
-
-        - id: square-number
-          title: 'Square of a Number'
-          description: Write a function that returns the square of a given number.
-          complexity: easy
-          points: 5
-          time_limit_seconds: 5
-          memory_limit_mb: 64
-          starter_code:
-            content: |2-
-              def square(n):
-                  # Your code here
-                  pass
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(square(num))
-          test_cases:
-            hidden: false
-            visible_cases:
-              - input: '4'
-                expected_output: '16'
-              - input: '-3'
-                expected_output: '9'
-            hidden: true
-            hidden_cases:
-              - input: '0'
-                expected_output: '0'
-          solution:
-            content: |2-
-              def square(n):
-                  return n * n
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(square(num))
-
-        - id: is-prime
-          title: 'Check Prime'
-          description: Write a function that checks whether a number is prime.
-          complexity: medium
-          points: 10
-          time_limit_seconds: 5
-          memory_limit_mb: 64
-          starter_code:
-            content: |2-
-              def is_prime(n):
-                  # Your code here
-                  pass
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(is_prime(num))
-          test_cases:
-            hidden: false
-            visible_cases:
-              - input: '7'
-                expected_output: 'True'
-              - input: '4'
-                expected_output: 'False'
-            hidden: true
-            hidden_cases:
-              - input: '17'
-                expected_output: 'True'
-              - input: '1'
-                expected_output: 'False'
-          solution:
-            content: |2-
-              def is_prime(n):
-                  if n <= 1:
-                      return False
-                  for i in range(2, int(n**0.5)+1):
-                      if n % i == 0:
-                          return False
-                  return True
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(is_prime(num))
-
-        - id: factorial-func
-          title: 'Factorial Function'
-          description: Write a function that calculates the factorial of a given number using recursion.
-          complexity: medium
-          points: 10
-          time_limit_seconds: 5
-          memory_limit_mb: 64
-          starter_code:
-            content: |2-
-              def factorial(n):
-                  # Your code here
-                  pass
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(factorial(num))
-          test_cases:
-            hidden: false
-            visible_cases:
-              - input: '5'
-                expected_output: '120'
-              - input: '0'
-                expected_output: '1'
-            hidden: true
-            hidden_cases:
-              - input: '3'
-                expected_output: '6'
-          solution:
-            content: |2-
-              def factorial(n):
-                  if n == 0 or n == 1:
-                      return 1
-                  return n * factorial(n - 1)
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(factorial(num))
-
-        - id: fibonacci-series
-          title: 'Fibonacci Series Generator'
-          description: Generate the first n numbers of the Fibonacci series using a function.
-          complexity: hard
-          points: 15
-          time_limit_seconds: 10
-          memory_limit_mb: 128
-          starter_code:
-            content: |2-
-              def fibonacci(n):
-                  # Your code here
-                  pass
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(fibonacci(num))
-          test_cases:
-            hidden: false
-            visible_cases:
-              - input: '5'
-                expected_output: '[0, 1, 1, 2, 3]'
-              - input: '1'
-                expected_output: '[0]'
-            hidden: true
-            hidden_cases:
-              - input: '7'
-                expected_output: '[0, 1, 1, 2, 3, 5, 8]'
-          solution:
-            content: |2-
-              def fibonacci(n):
-                  fib = [0, 1]
-                  while len(fib) < n:
-                      fib.append(fib[-1] + fib[-2])
-                  return fib[:n]
-
-              if __name__ == "__main__":
-                  num = int(input())
-                  print(fibonacci(num))
-
-        - id: calculator
-          title: 'Simple Calculator using Functions'
-          description: Implement a basic calculator using functions for add, subtract, multiply, divide.
-          complexity: hard
-          points: 15
-          time_limit_seconds: 10
-          memory_limit_mb: 128
-          starter_code:
-            content: |2-
-              def add(a, b): pass
-              def subtract(a, b): pass
-              def multiply(a, b): pass
-              def divide(a, b): pass
-
-              if __name__ == "__main__":
-                  a, b, op = input().split()
-                  a, b = int(a), int(b)
-                  # Call appropriate function based on op
-          test_cases:
-            hidden: false
-            visible_cases:
-              - input: '5 3 add'
-                expected_output: '8'
-              - input: '10 2 divide'
-                expected_output: '5.0'
-            hidden: true
-            hidden_cases:
-              - input: '4 5 multiply'
-                expected_output: '20'
-              - input: '9 3 subtract'
-                expected_output: '6'
-          solution:
-            content: |2-
-              def add(a, b): return a + b
-              def subtract(a, b): return a - b
-              def multiply(a, b): return a * b
-              def divide(a, b): return a / b
-
-              if __name__ == "__main__":
-                  a, b, op = input().split()
-                  a, b = int(a), int(b)
-                  if op == 'add':
-                      print(add(a, b))
-                  elif op == 'subtract':
-                      print(subtract(a, b))
-                  elif op == 'multiply':
-                      print(multiply(a, b))
-                  elif op == 'divide':
-                      print(divide(a, b))
-      
-      - topic_id: Understanding Built-in Collections
-        topic_title: Mastering Python Data Structures
-        short_description: >-
-          Learn how to store, retrieve, and manipulate data using Python's built-in structures like lists, tuples, sets, and dictionaries. These are essential tools for organizing and managing data effectively in any Python program.
-        order: 1
-        questions:
-          - id: sum-of-list
-            title: 'Sum of List Elements'
-            description: Calculate and return the sum of all elements in a given list.
+          - id: reverse-list
+            title: 'Reverse List'
+            description: Reverse a list of integers without using built-in reverse methods.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
+            input: A list of integers.
+            input_constraints: The list will contain 1 to 1000 integers, each between -1000 and 1000.
             starter_code:
               content: |2-
-                def sum_of_list(lst):
+                def reverse_list(lst):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    print(sum_of_list(nums))
+                    lst = list(map(int, input().split()))
+                    print(reverse_list(lst))
             test_cases:
               hidden: false
               visible_cases:
                 - input: '1 2 3 4 5'
-                  expected_output: '15'
-                  explanation: 'Sum = 1+2+3+4+5 = 15'
-                - input: '10 20 30'
-                  expected_output: '60'
-                  explanation: 'Sum = 10+20+30 = 60'
+                  expected_output: '[5, 4, 3, 2, 1]'
+                - input: '10'
+                  expected_output: '[10]'
               hidden: true
               hidden_cases:
-                - input: '0 0 0'
-                  expected_output: '0'
-                - input: '100 -50 25'
-                  expected_output: '75'
+                - input: '7 8 9'
+                  expected_output: '[9, 8, 7]'
             solution:
               content: |2-
-                def sum_of_list(lst):
-                    return sum(lst)
+                def reverse_list(lst):
+                    return lst[::-1]
 
                 if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    print(sum_of_list(nums))
+                    lst = list(map(int, input().split()))
+                    print(reverse_list(lst))
 
-
-          - id: count-unique-elements
-            title: 'Count Unique Elements'
-            description: Return the number of unique elements in a given list.
+          - id: unique-elements
+            title: 'Unique Elements'
+            description: Return a list of only the unique elements from the input list.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
+            input: A list of elements (strings, integers, or mix).
+            input_constraints: The list will contain 1 to 1000 elements.
             starter_code:
               content: |2-
-                def count_unique(lst):
+                def unique_elements(lst):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    print(count_unique(nums))
+                    lst = input().split()
+                    print(unique_elements(lst))
             test_cases:
               hidden: false
               visible_cases:
+                - input: 'a b c a b'
+                  expected_output: "['a', 'b', 'c']"
                 - input: '1 2 2 3 4'
-                  expected_output: '4'
-                  explanation: 'Unique elements are 1, 2, 3, 4'
-                - input: '5 5 5 5 5'
-                  expected_output: '1'
-                  explanation: 'Only one unique element: 5'
+                  expected_output: "['1', '2', '3', '4']"
               hidden: true
               hidden_cases:
-                - input: '1 1 2 2 3 3 4'
-                  expected_output: '4'
-                - input: '10 20 30 10 20'
-                  expected_output: '3'
+                - input: 'x y x z'
+                  expected_output: "['x', 'y', 'z']"
             solution:
               content: |2-
-                def count_unique(lst):
-                    return len(set(lst))
+                def unique_elements(lst):
+                    return list(dict.fromkeys(lst))
+
                 if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    print(count_unique(nums))
+                    lst = input().split()
+                    print(unique_elements(lst))
 
-
-          - id: frequency-counter
-            title: 'Frequency Counter'
-            description: Return a dictionary with the frequency of each element in the list.
+          - id: merge-sorted-lists
+            title: 'Merge Sorted Lists'
+            description: Merge two sorted lists into one sorted list.
             complexity: medium
             points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 128
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            input: Two sorted lists of integers.
+            input_constraints: Each list will contain 1 to 1000 integers with values between -1000 and 1000.
             starter_code:
               content: |2-
-                def get_frequency(lst):
-                    # Your code here
-                    pass
-                if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    freq_dict = get_frequency(nums)
-                    for key in sorted(freq_dict.keys()):
-                        print(f"{key}:{freq_dict[key]}")
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '1 2 2 3 3 3'
-                  expected_output: |
-                    1:1
-                    2:2
-                    3:3
-                  explanation: 'Frequencies are 1:1, 2:2, 3:3'
-                - input: '4 4 4 4'
-                  expected_output: |
-                    4:4
-                  explanation: 'Only one unique element with frequency 4'
-              hidden: true
-              hidden_cases:
-                - input: '5 6 5 6 5'
-                  expected_output: |
-                    5:3
-                    6:2
-                - input: '9 8 7 8 9 9'
-                  expected_output: |
-                    7:1
-                    8:2
-                    9:3
-            solution:
-              content: |2-
-                def get_frequency(lst):
-                    freq = {}
-                    for num in lst:
-                        freq[num] = freq.get(num, 0) + 1
-                    return freq
-                if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    freq_dict = get_frequency(nums)
-                    for key in sorted(freq_dict.keys()):
-                        print(f"{key}:{freq_dict[key]}")
-
-
-          - id: merge-and-sort
-            title: 'Merge and Sort Two Lists'
-            description: Merge two input lists and return a sorted list without duplicates.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                def merge_and_sort_unique(lst1, lst2):
+                def merge_lists(lst1, lst2):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    list1 = list(map(int, input().split()))
-                    list2 = list(map(int, input().split()))
-                    result = merge_and_sort_unique(list1, list2)
-                    print(*result)
+                    lst1 = list(map(int, input().split()))
+                    lst2 = list(map(int, input().split()))
+                    print(merge_lists(lst1, lst2))
             test_cases:
               hidden: false
               visible_cases:
-                - input: |
+                - input: | 
                     1 3 5
-                    2 3 6
-                  expected_output: '1 2 3 5 6'
-                  explanation: 'Merged and sorted without duplicates'
-                - input: |
-                    4 4 4
-                    4 4 4
-                  expected_output: '4'
-                  explanation: 'All elements are the same, only one unique'
-              hidden: true
-              hidden_cases:
-                - input: |
+                    2 4 6
+                  expected_output: '[1, 2, 3, 4, 5, 6]'
+                - input: | 
                     10 20 30
                     5 15 25
-                  expected_output: '5 10 15 20 25 30'
-                - input: |
-                    7 9 11 13
-                    8 10 12 14
-                  expected_output: '7 8 9 10 11 12 13 14'
-            solution:
-              content: |2-
-                def merge_and_sort_unique(lst1, lst2):
-                    merged = list(set(lst1 + lst2))
-                    merged.sort()
-                    return merged
-
-                if __name__ == "__main__":
-                    list1 = list(map(int, input().split()))
-                    list2 = list(map(int, input().split()))
-                    result = merge_and_sort_unique(list1, list2)
-                    print(*result)
-
-          - id: longest-unique-subarray
-            title: 'Longest Unique Subarray'
-            description: Find the length of the longest contiguous subarray with all unique elements.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                def longest_unique_subarray(arr):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    print(longest_unique_subarray(nums))
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '1 2 3 2 4 5'
-                  expected_output: '4'
-                  explanation: 'Longest unique subarray is [3,2,4,5]'
-                - input: '5 5 5 5'
-                  expected_output: '1'
-                  explanation: 'Only one unique element'
+                  expected_output: '[5, 10, 15, 20, 25, 30]'
               hidden: true
               hidden_cases:
-                - input: '1 2 3 4 5 1 2'
-                  expected_output: '5'
-                - input: '10 20 10 30 40 50 30'
-                  expected_output: '5'
+                - input: | 
+                    1 2 3 4
+                    5 6 7 8
+                  expected_output: '[1, 2, 3, 4, 5, 6, 7, 8]'
             solution:
               content: |2-
-                def longest_unique_subarray(arr):
-                    seen = set()
-                    left = 0
-                    max_len = 0
-                    for right in range(len(arr)):
-                        while arr[right] in seen:
-                            seen.remove(arr[left])
-                            left += 1
-                        seen.add(arr[right])
-                        max_len = max(max_len, right - left + 1)
-                    return max_len
-
-                if __name__ == "__main__":
-                    nums = list(map(int, input().split()))
-                    print(longest_unique_subarray(nums))
-
-          - id: flatten-nested-dictionary
-            title: 'Flatten Nested Dictionary'
-            description: Given a nested dictionary, flatten it into a single-level dictionary with keys representing the path.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                def flatten_dict(d, parent_key='', sep='.'):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    import ast
-                    d = ast.literal_eval(input())
-                    result = flatten_dict(d)
-                    for k in sorted(result):
-                        print(f"{k}:{result[k]}")
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: "{'a': 1, 'b': {'c': 2, 'd': {'e': 3}}}"
-                  expected_output: |
-                    a:1
-                    b.c:2
-                    b.d.e:3
-                  explanation: 'Flattened keys represent path in nested dict'
-                - input: "{'x': {'y': {'z': 5}}, 'w': 1}"
-                  expected_output: |
-                    w:1
-                    x.y.z:5
-                  explanation: 'All keys follow path structure with dots'
-              hidden: true
-              hidden_cases:
-                - input: "{'foo': {'bar': 2}, 'baz': {'qux': {'quux': 4}}}"
-                  expected_output: |
-                    baz.qux.quux:4
-                    foo.bar:2
-                - input: "{'a': {'b': {'c': {'d': 9}}}}"
-                  expected_output: |
-                    a.b.c.d:9
-            solution:
-              content: |2-
-                def flatten_dict(d, parent_key='', sep='.'):
-                    items = {}
-                    for k, v in d.items():
-                        new_key = f"{parent_key}{sep}{k}" if parent_key else k
-                        if isinstance(v, dict):
-                            items.update(flatten_dict(v, new_key, sep=sep))
+                def merge_lists(lst1, lst2):
+                    i, j, result = 0, 0, []
+                    while i < len(lst1) and j < len(lst2):
+                        if lst1[i] < lst2[j]:
+                            result.append(lst1[i])
+                            i += 1
                         else:
-                            items[new_key] = v
-                    return items
+                            result.append(lst2[j])
+                            j += 1
+                    result.extend(lst1[i:])
+                    result.extend(lst2[j:])
+                    return result
 
                 if __name__ == "__main__":
-                    import ast
-                    d = ast.literal_eval(input())
-                    result = flatten_dict(d)
-                    for k in sorted(result):
-                        print(f"{k}:{result[k]}")
+                    lst1 = list(map(int, input().split()))
+                    lst2 = list(map(int, input().split()))
+                    print(merge_lists(lst1, lst2))
 
-  
-      - topic_id: Working with Text Files and Data Storage
-        topic_title: File Handling in Python
-        short_description: Learn to structure Python code with classes, objects, and inheritance to build modular programs.
-        order: 4
-        questions:
-          - id: read-text-file
-            title: 'Read a Text File'
-            description: Read a file and print its content line by line.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def read_file(filename):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    filename = input()
-                    read_file(filename)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: 'sample1.txt'
-                  expected_output: "Hello World\nWelcome to Python\n"
-              hidden: true
-              hidden_cases:
-                - input: 'hidden1.txt'
-                  expected_output: "Hidden file content line 1\nHidden file content line 2\n"
-            solution:
-              content: |2-
-                def read_file(filename):
-                    with open(filename, 'r') as f:
-                        for line in f:
-                            print(line.strip())
-
-                if __name__ == "__main__":
-                    filename = input()
-                    read_file(filename)
-
-          - id: write-to-file
-            title: 'Write to a File'
-            description: Take a string input and write it into a file.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                def write_file(filename, content):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    filename = input()
-                    content = input()
-                    write_file(filename, content)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: "output1.txt\nHello Python"
-                  expected_output: ""
-              hidden: true
-              hidden_cases:
-                - input: "out.txt\nAnother line"
-                  expected_output: ""
-            solution:
-              content: |2-
-                def write_file(filename, content):
-                    with open(filename, 'w') as f:
-                        f.write(content)
-
-                if __name__ == "__main__":
-                    filename = input()
-                    content = input()
-                    write_file(filename, content)
-
-          - id: count-lines
-            title: 'Count Lines in a File'
-            description: Write a function to count the number of lines in a given file.
+          - id: longest-substring
+            title: 'Longest Substring Without Repeating Characters'
+            description: Find the length of the longest substring of a string without repeating characters.
             complexity: medium
-            points: 10
-            time_limit_seconds: 5
+            points: 15
+            time_limit_seconds: 10
             memory_limit_mb: 64
+            input: A string containing alphanumeric characters.
+            input_constraints: The string will contain 1 to 1000 characters.
             starter_code:
               content: |2-
-                def count_lines(filename):
+                def longest_substring(s):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    file = input()
-                    print(count_lines(file))
+                    s = input()
+                    print(longest_substring(s))
             test_cases:
               hidden: false
               visible_cases:
-                - input: 'sample2.txt'
+                - input: 'abcabcbb'
                   expected_output: '3'
+                - input: 'bbbbb'
+                  expected_output: '1'
               hidden: true
               hidden_cases:
-                - input: 'file3.txt'
-                  expected_output: '5'
+                - input: 'pwwkew'
+                  expected_output: '3'
             solution:
               content: |2-
-                def count_lines(filename):
-                    with open(filename, 'r') as f:
-                        return len(f.readlines())
+                def longest_substring(s):
+                    char_map = {}
+                    left = max_length = 0
+                    for right, char in enumerate(s):
+                        if char in char_map and char_map[char] >= left:
+                            left = char_map[char] + 1
+                        char_map[char] = right
+                        max_length = max(max_length, right - left + 1)
+                    return max_length
 
                 if __name__ == "__main__":
-                    file = input()
-                    print(count_lines(file))
+                    s = input()
+                    print(longest_substring(s))
 
-          - id: append-to-file
-            title: 'Append Text to File'
-            description: Write a function to append a line to an existing file.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
+          - id: longest-increasing-subsequence
+            title: 'Longest Increasing Subsequence'
+            description: Find the length of the longest increasing subsequence in a list of integers.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
             memory_limit_mb: 64
+            input: A list of integers.
+            input_constraints: The list will contain 1 to 1000 integers, each between -1000 and 1000.
             starter_code:
               content: |2-
-                def append_to_file(filename, text):
+                def longest_increasing_subsequence(lst):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    name = input()
-                    line = input()
-                    append_to_file(name, line)
+                    lst = list(map(int, input().split()))
+                    print(longest_increasing_subsequence(lst))
             test_cases:
               hidden: false
               visible_cases:
-                - input: "sample3.txt\nAppended line"
-                  expected_output: ""
+                - input: '10 9 2 5 3 7 101 18'
+                  expected_output: '4'
+                - input: '0 8 4 7 5 3 1'
+                  expected_output: '4'
               hidden: true
               hidden_cases:
-                - input: "myfile.txt\nNew content"
-                  expected_output: ""
+                - input: '3 2 6 4 5 1'
+                  expected_output: '3'
             solution:
               content: |2-
-                def append_to_file(filename, text):
-                    with open(filename, 'a') as f:
-                        f.write(text + "\n")
+                def longest_increasing_subsequence(lst):
+                    if not lst:
+                        return 0
+                    n = len(lst)
+                    dp = [1] * n
+                    for i in range(1, n):
+                        for j in range(i):
+                            if lst[i] > lst[j]:
+                                dp[i] = max(dp[i], dp[j] + 1)
+                    return max(dp)
 
                 if __name__ == "__main__":
-                    name = input()
-                    line = input()
-                    append_to_file(name, line)
-
-          - id: word-frequency
-            title: 'Word Frequency Counter'
-            description: Count the frequency of each word in a file.
+                    lst = list(map(int, input().split()))
+                    print(longest_increasing_subsequence(lst))
+          - id: maximum-sum-subarray
+            title: 'Maximum Sum Subarray'
+            description: Find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
             complexity: hard
             points: 15
-            time_limit_seconds: 10
+            time_limit_seconds: 15
             memory_limit_mb: 128
+            input: A list of integers, where the list may contain both positive and negative numbers.
+            input_constraints: 
+              - The list will contain 2 to 100,000 integers.
+              - Each integer in the list will be between -10^5 and 10^5.
             starter_code:
               content: |2-
-                def word_frequency(filename):
+                def maximum_sum_subarray(lst):
                     # Your code here
                     pass
 
                 if __name__ == "__main__":
-                    fname = input()
-                    word_frequency(fname)
+                    lst = list(map(int, input().split()))
+                    print(maximum_sum_subarray(lst))
             test_cases:
               hidden: false
               visible_cases:
-                - input: 'sample4.txt'
-                  expected_output: 'hello: 2\npython: 1\nworld: 1'
+                - input: '1 -2 3 4 -1 2 1 -5 4'
+                  expected_output: '6'
+                - input: '-2 1 -3 4 -1 2 1 -5 4'
+                  expected_output: '6'
               hidden: true
               hidden_cases:
-                - input: 'file5.txt'
-                  expected_output: 'data: 3\nscience: 2\npython: 1'
+                - input: '5 -1 3 4 -2 2 1 -3'
+                  expected_output: '12'  # Corrected expected output
+                - input: '-5 -1 -2 -3 -4'
+                  expected_output: '-1'
             solution:
               content: |2-
-                def word_frequency(filename):
-                    freq = {}
-                    with open(filename, 'r') as f:
-                        for line in f:
-                            words = line.strip().lower().split()
-                            for word in words:
-                                freq[word] = freq.get(word, 0) + 1
-                    for k in sorted(freq):
-                        print(f"{k}: {freq[k]}")
+                def maximum_sum_subarray(lst):
+                    # Initialize the maximum sum to the first element
+                    max_sum = current_sum = lst[0]
+                    
+                    # Iterate through the array starting from the second element
+                    for num in lst[1:]:
+                        # Update current_sum: either start fresh from current number or continue the subarray
+                        current_sum = max(num, current_sum + num)
+                        # Update max_sum to the larger value
+                        max_sum = max(max_sum, current_sum)
+                    
+                    return max_sum
 
                 if __name__ == "__main__":
-                    fname = input()
-                    word_frequency(fname)
+                    lst = list(map(int, input().split()))
+                    print(maximum_sum_subarray(lst))
 
-          - id: merge-files
-            title: 'Merge Two Files'
-            description: Merge contents of two text files into a third file.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                def merge_files(file1, file2, output):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    f1 = input()
-                    f2 = input()
-                    fout = input()
-                    merge_files(f1, f2, fout)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: "f1.txt\nf2.txt\nfout.txt"
-                  expected_output: ""
-              hidden: true
-              hidden_cases:
-                - input: "alpha.txt\nbeta.txt\ngamma.txt"
-                  expected_output: ""
-            solution:
-              content: |2-
-                def merge_files(file1, file2, output):
-                    with open(output, 'w') as out:
-                        with open(file1, 'r') as f1:
-                            out.write(f1.read())
-                        with open(file2, 'r') as f2:
-                            out.write(f2.read())
-
-                if __name__ == "__main__":
-                    f1 = input()
-                    f2 = input()
-                    fout = input()
-                    merge_files(f1, f2, fout)
-
-      - topic_id: Object-Oriented Programming Concepts
-        topic_title: Getting Started with OOP in Python
-        short_description: Solve classic algorithmic challenges to boost logical thinking and coding fluency.
-        order: 5
+      - topic_id: oops
+        topic_title: Object-Oriented Programming
         questions:
-          - id: class-rectangle
-            title: 'Rectangle Class'
-            description: Create a class `Rectangle` with methods to compute area and perimeter.
+          - id: class-inheritance
+            title: 'Class Inheritance'
+            description: |
+              Implement a class hierarchy where `Shape` is the base class. The `Circle` class should inherit from `Shape` and 
+              implement a method to calculate the area of the circle using its radius. This method should be inherited from the 
+              `Shape` class and used in the `Circle` class.
             complexity: easy
             points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
+            input: |
+              The input consists of a single float value representing the radius of the circle.
+            input_constraints: |
+              - The radius value will be a positive number between 0 and 100.
             starter_code:
-              content: |2-
-                class Rectangle:
-                    # Your code here
-                    pass
+              content: |
+                import math
 
-                if __name__ == "__main__":
-                    l = int(input())
-                    b = int(input())
-                    rect = Rectangle(l, b)
-                    print(rect.area())
-                    print(rect.perimeter())
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: "4\n5"
-                  expected_output: "20\n18"
-              hidden: true
-              hidden_cases:
-                - input: "7\n3"
-                  expected_output: "21\n20"
-            solution:
-              content: |2-
-                class Rectangle:
-                    def __init__(self, length, breadth):
-                        self.length = length
-                        self.breadth = breadth
-
-                    def area(self):
-                        return self.length * self.breadth
-
-                    def perimeter(self):
-                        return 2 * (self.length + self.breadth)
-
-                if __name__ == "__main__":
-                    l = int(input())
-                    b = int(input())
-                    rect = Rectangle(l, b)
-                    print(rect.area())
-                    print(rect.perimeter())
-
-          - id: class-student
-            title: 'Student Class'
-            description: Create a `Student` class with name, age, and marks attributes.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class Student:
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    name = input()
-                    age = int(input())
-                    marks = float(input())
-                    s = Student(name, age, marks)
-                    print(s.name)
-                    print(s.age)
-                    print(s.marks)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: "Alice\n20\n89.5"
-                  expected_output: "Alice\n20\n89.5"
-              hidden: true
-              hidden_cases:
-                - input: "Bob\n22\n75.0"
-                  expected_output: "Bob\n22\n75.0"
-            solution:
-              content: |2-
-                class Student:
-                    def __init__(self, name, age, marks):
-                        self.name = name
-                        self.age = age
-                        self.marks = marks
-
-                if __name__ == "__main__":
-                    name = input()
-                    age = int(input())
-                    marks = float(input())
-                    s = Student(name, age, marks)
-                    print(s.name)
-                    print(s.age)
-                    print(s.marks)
-
-          - id: inheritance-animal
-            title: 'Inheritance - Animal Sounds'
-            description: Implement inheritance where `Dog` and `Cat` inherit from `Animal` class.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class Animal:
-                    # Your code here
-                    pass
-
-                class Dog(Animal):
-                    pass
-
-                class Cat(Animal):
-                    pass
-
-                if __name__ == "__main__":
-                    d = Dog()
-                    c = Cat()
-                    d.sound()
-                    c.sound()
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ""
-                  expected_output: "Bark\nMeow"
-              hidden: true
-              hidden_cases:
-                - input: ""
-                  expected_output: "Bark\nMeow"
-            solution:
-              content: |2-
-                class Animal:
-                    def sound(self):
-                        print("Animal sound")
-
-                class Dog(Animal):
-                    def sound(self):
-                        print("Bark")
-
-                class Cat(Animal):
-                    def sound(self):
-                        print("Meow")
-
-                if __name__ == "__main__":
-                    d = Dog()
-                    c = Cat()
-                    d.sound()
-                    c.sound()
-
-          - id: bank-account
-            title: 'Bank Account Class'
-            description: Create a `BankAccount` class with deposit and withdraw methods.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                class BankAccount:
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    acc = BankAccount(1000)
-                    acc.deposit(500)
-                    acc.withdraw(300)
-                    print(acc.balance)
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ""
-                  expected_output: "1200"
-              hidden: true
-              hidden_cases:
-                - input: ""
-                  expected_output: "700"
-            solution:
-              content: |2-
-                class BankAccount:
-                    def __init__(self, balance):
-                        self.balance = balance
-
-                    def deposit(self, amount):
-                        self.balance += amount
-
-                    def withdraw(self, amount):
-                        self.balance -= amount
-
-                if __name__ == "__main__":
-                    acc = BankAccount(1000)
-                    acc.deposit(500)
-                    acc.withdraw(300)
-                    print(acc.balance)
-
-          - id: polymorphism-shape
-            title: 'Polymorphism - Shape Area'
-            description: Demonstrate polymorphism using a base `Shape` class and derived `Circle`, `Square` classes.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                class Shape:
-                    def area(self):
-                        pass
-
-                class Circle(Shape):
-                    # Your code here
-                    pass
-
-                class Square(Shape):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    c = Circle(5)
-                    s = Square(4)
-                    print(c.area())
-                    print(s.area())
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ""
-                  expected_output: "78.5\n16"
-              hidden: true
-              hidden_cases:
-                - input: ""
-                  expected_output: "50.24\n25"
-            solution:
-              content: |2-
                 class Shape:
                     def area(self):
                         pass
@@ -1315,77 +865,904 @@ courses:
                 class Circle(Shape):
                     def __init__(self, radius):
                         self.radius = radius
-
+                    
+                    # TODO: Implement area method to calculate circle's area
                     def area(self):
-                        return round(3.14 * self.radius ** 2, 2)
-
-                class Square(Shape):
-                    def __init__(self, side):
-                        self.side = side
-
-                    def area(self):
-                        return self.side ** 2
+                        pass
 
                 if __name__ == "__main__":
-                    c = Circle(5)
-                    s = Square(4)
+                    r = float(input())
+                    c = Circle(r)
                     print(c.area())
-                    print(s.area())
-
-          - id: employee-management
-            title: 'Employee Management System'
-            description: Create a class to manage multiple employees and display their details.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                class Employee:
-                    # Your code here
-                    pass
-
-                def show_employees(employees):
-                    # Your code here
-                    pass
-
-                if __name__ == "__main__":
-                    n = int(input())
-                    employees = []
-                    for _ in range(n):
-                        name = input()
-                        salary = int(input())
-                        employees.append(Employee(name, salary))
-                    show_employees(employees)
             test_cases:
               hidden: false
               visible_cases:
-                - input: "2\nJohn\n3000\nJane\n4000"
-                  expected_output: "John: 3000\nJane: 4000"
+                - input: '5'
+                  expected_output: '78.53975'
+                - input: '10'
+                  expected_output: '314.1595'
               hidden: true
               hidden_cases:
-                - input: "3\nAva\n5000\nTom\n4500\nMia\n3900"
-                  expected_output: "Ava: 5000\nTom: 4500\nMia: 3900"
+                - input: '7'
+                  expected_output: '153.93804'
             solution:
-              content: |2-
-                class Employee:
-                    def __init__(self, name, salary):
-                        self.name = name
-                        self.salary = salary
+              content: |
+                import math
 
-                def show_employees(employees):
-                    for emp in employees:
-                        print(f"{emp.name}: {emp.salary}")
+                class Shape:
+                    def area(self):
+                        pass
+
+                class Circle(Shape):
+                    def __init__(self, radius):
+                        self.radius = radius
+                    
+                    def area(self):
+                        return math.pi * self.radius ** 2
+
+                if __name__ == "__main__":
+                    r = float(input())
+                    c = Circle(r)
+                    print(c.area())
+
+          - id: student-class
+            title: 'Student Class'
+            description: |
+              Define a `Student` class with attributes for the student's `name` and `marks`. Implement methods in the class 
+              to retrieve the student's name and to calculate their average marks.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            input: |
+              The first input is the name of the student. The second input is a list of their marks.
+            input_constraints: |
+              - Name will be a non-empty string.
+              - Marks will be a list of 2 to 10 integers, each between 0 and 100.
+            starter_code:
+              content: |
+                class Student:
+                    def __init__(self, name, marks):
+                        self.name = name
+                        self.marks = marks
+
+                    def average_marks(self):
+                        # TODO: Calculate and return the average of marks
+                        pass
+
+                if __name__ == "__main__":
+                    name = input()
+                    marks = list(map(int, input().split()))
+                    s = Student(name, marks)
+                    print(s.name)
+                    print(s.average_marks())
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: | 
+                    Alice 
+                    90 80 85
+                  expected_output: | 
+                    Alice
+                    85.0
+                - input: | 
+                    Bob 
+                    60 70 75 80
+                  expected_output: | 
+                    Bob
+                    71.25
+              hidden: true
+              hidden_cases:
+                - input: | 
+                    Charlie
+                    100 100 100
+                  expected_output: | 
+                    Charlie
+                    100.0
+            solution:
+              content: |
+                class Student:
+                    def __init__(self, name, marks):
+                        self.name = name
+                        self.marks = marks
+
+                    def average_marks(self):
+                        return sum(self.marks) / len(self.marks)
+
+                if __name__ == "__main__":
+                    name = input()
+                    marks = list(map(int, input().split()))
+                    s = Student(name, marks)
+                    print(s.name)
+                    print(s.average_marks())
+
+          - id: bank-account
+            title: 'Bank Account'
+            description: |
+              Design a `BankAccount` class that provides functionality for depositing money, withdrawing money, and checking 
+              the account balance. Ensure that the account balance cannot go below zero after a withdrawal.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            input: |
+              The first input will be a positive integer representing the deposit amount. The second input will be a positive integer 
+              representing the withdrawal amount.
+            input_constraints: |
+              - Deposit and withdrawal amounts are between 1 and 10,000.
+            starter_code:
+              content: |
+                class BankAccount:
+                    def __init__(self, balance=0):
+                        self.balance = balance
+
+                    def deposit(self, amount):
+                        # TODO: Implement deposit logic
+                        pass
+
+                    def withdraw(self, amount):
+                        # TODO: Implement withdraw logic, check for sufficient funds
+                        pass
+
+                if __name__ == "__main__":
+                    account = BankAccount()
+                    deposit_amount = int(input())
+                    withdrawal_amount = int(input())
+                    account.deposit(deposit_amount)
+                    account.withdraw(withdrawal_amount)
+                    print(account.balance)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: | 
+                    100
+                    50
+                  expected_output: '50'
+                - input: | 
+                    500
+                    200
+                  expected_output: '300'
+              hidden: true
+              hidden_cases:
+                - input: | 
+                    1000
+                    500
+                  expected_output: '500'
+            solution:
+              content: |
+                class BankAccount:
+                    def __init__(self, balance=0):
+                        self.balance = balance
+
+                    def deposit(self, amount):
+                        self.balance += amount
+
+                    def withdraw(self, amount):
+                        if self.balance >= amount:
+                            self.balance -= amount
+                        else:
+                            print("Insufficient funds")
+
+                if __name__ == "__main__":
+                    account = BankAccount()
+                    deposit_amount = int(input())
+                    withdrawal_amount = int(input())
+                    account.deposit(deposit_amount)
+                    account.withdraw(withdrawal_amount)
+                    print(account.balance)
+
+          - id: vehicle-hierarchy
+            title: 'Vehicle Hierarchy with Details'
+            description: |
+              Design a class hierarchy for a `Vehicle` class, with two derived classes: `Car` and `Truck`.
+
+              Each vehicle has a make and model. Additionally:
+              - Each `Car` has a number of seats (integer).
+              - Each `Truck` has a payload capacity in tons (float).
+
+              Each class must implement a method to display all details of that vehicle:
+              - For a car: display "<make> <model> - Seats: <seats>"
+              - For a truck: display "<make> <model> - Payload: <capacity> tons"
+
+              Your task is to complete the class structure and implement the logic to display the correct details.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            input: |
+              The input consists of:
+              - A line with the vehicle type: "Car" or "Truck"
+              - A line with the make of the vehicle
+              - A line with the model of the vehicle
+              - A line with the specific value:
+                - For Car: number of seats (integer)
+                - For Truck: payload capacity (float)
+            input_constraints: |
+              - Vehicle type is either "Car" or "Truck"
+              - Make and model are non-empty strings
+              - Seats will be an integer between 1 and 10
+              - Payload capacity will be a float between 0.5 and 40.0
+            starter_code:
+              content: |
+                class Vehicle:
+                    def __init__(self, make, model):
+                        self.make = make
+                        self.model = model
+
+                    def show_details(self):
+                        # TODO: To be overridden in subclasses
+                        pass
+
+                class Car(Vehicle):
+                    def __init__(self, make, model, seats):
+                        super().__init__(make, model)
+                        self.seats = seats
+
+                    def show_details(self):
+                        # TODO: Print "<make> <model> - Seats: <seats>"
+                        pass
+
+                class Truck(Vehicle):
+                    def __init__(self, make, model, capacity):
+                        super().__init__(make, model)
+                        self.capacity = capacity
+
+                    def show_details(self):
+                        # TODO: Print "<make> <model> - Payload: <capacity> tons"
+                        pass
+
+                if __name__ == "__main__":
+                    vehicle_type = input()
+                    make = input()
+                    model = input()
+                    if vehicle_type == "Car":
+                        seats = int(input())
+                        v = Car(make, model, seats)
+                    elif vehicle_type == "Truck":
+                        capacity = float(input())
+                        v = Truck(make, model, capacity)
+                    v.show_details()
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: |
+                    Car
+                    Honda
+                    Civic
+                    5
+                  expected_output: |
+                    Honda Civic - Seats: 5
+                - input: |
+                    Truck
+                    Volvo
+                    FH16
+                    18.5
+                  expected_output: |
+                    Volvo FH16 - Payload: 18.5 tons
+              hidden: true
+              hidden_cases:
+                - input: |
+                    Car
+                    Toyota
+                    Camry
+                    4
+                  expected_output: |
+                    Toyota Camry - Seats: 4
+                - input: |
+                    Truck
+                    Tata
+                    LPT
+                    22.0
+                  expected_output: |
+                    Tata LPT - Payload: 22.0 tons
+            solution:
+              content: |
+                class Vehicle:
+                    def __init__(self, make, model):
+                        self.make = make
+                        self.model = model
+
+                    def show_details(self):
+                        pass
+
+                class Car(Vehicle):
+                    def __init__(self, make, model, seats):
+                        super().__init__(make, model)
+                        self.seats = seats
+
+                    def show_details(self):
+                        print(f"{self.make} {self.model} - Seats: {self.seats}")
+
+                class Truck(Vehicle):
+                    def __init__(self, make, model, capacity):
+                        super().__init__(make, model)
+                        self.capacity = capacity
+
+                    def show_details(self):
+                        print(f"{self.make} {self.model} - Payload: {self.capacity} tons")
+
+                if __name__ == "__main__":
+                    vehicle_type = input()
+                    make = input()
+                    model = input()
+                    if vehicle_type == "Car":
+                        seats = int(input())
+                        v = Car(make, model, seats)
+                    elif vehicle_type == "Truck":
+                        capacity = float(input())
+                        v = Truck(make, model, capacity)
+                    v.show_details()
+
+          - id: employee-salary
+            title: 'Employee Salary'
+            description: |
+              Create an `Employee` class that calculates the salary of an employee based on their hourly rate and the hours they work.
+              The class should also have a method that checks if the employee is eligible for a bonus based on the total salary.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            input: |
+              The first input is the hourly rate, and the second input is the hours worked.
+            input_constraints: |
+              - The hourly rate is between 10 and 200.
+              - The hours worked are between 1 and 80.
+            starter_code:
+              content: |
+                class Employee:
+                    def __init__(self, hourly_rate, hours_worked):
+                        self.hourly_rate = hourly_rate
+                        self.hours_worked = hours_worked
+
+                    def salary(self):
+                        # TODO: Calculate and return total salary
+                        pass
+
+                    def is_eligible_for_bonus(self):
+                        # TODO: Check if salary exceeds 1000 for bonus eligibility
+                        pass
+
+                if __name__ == "__main__":
+                    rate = float(input())
+                    hours = int(input())
+                    e = Employee(rate, hours)
+                    print(e.salary())
+                    print(e.is_eligible_for_bonus())
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: | 
+                    20
+                    40
+                  expected_output: | 
+                    800
+                    False
+                - input: | 
+                    25
+                    50
+                  expected_output: | 
+                    1250
+                    True
+              hidden: true
+              hidden_cases:
+                - input: | 
+                    30
+                    60
+                  expected_output: | 
+                    1800
+                    True
+            solution:
+              content: |
+                class Employee:
+                    def __init__(self, hourly_rate, hours_worked):
+                        self.hourly_rate = hourly_rate
+                        self.hours_worked = hours_worked
+
+                    def salary(self):
+                        return self.hourly_rate * self.hours_worked
+
+                    def is_eligible_for_bonus(self):
+                        return self.salary() > 1000
+
+                if __name__ == "__main__":
+                    rate = float(input())
+                    hours = int(input())
+                    e = Employee(rate, hours)
+                    print(e.salary())
+                    print(e.is_eligible_for_bonus())
+
+          - id: library-management
+            title: 'Library Management System'
+            description: |
+              Create two classes: `Book` and `Library`.
+
+              The `Book` class should store information about a book, including its title, author, and ISBN. The `Library` class will manage a collection of books and allow adding and removing books by ISBN.
+
+              You will receive a sequence of commands to add or remove books. After executing all operations, print the total number of books left in the library.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 128
+            input: |
+              The first input is an integer N, the number of commands (1 ≤ N ≤ 100).
+
+              This is followed by N commands, where each command is one of:
+              - "Add <title> <author> <isbn>": Add a book with the given title, author, and ISBN.
+              - "Remove <isbn>": Remove the book with the given ISBN.
+
+              Example:
+                2
+                Add Book1 Author1 123
+                Remove 123
+            input_constraints: |
+              - Title, author, and ISBN are non-empty strings without spaces.
+              - ISBNs are unique when adding.
+              - 1 ≤ N ≤ 100.
+            starter_code:
+              content: |
+                class Book:
+                    def __init__(self, title, author, isbn):
+                        self.title = title
+                        self.author = author
+                        self.isbn = isbn
+
+                class Library:
+                    def __init__(self):
+                        self.books = []
+
+                    def add_book(self, book):
+                        # TODO: Implement adding a book to the collection
+                        pass
+
+                    def remove_book(self, isbn):
+                        # TODO: Implement removing a book by ISBN
+                        pass
 
                 if __name__ == "__main__":
                     n = int(input())
-                    employees = []
+                    library = Library()
                     for _ in range(n):
-                        name = input()
-                        salary = int(input())
-                        employees.append(Employee(name, salary))
-                    show_employees(employees)
+                        command = input().strip().split()
+                        if command[0] == "Add":
+                            title, author, isbn = command[1:]
+                            book = Book(title, author, isbn)
+                            library.add_book(book)
+                        elif command[0] == "Remove":
+                            isbn = command[1]
+                            library.remove_book(isbn)
+                    print(f"Total books: {len(library.books)}")
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: |
+                    2
+                    Add Book1 Author1 123
+                    Remove 123
+                  expected_output: |
+                    Total books: 0
+                - input: |
+                    3
+                    Add Book2 Author2 124
+                    Add Book3 Author3 125
+                    Remove 124
+                  expected_output: |
+                    Total books: 1
+              hidden: true
+              hidden_cases:
+                - input: |
+                    2
+                    Add Book4 Author4 126
+                    Remove 126
+                  expected_output: |
+                    Total books: 0
+                - input: |
+                    3
+                    Add Book5 Author5 127
+                    Add Book6 Author6 128
+                    Remove 999
+                  expected_output: |
+                    Total books: 2
+            solution:
+              content: |
+                class Book:
+                    def __init__(self, title, author, isbn):
+                        self.title = title
+                        self.author = author
+                        self.isbn = isbn
 
+                class Library:
+                    def __init__(self):
+                        self.books = []
+
+                    def add_book(self, book):
+                        self.books.append(book)
+
+                    def remove_book(self, isbn):
+                        self.books = [book for book in self.books if book.isbn != isbn]
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    library = Library()
+                    for _ in range(n):
+                        command = input().strip().split()
+                        if command[0] == "Add":
+                            title, author, isbn = command[1:]
+                            book = Book(title, author, isbn)
+                            library.add_book(book)
+                        elif command[0] == "Remove":
+                            isbn = command[1]
+                            library.remove_book(isbn)
+                    print(f"Total books: {len(library.books)}")
+      
+      - topic_id: iterators-generators
+        topic_title: Iterators and Generators
+        questions:
+          - id: simple-iterator
+            title: 'Simple Range Iterator'
+            description: |
+              Implement a class `RangeIterator` that iterates over a range of integers from `start` to `end` (inclusive) with a given `step`. The class should implement the iterator protocol (`__iter__` and `__next__`).
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            input: |
+              The input consists of three integers on a single line: `start`, `end`, and `step`.
+              The iterator should produce numbers from `start` to `end` (inclusive) with the given `step`.
+              Print all numbers produced by the iterator, separated by spaces.
+            input_constraints: |
+              - -100 ≤ start, end ≤ 100
+              - 1 ≤ step ≤ 10
+              - start ≤ end
+            starter_code:
+              content: |
+                class RangeIterator:
+                    def __init__(self, start, end, step):
+                        self.start = start
+                        self.end = end
+                        self.step = step
+                    
+                    def __iter__(self):
+                        # TODO: Return iterator object
+                        pass
+                    
+                    def __next__(self):
+                        # TODO: Return next number or raise StopIteration
+                        pass
+
+                if __name__ == "__main__":
+                    start, end, step = map(int, input().split())
+                    iterator = RangeIterator(start, end, step)
+                    print(" ".join(str(x) for x in iterator))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '1 5 1'
+                  expected_output: '1 2 3 4 5'
+                - input: '0 6 2'
+                  expected_output: '0 2 4 6'
+              hidden: true
+              hidden_cases:
+                - input: '2 8 3'
+                  expected_output: '2 5 8'
+            solution:
+              content: |
+                class RangeIterator:
+                    def __init__(self, start, end, step):
+                        self.start = start
+                        self.end = end
+                        self.step = step
+                        self.current = start
+                    
+                    def __iter__(self):
+                        return self
+                    
+                    def __next__(self):
+                        if self.current > self.end:
+                            raise StopIteration
+                        result = self.current
+                        self.current += self.step
+                        return result
+
+                if __name__ == "__main__":
+                    start, end, step = map(int, input().split())
+                    iterator = RangeIterator(start, end, step)
+                    print(" ".join(str(x) for x in iterator))
+
+          - id: fibonacci-generator
+            title: 'Fibonacci Generator'
+            description: |
+              Implement a generator function `fibonacci(n)` that yields the first `n` numbers in the Fibonacci sequence (starting with 0, 1).
+              The sequence is: 0, 1, 1, 2, 3, 5, 8, ...
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            input: |
+              The input is a single integer `n`, the number of Fibonacci numbers to generate.
+              Print the generated numbers, separated by spaces.
+            input_constraints: |
+              - 1 ≤ n ≤ 20
+            starter_code:
+              content: |
+                def fibonacci(n):
+                    # TODO: Implement generator for first n Fibonacci numbers
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(" ".join(str(x) for x in fibonacci(n)))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: '0 1 1 2 3'
+                - input: '7'
+                  expected_output: '0 1 1 2 3 5 8'
+              hidden: true
+              hidden_cases:
+                - input: '3'
+                  expected_output: '0 1 1'
+            solution:
+              content: |
+                def fibonacci(n):
+                    a, b = 0, 1
+                    for _ in range(n):
+                        yield a
+                        a, b = b, a + b
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(" ".join(str(x) for x in fibonacci(n)))
+
+          - id: prime-generator
+            title: 'Prime Number Generator'
+            description: |
+              Implement a generator function `primes_up_to(n)` that yields all prime numbers up to `n` (inclusive).
+              A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            input: |
+              The input is a single integer `n`, the upper bound for generating prime numbers.
+              Print the generated prime numbers, separated by spaces.
+            input_constraints: |
+              - 2 ≤ n ≤ 1000
+            starter_code:
+              content: |
+                def primes_up_to(n):
+                    # TODO: Implement generator for prime numbers up to n
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(" ".join(str(x) for x in primes_up_to(n)))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '10'
+                  expected_output: '2 3 5 7'
+                - input: '20'
+                  expected_output: '2 3 5 7 11 13 17 19'
+              hidden: true
+              hidden_cases:
+                - input: '15'
+                  expected_output: '2 3 5 7 11 13'
+            solution:
+              content: |
+                def primes_up_to(n):
+                    def is_prime(num):
+                        if num < 2:
+                            return False
+                        for i in range(2, int(num ** 0.5) + 1):
+                            if num % i == 0:
+                                return False
+                        return True
+                    
+                    for num in range(2, n + 1):
+                        if is_prime(num):
+                            yield num
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(" ".join(str(x) for x in primes_up_to(n)))
+
+          - id: custom-iterator
+            title: 'Custom String Iterator'
+            description: |
+              Implement a class `StringIterator` that iterates over the characters of a string, skipping any characters specified in a `skip` set.
+              The class should implement the iterator protocol.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            input: |
+              The first input is a string `s`.
+              The second input is a string of characters to skip (each character is unique).
+              Print the characters produced by the iterator, separated by spaces.
+            input_constraints: |
+              - 1 ≤ len(s) ≤ 100
+              - 0 ≤ len(skip) ≤ 26
+              - All characters in `s` and `skip` are lowercase letters.
+            starter_code:
+              content: |
+                class StringIterator:
+                    def __init__(self, s, skip):
+                        self.s = s
+                        self.skip = set(skip)
+                        self.index = 0
+                    
+                    def __iter__(self):
+                        # TODO: Return iterator object
+                        pass
+                    
+                    def __next__(self):
+                        # TODO: Return next valid character or raise StopIteration
+                        pass
+
+                if __name__ == "__main__":
+                    s = input()
+                    skip = input()
+                    iterator = StringIterator(s, skip)
+                    print(" ".join(iterator))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: |
+                    hello
+                    lo
+                  expected_output: 'h e'
+                - input: |
+                    python
+                    p
+                  expected_output: 'y t h o n'
+              hidden: true
+              hidden_cases:
+                - input: |
+                    abcde
+                    bd
+                  expected_output: 'a c e'
+            solution:
+              content: |
+                class StringIterator:
+                    def __init__(self, s, skip):
+                        self.s = s
+                        self.skip = set(skip)
+                        self.index = 0
+                    
+                    def __iter__(self):
+                        return self
+                    
+                    def __next__(self):
+                        while self.index < len(self.s):
+                            char = self.s[self.index]
+                            self.index += 1
+                            if char not in self.skip:
+                                return char
+                        raise StopIteration
+
+                if __name__ == "__main__":
+                    s = input()
+                    skip = input()
+                    iterator = StringIterator(s, skip)
+                    print(" ".join(iterator))
+
+          - id: generator-pipeline
+            title: 'Generator Pipeline'
+            description: |
+              Implement a generator pipeline with two functions:
+              - `square_numbers(n)`: Yields the squares of numbers from 1 to `n`.
+              - `filter_even_squares(n)`: Yields only the even squares from `square_numbers(n)`.
+              Print the even squares, separated by spaces.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 128
+            input: |
+              The input is a single integer `n`, the upper bound for the range of numbers to square.
+            input_constraints: |
+              - 1 ≤ n ≤ 100
+            starter_code:
+              content: |
+                def square_numbers(n):
+                    # TODO: Yield squares of numbers from 1 to n
+                    pass
+
+                def filter_even_squares(n):
+                    # TODO: Yield even squares from square_numbers
+                    pass
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(" ".join(str(x) for x in filter_even_squares(n)))
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '5'
+                  expected_output: '4 16'
+                - input: '10'
+                  expected_output: '4 16 36 64 100'
+              hidden: true
+              hidden_cases:
+                - input: '7'
+                  expected_output: '4 16 36'
+            solution:
+              content: |
+                def square_numbers(n):
+                    for i in range(1, n + 1):
+                        yield i * i
+
+                def filter_even_squares(n):
+                    for square in square_numbers(n):
+                        if square % 2 == 0:
+                            yield square
+
+                if __name__ == "__main__":
+                    n = int(input())
+                    print(" ".join(str(x) for x in filter_even_squares(n)))
+
+          - id: permutation-generator
+            title: 'Permutation Generator'
+            description: |
+              Implement a generator function `permutations(s)` that yields all possible permutations of the input string `s`.
+              Each permutation should be yielded as a string.
+              Print all permutations, one per line.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 128
+            input: |
+              The input is a single string `s`.
+            input_constraints: |
+              - 1 ≤ len(s) ≤ 5
+              - `s` contains only lowercase letters, with no duplicates.
+            starter_code:
+              content: |
+                def permutations(s):
+                    # TODO: Yield all permutations of the string
+                    pass
+
+                if __name__ == "__main__":
+                    s = input()
+                    for perm in permutations(s):
+                        print(perm)
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: 'ab'
+                  expected_output: |
+                    ab
+                    ba
+                - input: 'abc'
+                  expected_output: |
+                    abc
+                    acb
+                    bac
+                    bca
+                    cab
+                    cba
+              hidden: true
+              hidden_cases:
+                - input: 'xy'
+                  expected_output: |
+                    xy
+                    yx
+            solution:
+              content: |
+                def permutations(s):
+                    if len(s) <= 1:
+                        yield s
+                        return
+                    for i in range(len(s)):
+                        char = s[i]
+                        rest = s[:i] + s[i+1:]
+                        for sub_perm in permutations(rest):
+                            yield char + sub_perm
+
+                if __name__ == "__main__":
+                    s = input()
+                    for perm in permutations(s):
+                        print(perm)
 
   - id: javascript-basics
     language: javascript
@@ -1608,35 +1985,97 @@ courses:
                     swap(a, b);
                     rl.close();
                 });
-          - id: js-multiple-declarations
-            title: 'Multiple Variable Declarations'
-            description: Declare multiple variables and assign them different types, then print their values and types.
+
+          - id: js-eval-expression-input
+            title: 'Evaluate Expression from Input'
+            description: >
+              Take three inputs: a number, an operator as a string (`+`, `-`, `*`, `/`), and another number. 
+              Based on the operator, perform the operation and print the result with its type. 
+              This tests your understanding of input parsing, conditionals, and type evaluation in JavaScript.
             complexity: hard
             points: 15
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                // Declare variables of different types and print their values and types
+                // Read inputs from stdin and evaluate the expression
+                // Input format (one per line):
+                // number1
+                // operator (+, -, *, /)
+                // number2
 
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let inputs = [];
+                rl.on('line', (line) => {
+                  inputs.push(line);
+                  if (inputs.length === 3) {
+                    // Process inputs here
+                    
+                    rl.close();
+                  }
+                });
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
+                - input: |
+                    10
+                    +
+                    5
                   expected_output: |
-                    5 number
-                    hello string
-                    true boolean
-                  explanation: 'Variables with different types should be declared and printed.'
-              hidden: true
+                    15 number
+                  explanation: '10 + 5 = 15, and type is number'
+                - input: |
+                    8
+                    /
+                    2
+                  expected_output: |
+                    4 number
+                  explanation: '8 / 2 = 4, and type is number'
+            hidden: true
             solution:
               content: |2-
-                let a = 5;
-                let b = "hello";
-                let c = true;
-                console.log(a + " " + typeof a);
-                console.log(b + " " + typeof b);
-                console.log(c + " " + typeof c);
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let inputs = [];
+                rl.on('line', (line) => {
+                  inputs.push(line);
+                  if (inputs.length === 3) {
+                    const a = Number(inputs[0]);
+                    const op = inputs[1];
+                    const b = Number(inputs[2]);
+
+                    let result;
+                    switch (op) {
+                      case '+':
+                        result = a + b;
+                        break;
+                      case '-':
+                        result = a - b;
+                        break;
+                      case '*':
+                        result = a * b;
+                        break;
+                      case '/':
+                        result = a / b;
+                        break;
+                      default:
+                        console.log("Invalid operator");
+                        return;
+                    }
+
+                    console.log(result + " " + typeof result);
+                    rl.close();
+                  }
+                });
 
 
       - topic_id: Making Decisions with JavaScript
@@ -2014,42 +2453,69 @@ courses:
                     rl.close();
                 });
 
-          - id: js-function-scope
-            title: 'Function Scope Check'
-            description: Demonstrate variable scope inside and outside of a function.
+          - id: js-function-scope-understanding
+            title: 'Scope Understanding'
+            description: >
+              Take a number as input and define a function that attempts to change the value of a variable declared outside the function.
+              Print the value of the variable both inside and outside the function to demonstrate scope behavior in JavaScript.
             complexity: medium
             points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
-              content: |2-
-                let x = 5;
+              content: |-
+                // Read one number from input
+                // Demonstrate how function scope works in JavaScript
+                
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
 
-                function changeX() {
-                    // Your code here
-                }
+                rl.question('', function(input) {
+                  let num = Number(input);
 
-                // Output x here
+                  // Your function definition and logic here
 
+                  rl.close();
+                });
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
-                  expected_output: '5'
+                - input: '7'
+                  expected_output: |
+                    Inside function: 10
+                    Outside function: 7
+                  explanation: 'The function creates a local variable "num" that doesn’t affect the outer variable.'
               hidden: true
               hidden_cases:
-                - input: ''
-                  expected_output: '5'
-            solution:
-              content: |2-
-                let x = 5;
+                - input: '100'
+                  expected_output: |
+                    Inside function: 10
+                    Outside function: 100
+              solution:
+                content: |-
+                  const readline = require('readline');
+                  const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                  });
 
-                function changeX() {
-                    let x = 10;
-                }
+                  rl.question('', function(input) {
+                    let num = Number(input);
 
-                changeX();
-                console.log(x);
+                    function modifyNum() {
+                      let num = 10; // Local scope
+                      console.log("Inside function: " + num);
+                    }
+
+                    modifyNum();
+                    console.log("Outside function: " + num);
+
+                    rl.close();
+                  });
+
 
           - id: js-default-parameters
             title: 'Function with Default Parameters'
@@ -2176,440 +2642,3 @@ courses:
                 console.log(counter());
                 console.log(counter());
 
-      - topic_id: Interacting with Web Pages
-        topic_title: DOM Manipulation
-        short_description: Explore JavaScript arrays and their powerful built-in methods to manipulate and process data effectively.
-        order: 4
-        questions:
-          - id: js-change-text
-            title: 'Change Text of an Element'
-            description: Select a paragraph by ID and change its text content.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                // HTML
-                // <p id="message">Hello</p>
-
-                // JavaScript
-                function updateText() {
-                    // Your code here
-                }
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '<p id="message">Welcome!</p>'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '<p id="message">Welcome!</p>'
-            solution:
-              content: |2-
-                function updateText() {
-                    document.getElementById('message').textContent = 'Welcome!';
-                }
-                updateText();
-
-          - id: js-toggle-class
-            title: 'Toggle a Class on Click'
-            description: Toggle a class "active" on a button when it's clicked.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                // HTML
-                // <button id="myButton">Click me</button>
-
-                // JavaScript
-                function setupButton() {
-                    // Your code here
-                }
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: 'Class toggled on click'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: 'Class toggled on click'
-            solution:
-              content: |2-
-                function setupButton() {
-                    const btn = document.getElementById('myButton');
-                    btn.addEventListener('click', () => {
-                        btn.classList.toggle('active');
-                    });
-                }
-                setupButton();
-
-          - id: js-create-element
-            title: 'Create and Append Element'
-            description: Create a new list item and append it to an unordered list.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                // HTML
-                // <ul id="myList"></ul>
-
-                // JavaScript
-                function addListItem() {
-                    // Your code here
-                }
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '<li>New Item</li> added'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '<li>New Item</li> added'
-            solution:
-              content: |2-
-                function addListItem() {
-                    const ul = document.getElementById('myList');
-                    const li = document.createElement('li');
-                    li.textContent = 'New Item';
-                    ul.appendChild(li);
-                }
-                addListItem();
-
-          - id: js-form-input
-            title: 'Get Input Value and Display'
-            description: Read user input from a text box and display it in a paragraph.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                // HTML
-                // <input type="text" id="username" />
-                // <p id="output"></p>
-
-                // JavaScript
-                function showUsername() {
-                    // Your code here
-                }
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: 'Alex'
-                  expected_output: '<p id="output">Alex</p>'
-              hidden: true
-              hidden_cases:
-                - input: 'Jamie'
-                  expected_output: '<p id="output">Jamie</p>'
-            solution:
-              content: |2-
-                function showUsername() {
-                    const name = document.getElementById('username').value;
-                    document.getElementById('output').textContent = name;
-                }
-
-          - id: js-delete-element
-            title: 'Remove an Element from DOM'
-            description: Remove a specific div from the DOM using JavaScript.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                // HTML
-                // <div id="toRemove">This will be removed</div>
-
-                // JavaScript
-                function removeDiv() {
-                    // Your code here
-                }
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: 'Element removed'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: 'Element removed'
-            solution:
-              content: |2-
-                function removeDiv() {
-                    const el = document.getElementById('toRemove');
-                    el.parentNode.removeChild(el);
-                }
-                removeDiv();
-
-          - id: js-dynamic-table
-            title: 'Generate Table from Array'
-            description: Create a table and populate rows from a given array of objects.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                // HTML
-                // <table id="dataTable"><tbody></tbody></table>
-
-                // JavaScript
-                function populateTable(data) {
-                    // Your code here
-                }
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '[{"name": "Alice"}, {"name": "Bob"}]'
-                  expected_output: '<tr><td>Alice</td></tr><tr><td>Bob</td></tr>'
-              hidden: true
-              hidden_cases:
-                - input: '[{"name": "John"}]'
-                  expected_output: '<tr><td>John</td></tr>'
-            solution:
-              content: |2-
-                function populateTable(data) {
-                    const tbody = document.getElementById('dataTable').querySelector('tbody');
-                    data.forEach(entry => {
-                        const tr = document.createElement('tr');
-                        const td = document.createElement('td');
-                        td.textContent = entry.name;
-                        tr.appendChild(td);
-                        tbody.appendChild(tr);
-                    });
-                }
-
-                const input = prompt();
-                const parsed = JSON.parse(input);
-                populateTable(parsed);
-
-      - topic_id: Managing Data Structures in JavaScript
-        topic_title: Objects and Arrays
-        short_description: Dive deeper into JavaScript array manipulation with advanced methods and techniques.
-        order: 6
-        questions:
-          - id: js-access-object
-            title: 'Access Object Properties'
-            description: Access and print a specific property of an object.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                const person = {
-                  name: "Alice",
-                  age: 25,
-                  city: "New York"
-                };
-
-                function getName(obj) {
-                  // Your code here
-                }
-
-                console.log(getName(person));
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: 'Alice'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: 'Alice'
-            solution:
-              content: |2-
-                function getName(obj) {
-                  return obj.name;
-                }
-
-          - id: js-array-push
-            title: 'Add Element to Array'
-            description: Push an element into an array and return the updated array.
-            complexity: easy
-            points: 5
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function addItem(arr, item) {
-                  // Your code here
-                }
-
-                const myArr = [1, 2, 3];
-                console.log(addItem(myArr, 4));
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '[1,2,3,4]'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '[1,2,3,4]'
-            solution:
-              content: |2-
-                function addItem(arr, item) {
-                  arr.push(item);
-                  return arr;
-                }
-
-          - id: js-merge-objects
-            title: 'Merge Two Objects'
-            description: Merge two JavaScript objects and return the result.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function mergeObjects(obj1, obj2) {
-                  // Your code here
-                }
-
-                const o1 = { a: 1, b: 2 };
-                const o2 = { b: 3, c: 4 };
-                console.log(mergeObjects(o1, o2));
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '{"a":1,"b":3,"c":4}'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '{"a":1,"b":3,"c":4}'
-            solution:
-              content: |2-
-                function mergeObjects(obj1, obj2) {
-                  return { ...obj1, ...obj2 };
-                }
-
-          - id: js-filter-array
-            title: 'Filter Array of Numbers'
-            description: Return an array containing only even numbers.
-            complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function filterEven(arr) {
-                  // Your code here
-                }
-
-                console.log(filterEven([1, 2, 3, 4, 5, 6]));
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '[2,4,6]'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '[2,4,6]'
-            solution:
-              content: |2-
-                function filterEven(arr) {
-                  return arr.filter(num => num % 2 === 0);
-                }
-
-          - id: js-nested-object-access
-            title: 'Access Nested Object'
-            description: Access a deeply nested property in an object.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                const user = {
-                  name: "John",
-                  address: {
-                    city: "LA",
-                    geo: {
-                      lat: 34.05,
-                      lng: -118.25
-                    }
-                  }
-                };
-
-                function getLatitude(obj) {
-                  // Your code here
-                }
-
-                console.log(getLatitude(user));
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '34.05'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '34.05'
-            solution:
-              content: |2-
-                function getLatitude(obj) {
-                  return obj.address.geo.lat;
-                }
-
-          - id: js-group-by-property
-            title: 'Group Objects by Property'
-            description: Group an array of objects by a specified key.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 10
-            memory_limit_mb: 128
-            starter_code:
-              content: |2-
-                function groupBy(arr, key) {
-                  // Your code here
-                }
-
-                const data = [
-                  { category: 'fruit', name: 'apple' },
-                  { category: 'vegetable', name: 'carrot' },
-                  { category: 'fruit', name: 'banana' }
-                ];
-
-                console.log(groupBy(data, 'category'));
-
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: ''
-                  expected_output: '{"fruit":[{"category":"fruit","name":"apple"},{"category":"fruit","name":"banana"}],"vegetable":[{"category":"vegetable","name":"carrot"}]}'
-              hidden: true
-              hidden_cases:
-                - input: ''
-                  expected_output: '{"fruit":[...],"vegetable":[...]}'
-            solution:
-              content: |2-
-                function groupBy(arr, key) {
-                  return arr.reduce((acc, obj) => {
-                    const groupKey = obj[key];
-                    if (!acc[groupKey]) acc[groupKey] = [];
-                    acc[groupKey].push(obj);
-                    return acc;
-                  }, {});
-                }

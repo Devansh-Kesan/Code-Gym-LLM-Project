@@ -1,0 +1,31 @@
+site_name: Travel Planning Assistant
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - Functionality & Usage: functionality.md
+  - Learnings: learnings.md
+  - How to run project: project_run.md
+
+theme:
+  name: material
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tooltips
+    - content.tabs.link
+    - content.code.render
+    - content.code.highlight
+    - content.code.prettify
+markdown_extensions:
+  - pymdownx.details
+  - pymdownx.tabbed
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
