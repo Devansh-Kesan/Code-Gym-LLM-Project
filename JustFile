@@ -1,0 +1,56 @@
+# Always use bash with -c and load .env automatically
+set shell := ["bash", "-cu"]
+set dotenv-load
+
+# Default command: show available commands
+default:
+  just --list
+
+# Setup environment and install dependencies
+setup:
+  uv sync
+
+# Start backend FastAPI server
+start-backend-server:
+  cd backend
+  uv run fastapi run main.py
+
+# Start Prefect server
+start-prefect-server:
+  uv run prefect server start
+
+# Start frontend server (simple Python HTTP server)
+start-frontend-server:
+  uv run python -m http.server 9000
+
+# Build docker images for backend and JS tester
+build-docker-images:
+  @echo "Building Docker images..."
+  uv run docker build -t code-gym-tester-js -f backend/docker/js_tester/Dockerfile .
+  uv run docker build -t code-gym-tester -f backend/docker/tester/Dockerfile .
+  @echo "Docker images built successfully!"
+
+# Start all servers (in background with logging)
+start-all:
+  @echo "Checking and freeing up required ports..."
+  # Kill processes on ports 4200, 8000, and 9000 if occupied
+  uv run bash -c "lsof -ti:4200 | xargs --no-run-if-empty kill -9"
+  uv run bash -c "lsof -ti:8000 | xargs --no-run-if-empty kill -9"
+  uv run bash -c "lsof -ti:9000 | xargs --no-run-if-empty kill -9"
+  @echo "Starting all servers in background..."
+  uv run prefect server start > prefect_server.log 2>&1 &
+  cd backend && uv run fastapi run main.py > ../backend_server.log 2>&1 &
+  uv run python -m http.server 9000 > frontend_server.log 2>&1 &
+  @echo "All servers started! Check log files."
+
+# Stop all running servers
+stop-all:
+  @echo "Stopping all servers..."
+  pkill -f "prefect server start" || true
+  pkill -f "fastapi run main.py" || true
+  pkill -f "python -m http.server 9000" || true
+  echo "All servers stopped."
+
+# Serve documentation locally using MkDocs
+documentation:
+  uv run mkdocs serve
