@@ -319,3 +319,10 @@ def run_javascript_code_all_tests(request: RunCodeRequest) -> dict[str, Any]:
         problem_id=request.question_id,
         hidden=True,
     )
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    # Run the FastAPI app on a custom port
+    uvicorn.run(app, host="0.0.0.0", port=8080)

@@ -12,7 +12,7 @@ setup:
 
 # Start backend FastAPI server
 start-backend-server:
-  cd backend && uv run fastapi run main.py
+  cd backend && uv run uvicorn main:app --port 8080 --reload
 
 # Start Prefect server
 start-prefect-server:

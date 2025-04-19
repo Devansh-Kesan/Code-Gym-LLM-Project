@@ -54,9 +54,9 @@ async function initializeEditorPage() {
 
     try {
         const [res, res1, res2] = await Promise.all([
-            fetch(`http://localhost:8000/courses/${courseId}/topics/${topicId}/questions/${question_id}`),
-            fetch(`http://localhost:8000/courses/${courseId}/topics/${topicId}`),
-            fetch(`http://localhost:8000/courses/${courseId}/`)
+            fetch(`http://localhost:8080/courses/${courseId}/topics/${topicId}/questions/${question_id}`),
+            fetch(`http://localhost:8080/courses/${courseId}/topics/${topicId}`),
+            fetch(`http://localhost:8080/courses/${courseId}/`)
         ]);
 
         const [problem, topic, course] = await Promise.all([res.json(), res1.json(), res2.json()]);
@@ -106,7 +106,7 @@ function setupHintFeature() {
         llmResponse.style.display = "block";
 
         try {
-            const response = await fetch("http://localhost:8000/llm/hint", {
+            const response = await fetch("http://localhost:8080/llm/hint", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title, description, code })
@@ -133,7 +133,7 @@ function setupErrorExplanationFeature() {
         llmResponse.style.display = "block";
 
         try {
-            const response = await fetch("http://localhost:8000/llm/explain-error", {
+            const response = await fetch("http://localhost:8080/llm/explain-error", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title, description, code })
@@ -160,7 +160,7 @@ function setupTestCaseGenerationFeature() {
         llmResponse.style.display = "block";
 
         try {
-            const response = await fetch("http://localhost:8000/llm/test-cases", {
+            const response = await fetch("http://localhost:8080/llm/test-cases", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title, description, code })
@@ -187,7 +187,7 @@ function setupCodeReviewFeature() {
         llmResponse.style.display = "block";
 
         try {
-            const response = await fetch("http://localhost:8000/llm/code-review", {
+            const response = await fetch("http://localhost:8080/llm/code-review", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title, description, code })
@@ -214,7 +214,7 @@ function setupQuestionScaffoldFeature() {
         llmResponse.style.display = "block";
 
         try {
-            const response = await fetch("http://localhost:8000/llm/question-scaffold", {
+            const response = await fetch("http://localhost:8080/llm/question-scaffold", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title, description, code })
@@ -249,7 +249,7 @@ async function runCode(){
         resultContainer.style.display="block";
 
         try{
-            const response= await fetch(`http://localhost:8000/${endpoint}`,{
+            const response= await fetch(`http://localhost:8080/${endpoint}`,{
                 method:"POST",
                 headers:{ "Content-Type":"application/json" },
                 body:JSON.stringify({code:code,question_id:question_id}),
@@ -332,7 +332,7 @@ async function Submit() {
         resultContainer.style.display="block";
 
         try{
-            const response=await fetch(`http://localhost:8000/${endpoint}`,{
+            const response=await fetch(`http://localhost:8080/${endpoint}`,{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({code:code,question_id:question_id})

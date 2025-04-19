@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("question-list");
     const titleEl = document.getElementById("topic-title");
     try {
-      const res = await fetch(`http://localhost:8000/courses/${courseId}/topics/${topicId}`);
+      const res = await fetch(`http://localhost:8080/courses/${courseId}/topics/${topicId}`);
       const topic = await res.json();
       console.log(topic)
       titleEl.textContent = topic.topic_title;

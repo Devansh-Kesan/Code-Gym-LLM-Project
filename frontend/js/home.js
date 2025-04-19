@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("courses");
   
     try {
-      const res = await fetch("http://localhost:8000/courses");
+      const res = await fetch("http://localhost:8080/courses");
       const courses = await res.json();
   
       courses.forEach(course => {
