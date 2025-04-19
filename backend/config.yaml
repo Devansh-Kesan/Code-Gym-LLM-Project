@@ -1952,103 +1952,179 @@ courses:
                     rl.close();
                 });
 
-          - id: js-swap-values
-            title: 'Swap Two Variables Without Temp'
-            description: Swap two values using arithmetic operations without using a third variable.
+          - id: js-memoization-cache
+            title: 'Memoization Cache Implementation'
+            description: >
+              Implement a memoize function that caches results of a computationally expensive function based on its arguments. The function should handle multiple argument types (numbers, strings, objects), maintain a cache with a configurable size limit, and ensure cache hits return the same result without recomputing. This tests your understanding of closures, argument serialization, and cache management in JavaScript.
             complexity: hard
-            points: 15
-            time_limit_seconds: 5
-            memory_limit_mb: 64
+            points: 25
+            time_limit_seconds: 10
+            memory_limit_mb: 128
             starter_code:
               content: |2-
-                function swap(a, b) {
-                    // Your code here
-                }
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
 
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+                  
+                  try {
+                    JSON.parse(jsonInput);
+                    const input = JSON.parse(jsonInput);
+                    
+                    // Implement your memoize function here
+                    function memoize(fn, maxCacheSize) {
+                      // Your implementation here
+                    }
+                    
+                    // Test function
+                    const expensiveFn = (a, b) => {
+                      let result = 0;
+                      for (let i = 0; i < 1000000; i++) result += a + b;
+                      return result;
+                    };
+                    
+                    const memoized = memoize(expensiveFn, input.maxCacheSize);
+                    const results = [
+                      memoized(input.args[0].a, input.args[0].b),
+                      memoized(input.args[1].a, input.args[1].b),
+                      memoized(input.args[0].a, input.args[0].b) // Cache hit
+                    ];
+                    
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
             test_cases:
               hidden: false
               visible_cases:
-                - input: '3 5'
-                  expected_output: '5 3'
+                - input: '{"args":[{"a":1,"b":2},{"a":3,"b":4}],"maxCacheSize":2}'
+                  expected_output: '3000000,7000000,3000000'
+                  explanation: 'The memoize function caches results for [1,2] and [3,4], returning cached result for the second call to [1,2]'
+                - input: '{"args":[{"a":5,"b":6},{"a":7,"b":8}],"maxCacheSize":1}'
+                  expected_output: '11000000,15000000,11000000'
+                  explanation: 'The memoize function respects cache size limit, maintaining only one entry'
               hidden: true
               hidden_cases:
-                - input: '10 20'
-                  expected_output: '20 10'
+                - input: '{"args":[{"a":2,"b":3},{"a":4,"b":5}],"maxCacheSize":3}'
+                  expected_output: '5000000,9000000,5000000'
             solution:
               content: |2-
-                const readline = require('readline');
-
-                const rl = readline.createInterface({
-                    input: process.stdin,
-                    output: process.stdout
-                });
-
-                function swap(a, b) {
-                    a = Number(a);
-                    b = Number(b);
-                    a = a + b;
-                    b = a - b;
-                    a = a - b;
-                    console.log(a + " " + b);
-                }
-
-                rl.on('line', (input) => {
-                    const [a, b] = input.trim().split(" ");
-                    swap(a, b);
-                    rl.close();
-                });
-
-          - id: js-eval-expression-input
-            title: 'Evaluate Expression from Input'
-            description: >
-              Take three inputs: a number, an operator as a string (`+`, `-`, `*`, `/`), and another number. 
-              Based on the operator, perform the operation and print the result with its type. 
-              This tests your understanding of input parsing, conditionals, and type evaluation in JavaScript.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                // Read inputs from stdin and evaluate the expression
-                // Input format (one per line):
-                // number1
-                // operator (+, -, *, /)
-                // number2
-
                 const readline = require('readline');
                 const rl = readline.createInterface({
                   input: process.stdin,
                   output: process.stdout
                 });
 
-                let inputs = [];
+                let jsonInput = '';
                 rl.on('line', (line) => {
-                  inputs.push(line);
-                  if (inputs.length === 3) {
-                    // Process inputs here
+                  jsonInput += line;
+                  
+                  try {
+                    JSON.parse(jsonInput);
+                    const input = JSON.parse(jsonInput);
                     
+                    function memoize(fn, maxCacheSize) {
+                      const cache = new Map();
+                      
+                      return function(...args) {
+                        const key = JSON.stringify(args);
+                        
+                        if (cache.has(key)) {
+                          return cache.get(key);
+                        }
+                        
+                        const result = fn(...args);
+                        
+                        if (cache.size >= maxCacheSize) {
+                          const firstKey = cache.keys().next().value;
+                          cache.delete(firstKey);
+                        }
+                        
+                        cache.set(key, result);
+                        return result;
+                      };
+                    }
+                    
+                    const expensiveFn = (a, b) => {
+                      let result = 0;
+                      for (let i = 0; i < 1000000; i++) result += a + b;
+                      return result;
+                    };
+                    
+                    const memoized = memoize(expensiveFn, input.maxCacheSize);
+                    const results = [
+                      memoized(input.args[0].a, input.args[0].b),
+                      memoized(input.args[1].a, input.args[1].b),
+                      memoized(input.args[0].a, input.args[0].b)
+                    ];
+                    
+                    console.log(results.join(','));
                     rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
+
+          - id: js-longest-increasing-subsequence
+            title: 'Longest Increasing Subsequence Implementation'
+            description: >
+              Implement a function to find the length of the longest increasing subsequence (LIS) in an array of numbers. A subsequence is a sequence derived from the array by deleting some or no elements without changing the order of the remaining elements. The subsequence must be strictly increasing. This tests your understanding of dynamic programming, array manipulation, and JavaScript's control structures.
+            complexity: hard
+            points: 25
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+                  
+                  try {
+                    JSON.parse(jsonInput);
+                    const input = JSON.parse(jsonInput);
+                    
+                    // Implement your longestIncreasingSubsequence function here
+                    function longestIncreasingSubsequence(arr) {
+                      // Your implementation here
+                    }
+                    
+                    // Process each test case
+                    const results = input.testCases.map(testCase => 
+                      longestIncreasingSubsequence(testCase.arr)
+                    );
+                    
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
                   }
                 });
             test_cases:
               hidden: false
               visible_cases:
-                - input: |
-                    10
-                    +
-                    5
-                  expected_output: |
-                    15 number
-                  explanation: '10 + 5 = 15, and type is number'
-                - input: |
-                    8
-                    /
-                    2
-                  expected_output: |
-                    4 number
-                  explanation: '8 / 2 = 4, and type is number'
-            hidden: true
+                - input: '{"testCases":[{"arr":[10,9,2,5,3,7,101,18]},{"arr":[0,1,0,3,2,3]}]}'
+                  expected_output: '4,4'
+                  explanation: 'For [10,9,2,5,3,7,101,18], the LIS is [2,3,7,101] (length 4); for [0,1,0,3,2,3], the LIS is [0,1,2,3] (length 4)'
+                - input: '{"testCases":[{"arr":[7,7,7,7]},{"arr":[1,3,6,7,9,4,10,5,6]}]}'
+                  expected_output: '1,6'
+                  explanation: 'For [7,7,7,7], the LIS is [7] (length 1); for [1,3,6,7,9,4,10,5,6], the LIS is [1,3,6,7,9,10] (length 6)'
+              hidden: true
+              hidden_cases:
+                - input: '{"testCases":[{"arr":[3,10,2,1,20]},{"arr":[50,3,10,7,40,80]}]}'
+                  expected_output: '3,4'
             solution:
               content: |2-
                 const readline = require('readline');
@@ -2057,38 +2133,43 @@ courses:
                   output: process.stdout
                 });
 
-                let inputs = [];
+                let jsonInput = '';
                 rl.on('line', (line) => {
-                  inputs.push(line);
-                  if (inputs.length === 3) {
-                    const a = Number(inputs[0]);
-                    const op = inputs[1];
-                    const b = Number(inputs[2]);
-
-                    let result;
-                    switch (op) {
-                      case '+':
-                        result = a + b;
-                        break;
-                      case '-':
-                        result = a - b;
-                        break;
-                      case '*':
-                        result = a * b;
-                        break;
-                      case '/':
-                        result = a / b;
-                        break;
-                      default:
-                        console.log("Invalid operator");
-                        return;
+                  jsonInput += line;
+                  
+                  try {
+                    JSON.parse(jsonInput);
+                    const input = JSON.parse(jsonInput);
+                    
+                    function longestIncreasingSubsequence(arr) {
+                      if (!arr || arr.length === 0) return 0;
+                      
+                      // dp[i] stores the length of LIS ending at index i
+                      const dp = new Array(arr.length).fill(1);
+                      
+                      // For each position, look back to find valid previous elements
+                      for (let i = 1; i < arr.length; i++) {
+                        for (let j = 0; j < i; j++) {
+                          if (arr[i] > arr[j]) {
+                            dp[i] = Math.max(dp[i], dp[j] + 1);
+                          }
+                        }
+                      }
+                      
+                      // Return the maximum length found
+                      return Math.max(...dp);
                     }
-
-                    console.log(result + " " + typeof result);
+                    
+                    const results = input.testCases.map(testCase => 
+                      longestIncreasingSubsequence(testCase.arr)
+                    );
+                    
+                    console.log(results.join(','));
                     rl.close();
+                  } catch (e) {
+                    // Continue reading input
                   }
                 });
-
 
       - topic_id: Making Decisions with JavaScript
         topic_title: Control Flow and Loops
@@ -2283,95 +2364,205 @@ courses:
                     rl.close();
                 });
 
-          - id: js-factorial-loop
-            title: 'Factorial Using Loop'
-            description: Compute the factorial of a number using a for loop.
+          - id: js-sum-5x5x5-cube
+            title: 'Sum of Numbers in 5x5x5 Cube Implementation'
+            description: >
+              Implement a function to calculate the sum of all numbers in a 5x5x5 cube (a 3D array). The cube is represented as a 3D array where each element is a number. The function should validate the cube's dimensions and handle invalid inputs by returning 0. This tests your understanding of control flow, nested loops, and array processing in JavaScript, requiring complex loop structures to traverse the 3D array.
             complexity: hard
-            points: 15
+            points: 25
+            time_limit_seconds: 10
+            memory_limit_mb: 128
+            starter_code:
+              content: |2-
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+                  
+                  try {
+                    const input = JSON.parse(jsonInput);
+                    
+                    // Implement your sumCube function here
+                    function sumCube(cube) {
+                      // Your implementation here
+                    }
+                    
+                    // Process each test case
+                    const results = input.testCases.map(testCase => 
+                      sumCube(testCase.cube)
+                    );
+                    
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '{"testCases":[{"cube":[[[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]],[[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]],[[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]],[[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]],[[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5],[1,2,3,4,5]]]},{"cube":[[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,1,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]]}]}'
+                  expected_output: '375,1'
+                  explanation: 'For a 5x5x5 cube with all elements as 1 to 5 in each layer, the sum is 1*25 + 2*25 + 3*25 + 4*25 + 5*25 = 375; for a cube with mostly 0s and one 1, the sum is 1'
+                - input: '{"testCases":[{"cube":[[[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],[[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],[[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],[[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],[[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]]]},{"cube":[[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]],[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]],[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]],[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]],[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]]}]}'
+                  expected_output: '250,125'
+                  explanation: 'For a 5x5x5 cube with all 2s, the sum is 2*125 = 250; for a cube with all 1s, the sum is 1*125 = 125'
+              hidden: true
+              hidden_cases:
+                - input: '{"testCases":[{"cube":[[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]]},{"cube":[[[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],[[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],[[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],[[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],[[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]]]}]}'
+                  expected_output: '0,375'
+            solution:
+              content: |2-
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+                  
+                  try {
+                    const input = JSON.parse(jsonInput);
+                    
+                    function sumCube(cube) {
+                      // Validate cube structure
+                      if (!cube || !Array.isArray(cube) || cube.length !== 5) return 0;
+                      for (let i = 0; i < 5; i++) {
+                        if (!Array.isArray(cube[i]) || cube[i].length !== 5) return 0;
+                        for (let j = 0; j < 5; j++) {
+                          if (!Array.isArray(cube[i][j]) || cube[i][j].length !== 5) return 0;
+                          for (let k = 0; k < 5; k++) {
+                            if (typeof cube[i][j][k] !== 'number' || isNaN(cube[i][j][k])) return 0;
+                          }
+                        }
+                      }
+                      
+                      // Calculate sum using nested loops
+                      let sum = 0;
+                      for (let i = 0; i < 5; i++) {
+                        for (let j = 0; j < 5; j++) {
+                          for (let k = 0; k < 5; k++) {
+                            sum += cube[i][j][k];
+                          }
+                        }
+                      }
+                      
+                      return sum;
+                    }
+                    
+                    const results = input.testCases.map(testCase => 
+                      sumCube(testCase.cube)
+                    );
+                    
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
+
+          - id: js-find-longest-increasing-subarray
+            title: 'Find Longest Increasing Subarray'
+            description: >
+              Given an array of integers, find the longest subarray (contiguous elements) where 
+              the elements are in strictly increasing order. Return the length of this subarray and
+              its starting index. If there are multiple such subarrays of the same length, return 
+              the one with the smallest starting index. This exercise tests your understanding of
+              loop control, comparative analysis, and array traversal.
+            complexity: hard
+            points: 20
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function factorial(n) {
-                    // Your code here
-                }
+                // Read an array of integers from stdin
+                // Find the longest strictly increasing subarray
+                // Output format:
+                // length startIndex
 
-            test_cases:
-              hidden: false
-              visible_cases:
-                - input: '5'
-                  expected_output: '120'
-              hidden: true
-              hidden_cases:
-                - input: '7'
-                  expected_output: '5040'
-            solution:
-              content: |2-
                 const readline = require('readline');
-
                 const rl = readline.createInterface({
-                    input: process.stdin,
-                    output: process.stdout
+                  input: process.stdin,
+                  output: process.stdout
                 });
 
-                function factorial(n) {
-                    n = Number(n);
-                    let fact = 1;
-                    for (let i = 1; i <= n; i++) {
-                        fact *= i;
-                    }
-                    console.log(fact);
+                function findLongestIncreasingSubarray(arr) {
+                  // Your code here
                 }
 
                 rl.on('line', (input) => {
-                    factorial(input.trim());
-                    rl.close();
+                  const arr = input.trim().split(' ').map(Number);
+                  const result = findLongestIncreasingSubarray(arr);
+                  console.log(`${result.length} ${result.startIndex}`);
+                  rl.close();
                 });
-
-          - id: js-reverse-number
-            title: 'Reverse a Number'
-            description: Reverse the digits of a number using loops.
-            complexity: hard
-            points: 15
-            time_limit_seconds: 5
-            memory_limit_mb: 64
-            starter_code:
-              content: |2-
-                function reverseNumber(n) {
-                    // Your code here
-                }
-
             test_cases:
               hidden: false
               visible_cases:
-                - input: '1234'
-                  expected_output: '4321'
+                - input: '1 2 3 1 2 3 4 5 1 2'
+                  expected_output: '5 3'
+                  explanation: 'The longest increasing subarray is [1,2,3,4,5] with length 5 starting at index 3'
+                - input: '10 9 8 7 6 5 4'
+                  expected_output: '1 0'
+                  explanation: 'No increasing sequences, so the longest is just one element starting at index 0'
+                - input: '5 6 7 8 1 2 3'
+                  expected_output: '4 0'
+                  explanation: 'The longest increasing subarray is [5,6,7,8] with length 4 starting at index 0'
               hidden: true
-              hidden_cases:
-                - input: '100'
-                  expected_output: '1'
+              hidden_cases: 
+                - input: '1 2 3 3 4 5 6'
+                  expected_output: '3 0'
+                  explanation: 'The strictly increasing property requires each element to be greater than previous'
             solution:
               content: |2-
                 const readline = require('readline');
-
                 const rl = readline.createInterface({
-                    input: process.stdin,
-                    output: process.stdout
+                  input: process.stdin,
+                  output: process.stdout
                 });
 
-                function reverseNumber(n) {
-                    n = Number(n);
-                    let rev = 0;
-                    while (n > 0) {
-                        rev = rev * 10 + (n % 10);
-                        n = Math.floor(n / 10);
+                function findLongestIncreasingSubarray(arr) {
+                  if (arr.length === 0) {
+                    return { length: 0, startIndex: -1 };
+                  }
+                  
+                  let maxLength = 1;
+                  let maxStartIndex = 0;
+                  let currentLength = 1;
+                  let currentStartIndex = 0;
+                  
+                  for (let i = 1; i < arr.length; i++) {
+                    // Check if current element continues the increasing sequence
+                    if (arr[i] > arr[i - 1]) {
+                      currentLength++;
+                      
+                      // Update max if current sequence is longer
+                      if (currentLength > maxLength) {
+                        maxLength = currentLength;
+                        maxStartIndex = currentStartIndex;
+                      }
+                    } else {
+                      // Reset for a new sequence
+                      currentLength = 1;
+                      currentStartIndex = i;
                     }
-                    console.log(rev);
+                  }
+                  
+                  return { length: maxLength, startIndex: maxStartIndex };
                 }
 
                 rl.on('line', (input) => {
-                    reverseNumber(input.trim());
-                    rl.close();
+                  const arr = input.trim().split(' ').map(Number);
+                  const result = findLongestIncreasingSubarray(arr);
+                  console.log(`${result.length} ${result.startIndex}`);
+                  rl.close();
                 });
 
 
@@ -2465,69 +2656,100 @@ courses:
                     rl.close();
                 });
 
-          - id: js-function-scope-understanding
-            title: 'Scope Understanding'
+          - id: js-count-pairs-greater-sum
+            title: 'Count Pairs with Sum Greater Than Target Implementation'
             description: >
-              Take a number as input and define a function that attempts to change the value of a variable declared outside the function.
-              Print the value of the variable both inside and outside the function to demonstrate scope behavior in JavaScript.
+              Implement a function to count the number of distinct pairs in an array whose sum is greater than a given target value. Each pair (i,j) should be counted only once (i.e., (i,j) and (j,i) are the same pair). The function should use block-scoped variables in loops to ensure proper scope management and avoid variable leakage. This tests your understanding of scope (block scope in nested loops) and complex loop traversal in JavaScript.
             complexity: medium
-            points: 10
-            time_limit_seconds: 5
-            memory_limit_mb: 64
+            points: 25
+            time_limit_seconds: 10
+            memory_limit_mb: 128
             starter_code:
-              content: |-
-                // Read one number from input
-                // Demonstrate how function scope works in JavaScript
-                
+              content: |2-
                 const readline = require('readline');
                 const rl = readline.createInterface({
                   input: process.stdin,
                   output: process.stdout
                 });
 
-                rl.question('', function(input) {
-                  let num = Number(input);
-
-                  // Your function definition and logic here
-
-                  rl.close();
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+                  
+                  try {
+                    const input = JSON.parse(jsonInput);
+                    
+                    // Implement your countPairsGreaterThanTarget function here
+                    function countPairsGreaterThanTarget(arr, target) {
+                      // Your implementation here
+                    }
+                    
+                    // Process each test case
+                    const results = input.testCases.map(testCase => 
+                      countPairsGreaterThanTarget(testCase.arr, testCase.target)
+                    );
+                    
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
                 });
             test_cases:
               hidden: false
               visible_cases:
-                - input: '7'
-                  expected_output: |
-                    Inside function: 10
-                    Outside function: 7
-                  explanation: 'The function creates a local variable "num" that doesn’t affect the outer variable.'
+                - input: '{"testCases":[{"arr":[1,2,3,4,5],"target":5},{"arr":[1,1,1,1],"target":2}]}'
+                  expected_output: '6,0'
+                  explanation: 'For [1,2,3,4,5] with target=5, pairs with sum > 5 are (1,5), (2,4), (2,5), (3,4), (3,5), (4,5), so 6; for [1,1,1,1] with target=2, no pairs have sum > 2, so 0'
+                - input: '{"testCases":[{"arr":[3,4,5,6],"target":9},{"arr":[-1,0,1,2],"target":0}]}'
+                  expected_output: '2,4'
+                  explanation: 'For [3,4,5,6] with target=9, pairs with sum > 9 are (4,6), (5,6), (4,5), so 3; for [-1,0,1,2] with target=0, pairs with sum > 0 are (-1,2), (0,1), (0,2), (1,2), (1,1), (-1,1), so 6'
               hidden: true
               hidden_cases:
-                - input: '100'
-                  expected_output: |
-                    Inside function: 10
-                    Outside function: 100
-              solution:
-                content: |-
-                  const readline = require('readline');
-                  const rl = readline.createInterface({
-                    input: process.stdin,
-                    output: process.stdout
-                  });
+                - input: '{"testCases":[{"arr":[10,20,30,40],"target":50},{"arr":[0,0,0],"target":0}]}'
+                  expected_output: '2,0'
+            solution:
+              content: |2-
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
 
-                  rl.question('', function(input) {
-                    let num = Number(input);
-
-                    function modifyNum() {
-                      let num = 10; // Local scope
-                      console.log("Inside function: " + num);
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+                  
+                  try {
+                    const input = JSON.parse(jsonInput);
+                    
+                    function countPairsGreaterThanTarget(arr, target) {
+                      if (!arr || arr.length < 2) return 0;
+                      
+                      let count = 0;
+                      
+                      // Use nested loops with block scope to count pairs
+                      for (let i = 0; i < arr.length - 1; i++) {
+                        for (let j = i + 1; j < arr.length; j++) {
+                          if (arr[i] + arr[j] > target) {
+                            count++;
+                          }
+                        }
+                      }
+                      
+                      return count;
                     }
-
-                    modifyNum();
-                    console.log("Outside function: " + num);
-
+                    
+                    const results = input.testCases.map(testCase => 
+                      countPairsGreaterThanTarget(testCase.arr, testCase.target)
+                    );
+                    
+                    console.log(results.join(','));
                     rl.close();
-                  });
-
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
 
           - id: js-default-parameters
             title: 'Function with Default Parameters'
@@ -2572,28 +2794,223 @@ courses:
                     rl.close();
                 });
 
-          - id: js-recursive-factorial
-            title: 'Recursive Factorial Function'
-            description: Use recursion to find the factorial of a number.
+          - id: js-find-max-in-array
+            title: 'Find Maximum Element in Array'
+            description: >
+              Implement a function to find the maximum element in a given array of integers.
+              The function should validate that the input is a proper array of numbers and return
+              the maximum value. It should use block-scoped variables (`let`/`const`) and avoid
+              using built-in methods like `Math.max`. This tests your understanding of loops,
+              conditionals, and input validation in JavaScript.
             complexity: hard
-            points: 15
+            points: 10
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function factorial(n) {
-                    // Your code here
-                }
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
 
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+
+                  try {
+                    const input = JSON.parse(jsonInput);
+
+                    function findMax(arr) {
+                      // Your implementation here
+                    }
+
+                    const results = input.testCases.map(testCase =>
+                      findMax(testCase.array)
+                    );
+
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
             test_cases:
               hidden: false
               visible_cases:
-                - input: '5'
-                  expected_output: '120'
+                - input: '{"testCases":[{"array":[1, 2, 3, 4, 5]},{"array":[-10, -20, -3, -4]}]}'
+                  expected_output: '5,-3'
+                  explanation: 'In the first array, 5 is the largest. In the second array, -3 is the maximum.'
+                - input: '{"testCases":[{"array":[42]},{"array":[0, 0, 0, 0]}]}'
+                  expected_output: '42,0'
+                  explanation: 'Single-element array returns 42. All-zero array has maximum 0.'
               hidden: true
               hidden_cases:
-                - input: '6'
-                  expected_output: '720'
+                - input: '{"testCases":[{"array":[100, 200, 150, 300, 50]},{"array":[-1, -1, -1, -1]}]}'
+                  expected_output: '300,-1'
+            solution:
+              content: |2-
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+
+                  try {
+                    const input = JSON.parse(jsonInput);
+
+                    function findMax(arr) {
+                      if (!Array.isArray(arr) || arr.length === 0) return null;
+
+                      let max = arr[0];
+                      for (let i = 1; i < arr.length; i++) {
+                        if (typeof arr[i] !== 'number' || isNaN(arr[i])) return null;
+                        if (arr[i] > max) {
+                          max = arr[i];
+                        }
+                      }
+
+                      return max;
+                    }
+
+                    const results = input.testCases.map(testCase =>
+                      findMax(testCase.array)
+                    );
+
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
+
+          - id: js-find-min-in-array
+            title: 'Find Minimum Element in Array'
+            description: >
+              Implement a function to find the minimum element in a given array of integers.
+              The function must ensure that the input is a valid array of numbers and should return
+              the minimum value. Avoid using built-in methods like `Math.min`. Use block-scoped variables
+              (`let`/`const`) and appropriate input validation. This task tests your understanding of
+              loops, conditionals, and variable scoping in JavaScript.
+            complexity: hard
+            points: 10
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+
+                  try {
+                    const input = JSON.parse(jsonInput);
+
+                    function findMin(arr) {
+                      // Your implementation here
+                    }
+
+                    const results = input.testCases.map(testCase =>
+                      findMin(testCase.array)
+                    );
+
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '{"testCases":[{"array":[5, 4, 3, 2, 1]},{"array":[10, 20, 5, 30]}]}'
+                  expected_output: '1,5'
+                  explanation: 'In the first array, 1 is the smallest. In the second array, 5 is the smallest.'
+                - input: '{"testCases":[{"array":[0]},{"array":[100, 100, 100]}]}'
+                  expected_output: '0,100'
+                  explanation: 'Single element and uniform values are handled correctly.'
+              hidden: true
+              hidden_cases:
+                - input: '{"testCases":[{"array":[-5, -10, -3, -1]},{"array":[42, -7, 0, 7]}]}'
+                  expected_output: '-10,-7'
+            solution:
+              content: |2-
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout
+                });
+
+                let jsonInput = '';
+                rl.on('line', (line) => {
+                  jsonInput += line;
+
+                  try {
+                    const input = JSON.parse(jsonInput);
+
+                    function findMin(arr) {
+                      if (!Array.isArray(arr) || arr.length === 0) return null;
+
+                      let min = arr[0];
+                      for (let i = 1; i < arr.length; i++) {
+                        if (typeof arr[i] !== 'number' || isNaN(arr[i])) return null;
+                        if (arr[i] < min) {
+                          min = arr[i];
+                        }
+                      }
+
+                      return min;
+                    }
+
+                    const results = input.testCases.map(testCase =>
+                      findMin(testCase.array)
+                    );
+
+                    console.log(results.join(','));
+                    rl.close();
+                  } catch (e) {
+                    // Continue reading input
+                  }
+                });
+
+      # Arrays and Objects
+      - topic_id: arrays-and-objects
+        topic_title: Arrays and Objects
+        short_description: Learn how to work with collections of data using arrays and objects. Master techniques for storing, accessing, and manipulating structured data in JavaScript.
+        order: 4
+        questions:
+          - id: js-array-sum
+            title: 'Sum Array Elements'
+            description: Create a function that calculates the sum of all elements in an array.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function sumArray(numbers) {
+                    // Your code here
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '[1, 2, 3, 4, 5]'
+                  expected_output: '15'
+                - input: '[10, 20, 30]'
+                  expected_output: '60'
+              hidden: true
+              hidden_cases:
+                - input: '[-1, 2, -3, 4]'
+                  expected_output: '2'
             solution:
               content: |2-
                 const readline = require('readline');
@@ -2603,53 +3020,948 @@ courses:
                     output: process.stdout
                 });
 
-                function factorial(n) {
-                    n = Number(n);
-                    if (n === 0) return 1;
-                    return n * factorial(n - 1);
+                function sumArray(numbers) {
+                    return numbers.reduce((sum, current) => sum + current, 0);
                 }
 
                 rl.on('line', (input) => {
-                    console.log(factorial(input.trim()));
+                    const numbers = JSON.parse(input);
+                    console.log(sumArray(numbers));
                     rl.close();
                 });
 
-          - id: js-closure-counter
-            title: 'Closure Counter'
-            description: Demonstrate closures by creating a counter function that remembers its state.
+          # - id: js-find-object-property
+          #   title: 'Find Object Property'
+          #   description: Create a function that finds and returns the value of a specific property in an object.
+          #   complexity: easy
+          #   points: 5
+          #   time_limit_seconds: 5
+          #   memory_limit_mb: 64
+          #   starter_code:
+          #     content: |2-
+          #       function findProperty(obj, key) {
+          #           // Your code here
+          #       }
+          #   test_cases:
+          #     hidden: false
+          #     visible_cases:
+          #       - input: "{'name': 'John', 'age': 30}\nname"
+          #         expected_output: 'John'
+          #       - input: "{'city': 'New York', 'country': 'USA'}\ncountry"
+          #         expected_output: 'USA'
+          #     hidden: true
+          #     hidden_cases:
+          #       - input: |
+          #           {"a": 1, "b": 2, "c": 3}
+          #           b
+          #         expected_output: '2'
+          #   solution:
+          #     content: |2-
+          #       const readline = require('readline');
+
+          #       const rl = readline.createInterface({
+          #           input: process.stdin,
+          #           output: process.stdout
+          #       });
+
+          #       function findProperty(obj, key) {
+          #           return obj[key];
+          #       }
+
+          #       const lines = [];
+          #       rl.on('line', (line) => {
+          #           lines.push(line);
+          #           if (lines.length === 2) {
+          #               const obj = JSON.parse(lines[0]);
+          #               const key = lines[1];
+          #               console.log(findProperty(obj, key));
+          #               rl.close();
+          #           }
+          #       });
+
+          - id: js-filter-array
+            title: 'Filter Array'
+            description: Create a function that filters an array to include only elements that meet a specific condition.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function filterEvens(numbers) {
+                    // Your code here
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '[1, 2, 3, 4, 5, 6]'
+                  expected_output: '[2,4,6]'
+                - input: '[11, 22, 33, 44]'
+                  expected_output: '[22,44]'
+              hidden: true
+              hidden_cases:
+                - input: '[100, 101, 102, 103, 104]'
+                  expected_output: '[100,102,104]'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                function filterEvens(numbers) {
+                    return numbers.filter(num => num % 2 === 0);
+                }
+
+                rl.on('line', (input) => {
+                    const numbers = JSON.parse(input);
+                    console.log(JSON.stringify(filterEvens(numbers)));
+                    rl.close();
+                });
+
+          - id: js-merge-objects
+            title: 'Merge Objects'
+            description: Create a function that merges two objects, with the second object's properties overriding the first when there are conflicts.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function mergeObjects(obj1, obj2) {
+                    // Your code here
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: |
+                    {"a": 1, "b": 2}
+                    {"b": 3, "c": 4}
+                  expected_output: '{"a":1,"b":3,"c":4}'
+                - input: |
+                    {"name": "John"}
+                    {"age": 30}'
+                  expected_output: '{"name":"John","age":30}'
+              hidden: true
+              hidden_cases:
+                - input: |
+                    {"x": 10, "y": 20}
+                    {"x": 30, "z": 40}
+                  expected_output: '{"x":30,"y":20,"z":40}'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                function mergeObjects(obj1, obj2) {
+                    return { ...obj1, ...obj2 };
+                }
+
+                const lines = [];
+                rl.on('line', (line) => {
+                    lines.push(line);
+                    if (lines.length === 2) {
+                        const obj1 = JSON.parse(lines[0]);
+                        const obj2 = JSON.parse(lines[1]);
+                        console.log(JSON.stringify(mergeObjects(obj1, obj2)));
+                        rl.close();
+                    }
+                });
+
+          - id: js-deep-clone
+            title: 'Deep Clone Object'
+            description: Create a function that creates a deep clone of a nested object (without using JSON methods).
             complexity: hard
             points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function deepClone(obj) {
+                    // Your code here
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '{"a": 1, "b": {"c": 2}}'
+                  expected_output: 'true'
+                - input: '{"x": [1, 2, {"y": 3}]}'
+                  expected_output: 'true'
+              hidden: true
+              hidden_cases:
+                - input: '{"a": 1, "b": null, "c": {"d": [1, 2, 3]}}'
+                  expected_output: 'true'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                function deepClone(obj) {
+                    if (obj === null || typeof obj !== 'object') {
+                        return obj;
+                    }
+                    
+                    let clone = Array.isArray(obj) ? [] : {};
+                    
+                    for (let key in obj) {
+                        if (obj.hasOwnProperty(key)) {
+                            clone[key] = deepClone(obj[key]);
+                        }
+                    }
+                    
+                    return clone;
+                }
+
+                rl.on('line', (input) => {
+                    const original = JSON.parse(input);
+                    const cloned = deepClone(original);
+                    
+                    // Test if clone is deep
+                    const result = isDeepClone(original, cloned);
+                    console.log(result);
+                    rl.close();
+                });
+
+                function isDeepClone(original, clone) {
+                    // Check if different objects
+                    if (original === clone) return false;
+                    
+                    // Check if structures match
+                    if (typeof original !== typeof clone) return false;
+                    
+                    if (Array.isArray(original) !== Array.isArray(clone)) return false;
+                    
+                    // Handle array case
+                    if (Array.isArray(original)) {
+                        if (original.length !== clone.length) return false;
+                        
+                        for (let i = 0; i < original.length; i++) {
+                            if (typeof original[i] === 'object' && original[i] !== null) {
+                                if (!isDeepClone(original[i], clone[i])) return false;
+                            } else if (original[i] !== clone[i]) return false;
+                        }
+                    } 
+                    // Handle object case
+                    else if (typeof original === 'object' && original !== null) {
+                        const origKeys = Object.keys(original);
+                        const cloneKeys = Object.keys(clone);
+                        
+                        if (origKeys.length !== cloneKeys.length) return false;
+                        
+                        for (let key of origKeys) {
+                            if (!clone.hasOwnProperty(key)) return false;
+                            
+                            if (typeof original[key] === 'object' && original[key] !== null) {
+                                if (!isDeepClone(original[key], clone[key])) return false;
+                            } else if (original[key] !== clone[key]) return false;
+                        }
+                    }
+                    
+                    return true;
+                }
+
+          - id: js-array-flatten
+            title: 'Flatten Nested Arrays'
+            description: Create a function that flattens a deeply nested array structure into a single-level array.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function flattenArray(arr) {
+                    // Your code here
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '[1, [2, 3], [4, [5, 6]]]'
+                  expected_output: '[1,2,3,4,5,6]'
+                - input: '[[1, 2], [3, [4, [5]]]]'
+                  expected_output: '[1,2,3,4,5]'
+              hidden: true
+              hidden_cases:
+                - input: '[[[1], [2]], [[[3, 4]]], 5]'
+                  expected_output: '[1,2,3,4,5]'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                function flattenArray(arr) {
+                    let result = [];
+                    
+                    function flatten(items) {
+                        for (let item of items) {
+                            if (Array.isArray(item)) {
+                                flatten(item);
+                            } else {
+                                result.push(item);
+                            }
+                        }
+                    }
+                    
+                    flatten(arr);
+                    return result;
+                }
+
+                rl.on('line', (input) => {
+                    const arr = JSON.parse(input);
+                    console.log(JSON.stringify(flattenArray(arr)));
+                    rl.close();
+                });
+
+      # Error Handling
+      - topic_id: error-handling
+        topic_title: Error Handling and Debugging
+        short_description: Learn how to anticipate, catch, and handle errors in your JavaScript code. Master techniques for debugging and writing robust code that can recover from unexpected situations.
+        order: 5
+        questions:
+          - id: js-try-catch-basics
+            title: 'Basic Try-Catch'
+            description: Create a function that uses try-catch to handle potential errors when parsing JSON.
+            complexity: easy
+            points: 5
             time_limit_seconds: 5
             memory_limit_mb: 64
             starter_code:
               content: |2-
-                function createCounter() {
+                function safeParse(jsonString) {
                     // Your code here
                 }
-
-                const counter = createCounter();
-                console.log(counter()); // 1
-                console.log(counter()); // 2
-
             test_cases:
               hidden: false
               visible_cases:
-                - input: ''
-                  expected_output: '1\n2'
+                - input: '{"name": "John"}'
+                  expected_output: '{"name":"John"}'
+                - input: '{invalid json}'
+                  expected_output: 'Error: Invalid JSON'
               hidden: true
               hidden_cases:
-                - input: ''
-                  expected_output: '1\n2'
+                - input: '[1, 2, 3]'
+                  expected_output: '[1,2,3]'
             solution:
               content: |2-
-                function createCounter() {
-                    let count = 0;
-                    return function () {
-                        count += 1;
-                        return count;
-                    };
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                function safeParse(jsonString) {
+                    try {
+                        return JSON.parse(jsonString);
+                    } catch (error) {
+                        return "Error: Invalid JSON";
+                    }
                 }
 
-                const counter = createCounter();
-                console.log(counter());
-                console.log(counter());
+                rl.on('line', (input) => {
+                    const result = safeParse(input);
+                    console.log(typeof result === 'string' ? result : JSON.stringify(result));
+                    rl.close();
+                });
+
+          - id: js-error-propagation
+            title: 'Error Propagation'
+            description: Create a function that checks if input is valid before processing it, throwing appropriate errors.
+            complexity: easy
+            points: 5
+            time_limit_seconds: 5
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function divide(a, b) {
+                    // Your code here
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "10\n2"
+                  expected_output: '5'
+                - input: "8\n0"
+                  expected_output: 'Error'
+              hidden: true
+              hidden_cases:
+                - input: "15\n3"
+                  expected_output: '5'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                function divide(a, b) {
+                    if (b === 0) {
+                        throw new Error("Error");
+                    }
+                    return a / b;
+                }
+
+                const lines = [];
+                rl.on('line', (line) => {
+                    lines.push(line);
+                    if (lines.length === 2) {
+                        const a = parseInt(lines[0]);
+                        const b = parseInt(lines[1]);
+                        
+                        try {
+                            const result = divide(a, b);
+                            console.log(result);
+                        } catch (error) {
+                            console.log(error.message);
+                        }
+                        
+                        rl.close();
+                    }
+                });
+
+          - id: js-custom-error
+            title: 'Custom Error Types'
+            description: Create custom error types and use them in a validation function.
+            complexity: medium
+            points: 10
+            time_limit_seconds: 10
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                // Define custom error types and validation function here
+                function validateUser(user) {
+                    // Your code here
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '{"username": "john", "age": 25}'
+                  expected_output: 'Valid user'
+                - input: '{"username": "j", "age": 25}'
+                  expected_output: 'ValidationError: Username must be at least 3 characters'
+              hidden: true
+              hidden_cases:
+                - input: '{"username": "john", "age": 15}'
+                  expected_output: 'ValidationError: User must be at least 18 years old'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                class ValidationError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = 'ValidationError';
+                    }
+                }
+
+                function validateUser(user) {
+                    if (user.username.length < 3) {
+                        throw new ValidationError('Username must be at least 3 characters');
+                    }
+                    
+                    if (user.age < 18) {
+                        throw new ValidationError('User must be at least 18 years old');
+                    }
+                    
+                    return 'Valid user';
+                }
+
+                rl.on('line', (input) => {
+                    const user = JSON.parse(input);
+                    
+                    try {
+                        const result = validateUser(user);
+                        console.log(result);
+                    } catch (error) {
+                        console.log(`${error.name}: ${error.message}`);
+                    }
+                    
+                    rl.close();
+                });
+
+          # - id: js-promise-error
+          #   title: 'Promise Error Handling'
+          #   description: Create a function that uses promises and properly handles errors.
+          #   complexity: medium
+          #   points: 10
+          #   time_limit_seconds: 10
+          #   memory_limit_mb: 64
+          #   starter_code:
+          #     content: |2-
+          #       function fetchData(shouldSucceed) {
+          #           // Your code here
+          #       }
+                
+          #       // Test function (already implemented)
+          #       function testFetch(shouldSucceed) {
+          #           fetchData(shouldSucceed)
+          #               .then(data => console.log(data))
+          #               .catch(error => console.log(error));
+          #       }
+          #   test_cases:
+          #     hidden: false
+          #     visible_cases:
+          #       - input: 'true'
+          #         expected_output: 'Data retrieved successfully'
+          #       - input: 'false'
+          #         expected_output: 'Failed to fetch data'
+          #     hidden: true
+          #     hidden_cases:
+          #       - input: 'true'
+          #         expected_output: 'Data retrieved successfully'
+          #   solution:
+          #     content: |2-
+          #       const readline = require('readline');
+
+          #       const rl = readline.createInterface({
+          #           input: process.stdin,
+          #           output: process.stdout
+          #       });
+
+          #       function fetchData(shouldSucceed) {
+          #           return new Promise((resolve, reject) => {
+          #               if (shouldSucceed === true || shouldSucceed === 'true') {
+          #                   resolve('Data retrieved successfully');
+          #               } else {
+          #                   reject('Failed to fetch data');
+          #               }
+          #           });
+          #       }
+                
+          #       // Test function
+          #       function testFetch(shouldSucceed) {
+          #           fetchData(shouldSucceed)
+          #               .then(data => console.log(data))
+          #               .catch(error => console.log(error));
+          #       }
+
+          #       rl.on('line', (input) => {
+          #           testFetch(input);
+          #           // Note: For this test to work completely we would need to handle the asynchronous nature
+          #           // In real scenarios, we'd close rl when the Promise is settled
+          #           setTimeout(() => {
+          #               rl.close();
+          #           }, 100);
+          #       });
+
+          - id: js-error-boundaries
+            title: 'Function Error Boundaries'
+            description: Create a higher-order function that wraps another function with error handling.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                function withErrorHandling(fn, fallback) {
+                    // Your code here
+                }
+                
+                // Example functions to test with
+                function divide(a, b) {
+                    if (b === 0) throw new Error("Division by zero");
+                    return a / b;
+                }
+                
+                function parse(str) {
+                    return JSON.parse(str);
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: "divide\n10\n2"
+                  expected_output: '5'
+                - input: "divide\n10\n0"
+                  expected_output: 'Error occurred: Division by zero'
+              hidden: true
+              hidden_cases:
+                - input: 'parse\n{"name":"John"}'
+                  expected_output: '{"name":"John"}'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                function withErrorHandling(fn, fallback) {
+                    return function(...args) {
+                        try {
+                            return fn(...args);
+                        } catch (error) {
+                            if (fallback) {
+                                return fallback(error);
+                            }
+                            return `Error occurred: ${error.message}`;
+                        }
+                    };
+                }
+                
+                // Example functions
+                function divide(a, b) {
+                    if (b === 0) throw new Error("Division by zero");
+                    return a / b;
+                }
+                
+                function parse(str) {
+                    return JSON.parse(str);
+                }
+                
+                const lines = [];
+                rl.on('line', (line) => {
+                    lines.push(line);
+                    
+                    if (lines[0] === 'divide' && lines.length === 3) {
+                        const safeDivide = withErrorHandling(divide);
+                        const result = safeDivide(parseInt(lines[1]), parseInt(lines[2]));
+                        console.log(result);
+                        rl.close();
+                    } else if (lines[0] === 'parse' && lines.length === 2) {
+                        const safeParse = withErrorHandling(parse);
+                        const result = safeParse(lines[1]);
+                        console.log(typeof result === 'object' ? JSON.stringify(result) : result);
+                        rl.close();
+                    }
+                });
+
+          - id: js-async-error-chain
+            title: 'Async Error Chain'
+            description: Create a chain of asynchronous operations with proper error handling throughout the chain.
+            complexity: hard
+            points: 15
+            time_limit_seconds: 15
+            memory_limit_mb: 64
+            starter_code:
+              content: |2-
+                async function processData(input) {
+                    // Your code here
+                }
+                
+                // Helper functions
+                async function validateInput(input) {
+                    if (typeof input !== 'number' || isNaN(input)) {
+                        throw new Error('Invalid input: must be a number');
+                    }
+                    return input;
+                }
+                
+                async function doubleValue(value) {
+                    return value * 2;
+                }
+                
+                async function addTen(value) {
+                    return value + 10;
+                }
+                
+                async function finalCheck(value) {
+                    if (value > 100) {
+                        throw new Error('Value too large');
+                    }
+                    return value;
+                }
+            test_cases:
+              hidden: false
+              visible_cases:
+                - input: '20'
+                  expected_output: 'Final result: 50'
+                - input: 'abc'
+                  expected_output: 'Error: Invalid input: must be a number'
+              hidden: true
+              hidden_cases:
+                - input: '50'
+                  expected_output: 'Error: Value too large'
+            solution:
+              content: |2-
+                const readline = require('readline');
+
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout
+                });
+
+                async function processData(input) {
+                    try {
+                        // Parse input to number
+                        const parsedInput = Number(input);
+                        
+                        // Chain of operations
+                        const validated = await validateInput(parsedInput);
+                        const doubled = await doubleValue(validated);
+                        const withAddition = await addTen(doubled);
+                        const finalValue = await finalCheck(withAddition);
+                        
+                        return `Final result: ${finalValue}`;
+                    } catch (error) {
+                        return `Error: ${error.message}`;
+                    }
+                }
+                
+                // Helper functions
+                async function validateInput(input) {
+                    if (typeof input !== 'number' || isNaN(input)) {
+                        throw new Error('Invalid input: must be a number');
+                    }
+                    return input;
+                }
+                
+                async function doubleValue(value) {
+                    return value * 2;
+                }
+                
+                async function addTen(value) {
+                    return value + 10;
+                }
+                
+                async function finalCheck(value) {
+                    if (value > 100) {
+                        throw new Error('Value too large');
+                    }
+                    return value;
+                }
+
+                rl.on('line', async (input) => {
+                    const result = await processData(input);
+                    console.log(result);
+                    rl.close();
+                });
+
+      # # Asynchronous JavaScript
+      # - topic_id: async-javascript
+      #   topic_title: Asynchronous JavaScript
+      #   short_description: Learn how to handle operations that take time to complete using callbacks, promises, and async/await. Master techniques for managing concurrent operations and handling asynchronous data flows.
+      #   order: 6
+      #   questions:
+      #     - id: js-basic-timeout
+      #       title: 'Basic Timeout'
+      #       description: Create a function that uses setTimeout to delay execution.
+      #       complexity: easy
+      #       points: 5
+      #       time_limit_seconds: 5
+      #       memory_limit_mb: 64
+      #       starter_code:
+      #         content: |2-
+      #           function delayedGreeting(name) {
+      #               // Your code here
+      #           }
+      #       test_cases:
+      #         hidden: false
+      #         visible_cases:
+      #           - input: 'John'
+      #             expected_output: 'Hello, John!'
+      #           - input: 'Alice'
+      #             expected_output: 'Hello, Alice!'
+      #         hidden: true
+      #         hidden_cases:
+      #           - input: 'Bob'
+      #             expected_output: 'Hello, Bob!'
+      #       solution:
+      #         content: |2-
+      #           const readline = require('readline');
+
+      #           const rl = readline.createInterface({
+      #               input: process.stdin,
+      #               output: process.stdout
+      #           });
+
+      #           function delayedGreeting(name) {
+      #               // For testing purposes, we'll make it immediate instead of truly delayed
+      #               console.log(`Hello, ${name}!`);
+      #           }
+
+      #           rl.on('line', (input) => {
+      #               delayedGreeting(input);
+      #               rl.close();
+      #           });
+                
+      #           // Note: In a real implementation with setTimeout, we'd need to handle
+      #           // the asynchronous nature differently for testing.
+
+      #     - id: js-callback-function
+      #       title: 'Callback Function'
+      #       description: Create a function that takes a callback and executes it with a transformed input.
+      #       complexity: easy
+      #       points: 5
+      #       time_limit_seconds: 5
+      #       memory_limit_mb: 64
+      #       starter_code:
+      #         content: |2-
+      #           function processWithCallback(data, callback) {
+      #               // Your code here
+      #           }
+      #       test_cases:
+      #         hidden: false
+      #         visible_cases:
+      #           - input: '5'
+      #             expected_output: 'Processed result: 10'
+      #           - input: '20'
+      #             expected_output: 'Processed result: 40'
+      #         hidden: true
+      #         hidden_cases:
+      #           - input: '0'
+      #             expected_output: 'Processed result: 0'
+      #       solution:
+      #         content: |2-
+      #           const readline = require('readline');
+
+      #           const rl = readline.createInterface({
+      #               input: process.stdin,
+      #               output: process.stdout
+      #           });
+
+      #           function processWithCallback(data, callback) {
+      #               // Double the value and pass to callback
+      #               const result = data * 2;
+      #               callback(result);
+      #           }
+
+      #           rl.on('line', (input) => {
+      #               const number = parseInt(input);
+      #               processWithCallback(number, (result) => {
+      #                   console.log(`Processed result: ${result}`);
+      #                   rl.close();
+      #               });
+      #           });
+
+      #     - id: js-basic-promise
+      #       title: 'Basic Promise'
+      #       description: Create a function that returns a promise which resolves with a transformed value.
+      #       complexity: medium
+      #       points: 10
+      #       time_limit_seconds: 10
+      #       memory_limit_mb: 64
+      #       starter_code:
+      #         content: |2-
+      #           function multiplyAsync(num) {
+      #               // Your code here
+      #           }
+                
+      #           // Test function
+      #           function testMultiply(input) {
+      #               multiplyAsync(input)
+      #                   .then(result => console.log(`Result: ${result}`))
+      #                   .catch(error => console.log(`Error: ${error.message}`));
+      #           }
+      #       test_cases:
+      #         hidden: false
+      #         visible_cases:
+      #           - input: '5'
+      #             expected_output: 'Result: 15'
+      #           - input: '10'
+      #             expected_output: 'Result: 30'
+      #         hidden: true
+      #         hidden_cases:
+      #           - input: '-2'
+      #             expected_output: 'Result: -6'
+      #       solution:
+      #         content: |2-
+      #           const readline = require('readline');
+
+      #           const rl = readline.createInterface({
+      #               input: process.stdin,
+      #               output: process.stdout
+      #           });
+
+      #           function multiplyAsync(num) {
+      #               return new Promise((resolve, reject) => {
+      #                   const parsedNum = Number(num);
+                        
+      #                   if (isNaN(parsedNum)) {
+      #                       reject(new Error('Input must be a number'));
+      #                   } else {
+      #                       resolve(parsedNum * 3);
+      #                   }
+      #               });
+      #           }
+                
+      #           // Test function
+      #           function testMultiply(input) {
+      #               multiplyAsync(input)
+      #                   .then(result => console.log(`Result: ${result}`))
+      #                   .catch(error => console.log(`Error: ${error.message}`));
+      #           }
+
+      #           rl.on('line', (input) => {
+      #               testMultiply(input);
+      #               // Need to handle the asynchronous nature for testing
+      #               setTimeout(() => {
+      #                   rl.close();
+      #               }, 100);
+      #           });
+
+      #     - id: js-promise-chain
+      #       title: 'Promise Chain'
+      #       description: Create a series of functions that use promise chaining to process data in sequence.
+      #       complexity: medium
+      #       points: 10
+      #       time_limit_seconds: 10
+      #       memory_limit_mb: 64
+      #       starter_code:
+      #         content: |2-
+      #           function fetchNumber(value) {
+      #               // Your code here
+      #           }
+                
+      #           function double(value) {
+      #               // Your code here
+      #           }
+                
+      #           function addTen(value) {
+      #               // Your code here
+      #           }
+                
+      #           // Test function
+      #           function processValue(input) {
+      #               fetchNumber(input)
+      #                   .then(double)
+      #                   .then(addTen)
+      #                   .then(result => console.log(`Final result: ${result}`))
+      #                   .catch(error => console.log(`Error: ${error.message}`));
+      #           }
+      #       test_cases:
+      #         hidden: false
+      #         visible_cases:
+      #           - input: '5'
+      #             expected_output: 'Final result: 20'
+      #           - input: '10'
+      #             expected_output: 'Final result: 30'
+      #         hidden: true
+      #         hidden_cases:
+      #           - input: '0'
+      #             expected_output: 'Final result: 10'
+      #       solution:
+      #         content: |2-
+      #           const readline = require('readline');
+
+      #           const rl = readline.createInterface({
+      #               input: process.stdin,
+      #               output: process.stdout
+      #           });
+
+      #           function fetchNumber(value) {
+      #               return new Promise((resolve, reject) => {
+      #                   const parsedValue = Number(value);
+                        
+      #                   if (isNaN(parsedValue)) {
+      #                       reject(new Error

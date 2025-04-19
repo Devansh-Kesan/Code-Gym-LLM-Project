@@ -53,4 +53,5 @@ stop-all:
 
 # Serve documentation locally using MkDocs
 documentation:
+  cd project-docs 
   uv run mkdocs serve
