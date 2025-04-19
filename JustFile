@@ -53,3 +53,8 @@ stop-all:
 # Serve documentation locally using MkDocs
 documentation:
   cd project-docs && uv run mkdocs serve
+
+
+# mlflow server
+mlflow:
+  uv run mlflow server --host 127.0.0.1 --port 8888
