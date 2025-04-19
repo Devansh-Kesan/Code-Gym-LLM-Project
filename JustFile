@@ -12,8 +12,7 @@ setup:
 
 # Start backend FastAPI server
 start-backend-server:
-  cd backend
-  uv run fastapi run main.py
+  cd backend && uv run fastapi run main.py
 
 # Start Prefect server
 start-prefect-server:
@@ -53,5 +52,4 @@ stop-all:
 
 # Serve documentation locally using MkDocs
 documentation:
-  cd project-docs 
-  uv run mkdocs serve
+  cd project-docs && uv run mkdocs serve
